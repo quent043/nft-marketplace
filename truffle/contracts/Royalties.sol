@@ -6,7 +6,6 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 
 interface IERC2981Royalties {
-    //Virtual?
     function royaltyInfo(uint256 _tokenId, uint256 _value) external view  returns (address _receiver, uint256 _royaltyAmount);
 }
 
@@ -27,7 +26,6 @@ contract Royalties is IERC2981Royalties, ERC165 {
         _royalties[tokenId] = RoyaltyInfo(recipient, uint24(value));
     }
 
-    //Pas besoin de return ? On dirait pas si on déclare les noms des variables dans le return
     function royaltyInfo(uint256 tokenId, uint256 NFTPrice) external view override returns (address receiver, uint256 royaltyAmount)
     {
         RoyaltyInfo memory royalties = _royalties[tokenId];

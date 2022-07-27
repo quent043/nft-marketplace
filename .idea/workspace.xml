@@ -2,57 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="87cfabeb-032c-453c-b37f-7c3c7cf837fd" name="Changes" comment="First Commit: Dapp architecture using truffle react box&#10;- Smart Contracts&#10;- truffle-config.js&#10;- package.json&#10;- 1_deploy_simple_storage.js&#10;- .env">
-      <change afterPath="$PROJECT_DIR$/.gitattributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/logo192.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/logo512.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/robots.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/App.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/App.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/App.test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/Demo/Contract.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/Demo/ContractBtns.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/Demo/Cta.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/Demo/Desc.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/Demo/NoticeNoArtifact.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/Demo/NoticeWrongNetwork.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/Demo/Title.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/Demo/index.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/Footer.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/Intro/Desc.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/Intro/Tree.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/Intro/Welcome.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/Intro/index.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/Setup.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/contexts/EthContext/EthContext.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/contexts/EthContext/EthProvider.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/contexts/EthContext/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/contexts/EthContext/state.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/contexts/EthContext/useEth.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/setupTests.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/truffle/contracts/Marketplace.sol" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/truffle/contracts/NFTCollection.sol" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/truffle/contracts/NFTFacrtory.sol" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/truffle/contracts/Royalties.sol" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/truffle/migrations/1_deploy_simple_storage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/truffle/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/truffle/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/truffle/scripts/increment.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/truffle/test/SimpleStorageTest.sol" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/truffle/test/simplestorage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/truffle/truffle-config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/truffle/contracts/MetaVariables.sol" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/truffle/contracts/NftCollection.sol" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/truffle/contracts/SftCollection.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/truffle/contracts/Marketplace.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/Marketplace.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/truffle/contracts/NFTCollection.sol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/truffle/contracts/NFTFacrtory.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/NftFacrtory.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/truffle/contracts/Royalties.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/Royalties.sol" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,8 +57,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1658921589269</updated>
-      <workItem from="1658921590854" duration="1375000" />
+      <workItem from="1658921590854" duration="12931000" />
     </task>
+    <task id="LOCAL-00001" summary="First Commit: Dapp architecture using truffle react box&#10;- Smart Contracts&#10;- truffle-config.js&#10;- package.json&#10;- 1_deploy_simple_storage.js&#10;- .env">
+      <created>1658923121505</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1658923121505</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
