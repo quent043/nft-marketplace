@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="87cfabeb-032c-453c-b37f-7c3c7cf837fd" name="Changes" comment="First Commit: Dapp architecture using truffle react box&#10;- Smart Contracts&#10;- truffle-config.js&#10;- package.json&#10;- 1_deploy_simple_storage.js&#10;- .env">
+      <change afterPath="$PROJECT_DIR$/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/public/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/public/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/public/logo192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/public/logo512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/public/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/public/robots.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/App.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/App.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/App.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/Demo/Contract.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/Demo/ContractBtns.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/Demo/Cta.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/Demo/Desc.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/Demo/NoticeNoArtifact.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/Demo/NoticeWrongNetwork.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/Demo/Title.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/Demo/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/Footer.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/Intro/Desc.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/Intro/Tree.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/Intro/Welcome.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/Intro/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/Setup.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/contexts/EthContext/EthContext.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/contexts/EthContext/EthProvider.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/contexts/EthContext/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/contexts/EthContext/state.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/contexts/EthContext/useEth.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/setupTests.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/truffle/contracts/Marketplace.sol" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/truffle/contracts/NFTCollection.sol" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/truffle/contracts/NFTFacrtory.sol" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/truffle/contracts/Royalties.sol" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/truffle/migrations/1_deploy_simple_storage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/truffle/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/truffle/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/truffle/scripts/increment.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/truffle/test/SimpleStorageTest.sol" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/truffle/test/simplestorage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/truffle/truffle-config.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Solidity Contract" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2CWc4FXXDicWv5P5uYJHMpHqW1D" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\quent\Documents\Developpement Web\Web3\Alyra\NFTMarketplace" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="87cfabeb-032c-453c-b37f-7c3c7cf837fd" name="Changes" comment="" />
+      <created>1658921589269</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1658921589269</updated>
+      <workItem from="1658921590854" duration="1375000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="First Commit: Dapp architecture using truffle react box&#10;- Smart Contracts&#10;- truffle-config.js&#10;- package.json&#10;- 1_deploy_simple_storage.js&#10;- .env" />
+    <option name="LAST_COMMIT_MESSAGE" value="First Commit: Dapp architecture using truffle react box&#10;- Smart Contracts&#10;- truffle-config.js&#10;- package.json&#10;- 1_deploy_simple_storage.js&#10;- .env" />
+  </component>
+</project>
