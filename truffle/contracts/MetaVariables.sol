@@ -2,19 +2,30 @@
 pragma solidity 0.8.14;
 
 contract MetaVariables {
-    struct collectionData {
+    struct sftCollectionData {
         string _name;
         string _description;
         string _image;
-        uint _amount;
+        uint _minted;
+        uint _supply;
         uint _royalties;
+        uint _price;
+    }
+
+    struct nftCollectionData {
+        string _name;
+        string _description;
+        string _image;
+        uint _royalties;
+        uint _price;
     }
 }
 
 
 
 // [
-//     ["jbkbkb", "jbkbkb", "jbkbkb", 2, 2]
+//     ["jbkbkb", "jbkbkb", "jbkbkb", 0, 2, 10, 50],
+//     ["jbkbkb", "jbkbkb", "jbkbkb", 0, 2, 10, 50]
 // ]
 // #setUsers
 // [

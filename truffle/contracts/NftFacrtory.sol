@@ -11,8 +11,10 @@ import "./MetaVariables.sol";
 //TODO: Ajouter notre email
 //TODO: Events
 
+
 contract NftFactory is MetaVariables {
 
+    event CollectionDeployed(address contractAddress);
 
     // collectionData[] sftFactoryInputData;
 
@@ -20,7 +22,7 @@ contract NftFactory is MetaVariables {
 
     }
 
-    function createSftCollection(string calldata _uri, uint _maxPurchasePerBuyer, collectionData[] calldata sftFactoryInputData, uint _amountOfSeries) external {
+    function createSftCollection(string calldata _uri, uint _max_mint_allowed, uint _max_supply, sftCollectionData[] calldata sftFactoryInputData, uint _amountOfSeries) external {
         // Import the bytecode of the contract to deploy
         bytes memory sftCollectionBytecode = type(SftCollection).creationCode;
         // Make a random salt based on the artist name
@@ -28,7 +30,9 @@ contract NftFactory is MetaVariables {
         bytes32 salt = keccak256(abi.encodePacked(msg.sender, block.timestamp));
         address sftCollectionAddress = Create2.deploy(0, salt, sftCollectionBytecode);
 
-        SftCollection(sftCollectionAddress).init(msg.sender, _uri, _maxPurchasePerBuyer, sftFactoryInputData, _amountOfSeries);
+        emit CollectionDeployed(sftCollectionAddress);
+
+        SftCollection(sftCollectionAddress).init(msg.sender, _uri, _max_mint_allowed, _max_supply, sftFactoryInputData, _amountOfSeries);
 
     }
 
