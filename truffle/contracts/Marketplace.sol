@@ -6,7 +6,6 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "./NftCollection.sol";
 
-import "hardhat/console.sol";
 
 contract Marketplace is ReentrancyGuard {
     using Counters for Counters.Counter;
@@ -22,7 +21,7 @@ contract Marketplace is ReentrancyGuard {
         NftCollection nft;
         uint tokenId;
         uint price;
-        address payable seller;
+        address seller;
         bool sold;
     }
 
@@ -60,6 +59,7 @@ contract Marketplace is ReentrancyGuard {
     function putItemForSale(NftCollection _nft, uint _tokenId, uint _price) external nonReentrant {
         require(_price > 0, "Price must be greater than zero");
 
+        // address seller = msg.sender;
         itemCount.increment();
         _nft.transferFrom(msg.sender, address(this), _tokenId);
 
@@ -68,7 +68,7 @@ contract Marketplace is ReentrancyGuard {
             _nft,
             _tokenId,
             _price,
-            payable(msg.sender),
+            msg.sender,
             false
         );
 
@@ -87,9 +87,6 @@ contract Marketplace is ReentrancyGuard {
         require(msg.value >= itemIdToItemData[_itemId].price, "not enough ether to cover item price and market fee");
         require(!item.sold, "item already sold");
 
-
-        // item.seller.transfer(item.price);
-        // marketplaceOwnerAccount.transfer(_totalPrice - item.price);
         // update item to sold
         item.sold = true;
         // transfer nft to buyer
@@ -111,19 +108,14 @@ contract Marketplace is ReentrancyGuard {
         uint price = itemIdToItemData[_itemId].price;
         (address receiver, uint royaltyAmount) = itemIdToItemData[_itemId].nft.royaltyInfo(_itemId, price);
         //Pay royalties
-        payable (receiver).transfer(royaltyAmount);
+        (bool royaltySent,) = payable (receiver).call{value: royaltyAmount}("");
+        require(royaltySent, "Royaltiy payment failed");
         //Pay marketPlace fees
         uint marketplaceFee = (price * marketplaceFeePercentage) / 10000;
-        marketplaceOwnerAccount.transfer(marketplaceFee);
+        (bool feeSent,) = marketplaceOwnerAccount.call{value: marketplaceFee}("");
+        require(feeSent, "Fee payment failed");
         //Pay seller
-        itemIdToItemData[_itemId].seller.transfer(price - (royaltyAmount + marketplaceFee));
+        (bool paymentSent,) = payable (itemIdToItemData[_itemId].seller).call{value: (price - (royaltyAmount + marketplaceFee))}("");
+        require(paymentSent, "Payment failed");
     }
-
-    //     function royaltyInfo(uint256 tokenId, uint256 NFTPrice)
-    // external view override returns (address receiver, uint256 royaltyAmount)
-    // {
-    //     RoyaltyInfo memory royalties = _royalties[tokenId];
-    //     receiver = royalties.recipient;
-    //     royaltyAmount = (NFTPrice * royalties.amount) / 10000;
-    // }
 }

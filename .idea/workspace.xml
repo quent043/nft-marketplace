@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="87cfabeb-032c-453c-b37f-7c3c7cf837fd" name="Changes" comment="COrrected mistakes">
+    <list default="true" id="87cfabeb-032c-453c-b37f-7c3c7cf837fd" name="Changes" comment="Added Marketplace contract&#10;Correcterd mistakes in Collections">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/truffle/contracts/Marketplace.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/Marketplace.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/contracts/NftCollection.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/NftCollection.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/contracts/SftCollection.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/SftCollection.sol" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +84,7 @@
       <workItem from="1658987829090" duration="157000" />
       <workItem from="1658988012281" duration="17307000" />
       <workItem from="1659082354104" duration="9829000" />
-      <workItem from="1659106923663" duration="2951000" />
+      <workItem from="1659106923663" duration="4389000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit: Dapp architecture using truffle react box&#10;- Smart Contracts&#10;- truffle-config.js&#10;- package.json&#10;- 1_deploy_simple_storage.js&#10;- .env">
       <created>1658923121505</created>
@@ -130,7 +128,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659099379678</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added Marketplace contract&#10;Correcterd mistakes in Collections">
+      <created>1659112127285</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1659112127285</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -154,6 +159,7 @@
     <MESSAGE value="Corrected mistakes on Gift functions&#10;Splitted Factory into 2 factories&#10;Initiated random number generation" />
     <MESSAGE value="Added royalties" />
     <MESSAGE value="COrrected mistakes" />
-    <option name="LAST_COMMIT_MESSAGE" value="COrrected mistakes" />
+    <MESSAGE value="Added Marketplace contract&#10;Correcterd mistakes in Collections" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Marketplace contract&#10;Correcterd mistakes in Collections" />
   </component>
 </project>
