@@ -58,20 +58,20 @@ contract SftCollection is ERC1155, Royalties, Ownable, MetaVariables, Pausable, 
     }
 
     //TODO: Utiliser le hook _beforeTokenTransfer pour cette méthode ? Ou juste pour les events ? C'est appelé ppour les Batch aussi
-    function _mintSft(uint _tokenId, uint _amount) public payable whenNotPaused returns (uint) {
-        require(_tokenId > 0, "Token does not exist");
-        require(_tokenId <= _tokenIds.current(), "Token does not exist");
+    function _mintSft(uint tokenId, uint _amount) public payable whenNotPaused returns (uint) {
+        require(tokenId > 0, "Token does not exist");
+        require(tokenId <= _tokenIds.current(), "Token does not exist");
         require(userToMintAmount[msg.sender] + _amount <= max_mint_allowed);
-        require(tokenIdToSftData[_tokenId]._minted + _amount <= tokenIdToSftData[_tokenId]._supply, "Not enough Supply");
-        require(msg.value >= tokenIdToSftData[_tokenId]._price * _amount, "Insufficient funds");
+        require(tokenIdToSftData[tokenId]._minted + _amount <= tokenIdToSftData[tokenId]._supply, "Not enough Supply");
+        require(msg.value >= tokenIdToSftData[tokenId]._price * _amount, "Insufficient funds");
 
-        tokenIdToSftData[_tokenId]._minted += _amount;
+        tokenIdToSftData[tokenId]._minted += _amount;
         userToMintAmount[msg.sender] += _amount;
-        _mint(msg.sender, _tokenId, _amount, "");
+        _mint(msg.sender, tokenId, _amount, "");
 
         //TODO: On enlève ? Ou on renvoie autre chose ?
         emit TokenMinted(msg.sender, _tokenIds.current(), _amount);
-        return _tokenId;
+        return tokenId;
     }
 
     function gift(address luckyOne, uint tokenId ,uint _amount) external onlyOwner {

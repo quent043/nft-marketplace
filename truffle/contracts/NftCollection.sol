@@ -19,6 +19,7 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
     Counters.Counter private _tokenIds;
 
     uint public max_mint_allowed;
+    //TODO: Gérer le max supply
     uint public max_supply;
     bool private isInit;
     mapping(uint => nftCollectionData) public tokenIdToNftData;
@@ -53,14 +54,14 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
     function mintNft(uint tokenId) public whenNotPaused payable returns(uint) {
         require(tokenId > 0, "Token does not exist");
         require(tokenId <= _tokenIds.current(), "Token does not exist");
-        require(msg.value >= tokenIdToNftData[_tokenIds.current()]._price, "Insufficient funds");
+        require(msg.value >= tokenIdToNftData[tokenId]._price, "Insufficient funds");
         require(userToMintAmount[msg.sender] + 1 <= max_mint_allowed);
 
         userToMintAmount[msg.sender] += 1;
-        _safeMint(msg.sender, _tokenIds.current());
+        _safeMint(msg.sender, tokenId);
 
-        emit TokenMinted(msg.sender, _tokenIds.current());
-        return(_tokenIds.current());
+        emit TokenMinted(msg.sender, tokenId);
+        return(tokenId);
     }
 
     function withdraw() external payable onlyOwner {
@@ -70,11 +71,11 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
     function gift(address luckyOne, uint tokenId) external payable onlyOwner {
         require(tokenId > 0, "Token does not exist");
         require(tokenId <= _tokenIds.current(), "Token does not exist");
-        require(msg.value >= tokenIdToNftData[_tokenIds.current()]._price, "Insufficient funds");
+        require(msg.value >= tokenIdToNftData[tokenId]._price, "Insufficient funds");
         require(userToMintAmount[msg.sender] + 1 <= max_mint_allowed);
 
         userToMintAmount[msg.sender] += 1;
-        _safeMint(luckyOne, _tokenIds.current());
+        _safeMint(luckyOne, tokenId);
 
         emit TokenMinted(msg.sender, tokenId);
     }
