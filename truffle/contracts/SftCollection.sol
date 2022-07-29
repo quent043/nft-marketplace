@@ -74,17 +74,17 @@ contract SftCollection is ERC1155, Royalties, Ownable, MetaVariables, Pausable, 
         return _tokenId;
     }
 
-    function gift(address luckyOne, uint tokenId ,uint amount) external onlyOwner {
-        require(_tokenId > 0, "Token does not exist");
-        require(_tokenId <= _tokenIds.current(), "Token does not exist");
+    function gift(address luckyOne, uint tokenId ,uint _amount) external onlyOwner {
+        require(tokenId > 0, "Token does not exist");
+        require(tokenId <= _tokenIds.current(), "Token does not exist");
         require(userToMintAmount[msg.sender] + _amount <= max_mint_allowed);
-        require(tokenIdToSftData[_tokenId]._minted + _amount <= tokenIdToSftData[_tokenId]._supply, "Not enough Supply");
+        require(tokenIdToSftData[tokenId]._minted + _amount <= tokenIdToSftData[tokenId]._supply, "Not enough Supply");
 
         tokenIdToSftData[tokenId]._minted += _amount;
         userToMintAmount[msg.sender] += _amount;
-        _mint(luckyOne, tokenId, amount, "");
+        _mint(luckyOne, tokenId, _amount, "");
 
-        emit TokenMinted(msg.sender, tokenId, amount);
+        emit TokenMinted(msg.sender, tokenId, _amount);
     }
 
     function pause() public onlyOwner {
