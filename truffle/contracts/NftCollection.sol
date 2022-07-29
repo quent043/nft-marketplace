@@ -11,7 +11,7 @@ import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 import "./Royalties.sol";
 import "./MetaVariables.sol";
 
-//TODO: Add Burn ? (Existe deja? )
+//TODO: Add Burn ? (Existe deja?)
 //TODO: SetTokenUri URI+tokenId
 
 contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, Pausable {
@@ -49,9 +49,12 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
         emit CollectionInitiated(owner(), _amountOfNft);
     }
 
-    function mintNft() public whenNotPaused payable returns(uint) {
+    function mintNft(uint tokenId) public whenNotPaused payable returns(uint) {
+        require(_tokenId > 0, "Token does not exist");
+        require(_tokenId <= _tokenIds.current(), "Token does not exist");
         require(msg.value >= tokenIdToNftData[_tokenIds.current()]._price, "Insufficient funds");
         require(userToMintAmount[msg.sender] + 1 <= max_mint_allowed);
+
         userToMintAmount[msg.sender] += 1;
         _safeMint(msg.sender, _tokenIds.current());
 
@@ -63,11 +66,16 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
         payable (owner()).transfer(address (this).balance);
     }
 
-    function gift(address luckyOne) external onlyOwner {
-        _tokenIds.increment();
+    function gift(address luckyOne, uint tokenId) external onlyOwner {
+        require(_tokenId > 0, "Token does not exist");
+        require(_tokenId <= _tokenIds.current(), "Token does not exist");
+        require(msg.value >= tokenIdToNftData[_tokenIds.current()]._price, "Insufficient funds");
+        require(userToMintAmount[msg.sender] + 1 <= max_mint_allowed);
+
+        userToMintAmount[msg.sender] += 1;
         _safeMint(luckyOne, _tokenIds.current());
 
-        emit TokenMinted(msg.sender, _tokenIds.current());
+        emit TokenMinted(msg.sender, tokenId);
     }
 
     function pause() public onlyOwner {

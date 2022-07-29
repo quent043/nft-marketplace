@@ -2,10 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="87cfabeb-032c-453c-b37f-7c3c7cf837fd" name="Changes" comment="Worked on smart contracts">
+      <change afterPath="$PROJECT_DIR$/truffle/contracts/SftFactory.sol" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/truffle/contracts/VRFv2Consumer.sol" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/truffle/contracts/NftCollection.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/NftCollection.sol" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/truffle/contracts/NftFacrtory.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/NftFacrtory.sol" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/truffle/contracts/SftCollection.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/SftCollection.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/truffle/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/truffle/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,6 +89,7 @@
       <workItem from="1658921590854" duration="13683000" />
       <workItem from="1658987829090" duration="157000" />
       <workItem from="1658988012281" duration="17307000" />
+      <workItem from="1659082354104" duration="3535000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit: Dapp architecture using truffle react box&#10;- Smart Contracts&#10;- truffle-config.js&#10;- package.json&#10;- 1_deploy_simple_storage.js&#10;- .env">
       <created>1658923121505</created>

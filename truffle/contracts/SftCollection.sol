@@ -13,6 +13,7 @@ import "./MetaVariables.sol";
 
 //TODO: Ajouter une fonction de random pour un attribut du NFT via Chainlink
 //TODO: SetTokenUri URI+tokenId
+//TODO: Initializable
 
 contract SftCollection is ERC1155, Royalties, Ownable, MetaVariables, Pausable, Initializable {
     //TODO: Initializable
@@ -73,11 +74,17 @@ contract SftCollection is ERC1155, Royalties, Ownable, MetaVariables, Pausable, 
         return _tokenId;
     }
 
-    function gift(address luckyOne, uint amount) external onlyOwner {
-        _tokenIds.increment();
-        _mint(luckyOne, _tokenIds.current(), amount, "");
+    function gift(address luckyOne, uint tokenId ,uint amount) external onlyOwner {
+        require(_tokenId > 0, "Token does not exist");
+        require(_tokenId <= _tokenIds.current(), "Token does not exist");
+        require(userToMintAmount[msg.sender] + _amount <= max_mint_allowed);
+        require(tokenIdToSftData[_tokenId]._minted + _amount <= tokenIdToSftData[_tokenId]._supply, "Not enough Supply");
 
-        emit TokenMinted(msg.sender, _tokenIds.current(), amount);
+        tokenIdToSftData[tokenId]._minted += _amount;
+        userToMintAmount[msg.sender] += _amount;
+        _mint(luckyOne, tokenId, amount, "");
+
+        emit TokenMinted(msg.sender, tokenId, amount);
     }
 
     function pause() public onlyOwner {
