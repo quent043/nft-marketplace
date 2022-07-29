@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="87cfabeb-032c-453c-b37f-7c3c7cf837fd" name="Changes" comment="Worked on smart contracts">
-      <change afterPath="$PROJECT_DIR$/truffle/contracts/SftFactory.sol" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/truffle/contracts/VRFv2Consumer.sol" afterDir="false" />
+    <list default="true" id="87cfabeb-032c-453c-b37f-7c3c7cf837fd" name="Changes" comment="Corrected mistakes on Gift functions&#10;Splitted Factory into 2 factories&#10;Initiated random number generation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/truffle/contracts/NftCollection.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/NftCollection.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/contracts/NftFacrtory.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/NftFacrtory.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/truffle/contracts/Royalties.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/Royalties.sol" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/truffle/contracts/SftCollection.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/SftCollection.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +85,7 @@
       <workItem from="1658921590854" duration="13683000" />
       <workItem from="1658987829090" duration="157000" />
       <workItem from="1658988012281" duration="17307000" />
-      <workItem from="1659082354104" duration="3535000" />
+      <workItem from="1659082354104" duration="6463000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit: Dapp architecture using truffle react box&#10;- Smart Contracts&#10;- truffle-config.js&#10;- package.json&#10;- 1_deploy_simple_storage.js&#10;- .env">
       <created>1658923121505</created>
@@ -112,7 +108,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659002722880</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Corrected mistakes on Gift functions&#10;Splitted Factory into 2 factories&#10;Initiated random number generation">
+      <created>1659087119524</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1659087119524</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -133,6 +136,7 @@
     <MESSAGE value="First Commit: Dapp architecture using truffle react box&#10;- Smart Contracts&#10;- truffle-config.js&#10;- package.json&#10;- 1_deploy_simple_storage.js&#10;- .env" />
     <MESSAGE value="Worked on smart contracts, firts draft" />
     <MESSAGE value="Worked on smart contracts" />
-    <option name="LAST_COMMIT_MESSAGE" value="Worked on smart contracts" />
+    <MESSAGE value="Corrected mistakes on Gift functions&#10;Splitted Factory into 2 factories&#10;Initiated random number generation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrected mistakes on Gift functions&#10;Splitted Factory into 2 factories&#10;Initiated random number generation" />
   </component>
 </project>

@@ -21,7 +21,7 @@ contract Royalties is IERC2981Royalties, ERC165 {
         return interfaceId == type(IERC2981Royalties).interfaceId || super.supportsInterface(interfaceId);
     }
 
-    function _setTokenRoyalty( uint256 tokenId, address recipient, uint256 value) internal {
+    function _setTokenRoyalty(uint256 tokenId, address recipient, uint256 value) internal {
         require(value <= 10000, 'ERC2981Royalties: Too high');
         _royalties[tokenId] = RoyaltyInfo(recipient, uint24(value));
     }

@@ -38,6 +38,7 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
         for(uint i = 0; i < _amountOfNft; i++) {
             _tokenIds.increment();
             tokenIdToNftData[_tokenIds.current()] = nftFactoryInputData[i];
+            _setTokenRoyalty(_tokenIds.current(), msg.sender, tokenIdToNftData[_tokenIds.current()]._royalties);
             //TODO: SetTokenUri URI+tokenId
 //            _setTokenURI(_tokenIds.current(), _uri);
         }

@@ -37,6 +37,7 @@ contract SftCollection is ERC1155, Royalties, Ownable, MetaVariables, Pausable, 
         for(uint i = 0; i < _amountOfSeries; i++) {
             _tokenIds.increment();
             tokenIdToSftData[_tokenIds.current()] = sftFactoryInputData[i];
+            _setTokenRoyalty(_tokenIds.current(), msg.sender, tokenIdToSftData[_tokenIds.current()]._royalties);
         }
 
         _setURI(_uri);
@@ -67,7 +68,6 @@ contract SftCollection is ERC1155, Royalties, Ownable, MetaVariables, Pausable, 
         tokenIdToSftData[_tokenId]._minted += _amount;
         userToMintAmount[msg.sender] += _amount;
         _mint(msg.sender, _tokenId, _amount, "");
-        _setTokenRoyalty(_tokenId, msg.sender, tokenIdToSftData[_tokenId]._royalties);
 
         //TODO: On enlève ? Ou on renvoie autre chose ?
         emit TokenMinted(msg.sender, _tokenIds.current(), _amount);
