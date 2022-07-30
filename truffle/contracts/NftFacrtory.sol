@@ -16,7 +16,7 @@ contract NftFactory is MetaVariables {
 
     event CollectionDeployed(address contractAddress);
 
-    function createNftCollection(string calldata _uri, uint _max_mint_allowed, uint _max_supply, nftCollectionData[] calldata nftFactoryInputData, uint _amountOfSeries) external {
+    function createNftCollection(string calldata _uri, uint _max_mint_allowed, uint _max_supply, nftCollectionData[] calldata nftFactoryInputData, uint _amountOfNft) external {
         // Import the bytecode of the contract to deploy
         bytes memory nftCollectionBytecode = type(NftCollection).creationCode;
         // Make a random salt based on the artist name
@@ -25,6 +25,6 @@ contract NftFactory is MetaVariables {
 
         emit CollectionDeployed(nftCollectionAddress);
 
-        NftCollection(nftCollectionAddress).init(msg.sender, _uri, _max_mint_allowed, _max_supply, nftFactoryInputData, _amountOfSeries);
+        NftCollection(nftCollectionAddress).init(msg.sender, _uri, _max_mint_allowed, _max_supply, nftFactoryInputData, _amountOfNft);
     }
 }

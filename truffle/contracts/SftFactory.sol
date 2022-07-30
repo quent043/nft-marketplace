@@ -10,7 +10,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 //TODO: Ajouter notre email
 //TODO: Events
 
-contract NftFactory is MetaVariables , Ownable{
+contract SftFactory is MetaVariables , Ownable{
 
     uint64 constant CHAINLINK_SUBSCRIPTION_ID = 9366;
     VRFv2Consumer chanlinkRandomGanarator = new VRFv2Consumer(CHAINLINK_SUBSCRIPTION_ID);
