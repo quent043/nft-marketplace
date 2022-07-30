@@ -126,7 +126,8 @@ contract Marketplace is ReentrancyGuard {
         require(royaltySent, "Royaltiy payment failed");
         //Pay marketPlace fees
         uint marketplaceFee = (price * marketplaceFeePercentage) / 10000;
-        (bool feeSent,) = marketplaceOwnerAccount.call{value: marketplaceFee}("");
+        bool feeSent = marketplaceOwnerAccount.send(marketplaceFee);
+        // (bool feeSent,) = marketplaceOwnerAccount.call{value: marketplaceFee}("");
         require(feeSent, "Fee payment failed");
         //Pay seller
         // (bool paymentSent,) = payable (itemIdToItemData[_itemId].seller).call{value: (price - (royaltyAmount + marketplaceFee))}("");
