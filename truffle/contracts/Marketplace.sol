@@ -4,15 +4,14 @@ pragma solidity 0.8.14;
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "./NftCollection.sol";
 
 
-contract Marketplace is ReentrancyGuard {
+contract Marketplace is ReentrancyGuard, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter public itemCount;
 
-
-    // Variables
     address payable public immutable marketplaceOwnerAccount;
     uint public immutable marketplaceFeePercentage;
 
@@ -25,10 +24,9 @@ contract Marketplace is ReentrancyGuard {
         bool sold;
     }
 
-    // itemId -> Item
     mapping(uint => Item) public itemIdToItemData;
 
-    event putForSale(
+    event PutForSale(
         uint itemId,
         address indexed nft,
         uint tokenId,
@@ -54,20 +52,20 @@ contract Marketplace is ReentrancyGuard {
         uint feeAmount
     );
 
+    event LogDepositReceived(address from, uint amount);
+
+
     constructor(uint _feePertenthousand) {
         marketplaceOwnerAccount = payable(msg.sender);
         marketplaceFeePercentage = _feePertenthousand;
     }
 
-    event ApproveLogger(address callerAddress, uint tokenId);
-    event TransferLogger(address callerAddress, address recipientAddress, uint tokenId);
-
     /**
-    @notice Function used to allow voters to vote for a proposal
+    @notice Function used to put a NFT for sale on the marketplace
     @param _nft The contract address of the NFT being put for sale
     @param _tokenId The id of the NFT being put for sale
     @param _nft The price of the NFT being put for sale
-    @dev
+    @dev Emits a "PutForSale" event
     */
     function putNftForSale(NftCollection _nft, uint _tokenId, uint _price) external nonReentrant {
         require(_price > 0, "Price must be greater than zero");
@@ -76,7 +74,6 @@ contract Marketplace is ReentrancyGuard {
         // emit ApproveLogger(address(this), _tokenId);
         // _nft.approve(address(this), _tokenId);
         itemCount.increment();
-        emit TransferLogger(msg.sender, address(this), _tokenId);
         _nft.transferFrom(msg.sender, address(this), _tokenId);
 
         itemIdToItemData[itemCount.current()] = Item (
@@ -88,7 +85,7 @@ contract Marketplace is ReentrancyGuard {
             false
         );
 
-        emit putForSale(
+        emit PutForSale(
             itemCount.current(),
             address(_nft),
             _tokenId,
@@ -97,6 +94,12 @@ contract Marketplace is ReentrancyGuard {
         );
     }
 
+    /**
+    @notice Function used to purchase a NFT for sale on the marketplace
+    @param _itemId The marketplace id of the NFT being bought
+    @param _nft The price of the NFT being put for sale
+    @dev Emits a "Bought" event, protected against reentrancy
+    */
     function purchaseItem(uint _itemId) external payable nonReentrant {
         Item storage item = itemIdToItemData[_itemId];
         require(_itemId > 0 && _itemId <= itemCount.current(), "item doesn't exist");
@@ -117,6 +120,11 @@ contract Marketplace is ReentrancyGuard {
         );
     }
 
+    /**
+    @notice Function used to calculate fees, & royalties and pay all the recipients
+    @param _itemId The marketplace id of the NFT being bought
+    @dev Emits a "SplitPayment" event
+    */
     function splitPayment(uint _itemId) internal {
         uint price = itemIdToItemData[_itemId].price;
         (address receiver, uint royaltyAmount) = itemIdToItemData[_itemId].nft.royaltyInfo(_itemId, price);
@@ -150,8 +158,17 @@ contract Marketplace is ReentrancyGuard {
 //        emit seller(itemIdToItemData[_itemId].seller);
 //        emit sellerPrice(price - (royaltyAmount + marketplaceFee));
 //        emit PaymentResult(paymentSent);
-//    }
+    }
 
+    /**
+    @notice Function used to receive ether
+    @dev  Emits "LogDepositReceived" event | Ether send to this contract for
+    no reason will be credited to the contract owner, and the deposit logged,
+    */
+    receive() external payable{
+        payable (owner()).transfer(msg.value);
+        emit LogDepositReceived(msg.sender, msg.value);
+    }
 
     // ****************************************TESTS****************************************
     // DELETE BEFORE PROD

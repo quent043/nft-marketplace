@@ -11,7 +11,6 @@ import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 import "./Royalties.sol";
 import "./MetaVariables.sol";
 
-//TODO: Add Burn ? (Existe deja?)
 //TODO: SetTokenUri URI+tokenId
 
 contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, Pausable {
@@ -28,11 +27,26 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
 
     event TokenMinted(address tokenOwner, uint tokenId);
     event CollectionInitiated(address contractOwner, uint amountOfNft);
+    event LogDepositReceived(address from, uint amount);
 
+    /**
+    @dev See {IERC165-supportsInterface}.
+    */
     function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, Royalties) returns (bool){
         return super.supportsInterface(interfaceId);
     }
+
     //TODO:         require(_tokenIds.current() + 1 <= max_supply, "Max supply reached"); useless. Le max est défini dans la supply.
+    /**
+    @notice Init function used to populate the collection once it was created by the factory
+    @param _creator The owner of the collection
+    @param _uri The URI of the IPFS storage location
+    @param _max_mint_allowed The maximum amounts of mints allowed per user
+    @param _max_supply The maximum amount of NFTs in the collection
+    @param nftFactoryInputData The NFT collection metadata (
+    @param _amountOfNft The amount of tokens in the collection, got from the frontend to avoid using gas calculating it
+    @dev Emits "CollectionInitiated" event
+    */
     function init(address _creator, string calldata _uri, uint _max_mint_allowed, uint _max_supply, nftCollectionData[] calldata nftFactoryInputData, uint _amountOfNft) external onlyOwner {
         require(!isInit, "Contract was already initiated");
         // require(_amountOfNft <= max_supply, "Max supply reached");
@@ -51,11 +65,17 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
         emit CollectionInitiated(owner(), _amountOfNft);
     }
 
+    /**
+    @notice Function used to mint tokens and regulate minting
+    @param tokenId The id of the token to be minted
+    @dev Emits "TokenMinted" event | Requires token to exist (0 does not exist),
+    payment to be sufficient, and max supply and mint amounts not reached.
+    */
     function mintNft(uint tokenId) public whenNotPaused payable returns(uint) {
         require(tokenId > 0, "Token does not exist");
         require(tokenId <= _tokenIds.current(), "Token does not exist");
         require(msg.value >= tokenIdToNftData[tokenId]._price, "Insufficient funds");
-        require(userToMintAmount[msg.sender] + 1 <= max_mint_allowed);
+        require(userToMintAmount[msg.sender] + 1 <= max_mint_allowed, "Max mint amount reached");
         require(_tokenIds.current() + 1 <= max_supply, "Max supply reached");
 
         userToMintAmount[msg.sender] += 1;
@@ -65,15 +85,24 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
         return(tokenId);
     }
 
+    /**
+    @notice Function used to withdraw contract funds
+    */
     function withdraw() external payable onlyOwner {
         payable (owner()).transfer(address (this).balance);
     }
 
+    /**
+    @notice Function used to gift tokens and regulate minting
+    @param luckyOne The address of the token receiver
+    @param tokenId The id of the token to be minted
+    @dev Emits "TokenMinted" event | Requires token to exist (0 does not exist),
+    payment to be sufficient, and max supply and mint amounts not reached.
+    */
     function gift(address luckyOne, uint tokenId) external payable onlyOwner {
         require(tokenId > 0, "Token does not exist");
         require(tokenId <= _tokenIds.current(), "Token does not exist");
-        require(msg.value >= tokenIdToNftData[tokenId]._price, "Insufficient funds");
-        require(userToMintAmount[msg.sender] + 1 <= max_mint_allowed);
+        require(userToMintAmount[msg.sender] + 1 <= max_mint_allowed, "Max mint amount reached");
         require(_tokenIds.current() + 1 <= max_supply, "Max supply reached");
 
         userToMintAmount[msg.sender] += 1;
@@ -82,11 +111,29 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
         emit TokenMinted(msg.sender, tokenId);
     }
 
+    /**
+    @notice Function used by the owner to pause certain functions
+    @dev Used here only on mintNft() function
+    */
     function pause() public onlyOwner {
         _pause();
     }
 
+    /**
+    @notice Function used by the owner to unpause certain functions
+    @dev Used here only on mintNft() function
+    */
     function unPause() public onlyOwner {
         _unpause();
+    }
+
+    /**
+    @notice Function used to receive ether
+    @dev  Emits "LogDepositReceived" event | Ether send to this contract for
+    no reason will be credited to the contract owner, and the deposit logged,
+    */
+    receive() external payable{
+        payable (owner()).transfer(msg.value);
+        emit LogDepositReceived(msg.sender, msg.value);
     }
 }

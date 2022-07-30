@@ -7,15 +7,13 @@ import "./NftCollection.sol";
 import "./MetaVariables.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-//TODO: Ajouter notre email
-//TODO: Events
-
 contract SftFactory is MetaVariables , Ownable{
 
     uint64 constant CHAINLINK_SUBSCRIPTION_ID = 9366;
     VRFv2Consumer chanlinkRandomGanarator = new VRFv2Consumer(CHAINLINK_SUBSCRIPTION_ID);
 
     event CollectionDeployed(address contractAddress);
+    event LogDepositReceived(address from, uint amount);
 
     function createNftCollection(string calldata _uri, uint _max_mint_allowed, uint _max_supply, nftCollectionData[] calldata nftFactoryInputData, uint _amountOfSeries) external onlyOwner {
         // Import the bytecode of the contract to deploy
@@ -27,5 +25,10 @@ contract SftFactory is MetaVariables , Ownable{
         emit CollectionDeployed(nftCollectionAddress);
 
         NftCollection(nftCollectionAddress).init(msg.sender, _uri, _max_mint_allowed, _max_supply, nftFactoryInputData, _amountOfSeries);
+    }
+
+    receive() external payable{
+        payable (owner()).transfer(msg.value);
+        emit LogDepositReceived(msg.sender, msg.value);
     }
 }
