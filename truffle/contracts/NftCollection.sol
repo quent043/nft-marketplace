@@ -19,7 +19,6 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
     Counters.Counter private _tokenIds;
 
     uint public max_mint_allowed;
-    //TODO: Gérer le max supply
     uint public max_supply;
     bool private isInit;
     mapping(uint => nftCollectionData) public tokenIdToNftData;
@@ -33,13 +32,14 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
     function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, Royalties) returns (bool){
         return super.supportsInterface(interfaceId);
     }
-
+    //TODO:         require(_tokenIds.current() + 1 <= max_supply, "Max supply reached"); useless. Le max est défini dans la supply.
     function init(address _creator, string calldata _uri, uint _max_mint_allowed, uint _max_supply, nftCollectionData[] calldata nftFactoryInputData, uint _amountOfNft) external onlyOwner {
         require(!isInit, "Contract was already initiated");
+        // require(_amountOfNft <= max_supply, "Max supply reached");
         for(uint i = 0; i < _amountOfNft; i++) {
             _tokenIds.increment();
             tokenIdToNftData[_tokenIds.current()] = nftFactoryInputData[i];
-            _setTokenRoyalty(_tokenIds.current(), msg.sender, tokenIdToNftData[_tokenIds.current()]._royalties);
+            _setTokenRoyalty(_tokenIds.current(), _creator, tokenIdToNftData[_tokenIds.current()]._royalties);
             //TODO: SetTokenUri URI+tokenId
             //            _setTokenURI(_tokenIds.current(), _uri);
         }
@@ -56,6 +56,7 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
         require(tokenId <= _tokenIds.current(), "Token does not exist");
         require(msg.value >= tokenIdToNftData[tokenId]._price, "Insufficient funds");
         require(userToMintAmount[msg.sender] + 1 <= max_mint_allowed);
+        require(_tokenIds.current() + 1 <= max_supply, "Max supply reached");
 
         userToMintAmount[msg.sender] += 1;
         _safeMint(msg.sender, tokenId);
@@ -73,6 +74,7 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
         require(tokenId <= _tokenIds.current(), "Token does not exist");
         require(msg.value >= tokenIdToNftData[tokenId]._price, "Insufficient funds");
         require(userToMintAmount[msg.sender] + 1 <= max_mint_allowed);
+        require(_tokenIds.current() + 1 <= max_supply, "Max supply reached");
 
         userToMintAmount[msg.sender] += 1;
         _safeMint(luckyOne, tokenId);

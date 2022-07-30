@@ -35,6 +35,7 @@ contract Marketplace is ReentrancyGuard {
         uint price,
         address indexed seller
     );
+
     event Bought(
         uint itemId,
         address indexed nft,
@@ -44,10 +45,22 @@ contract Marketplace is ReentrancyGuard {
         address indexed buyer
     );
 
+    event SplitPayment(
+        address sellerAddress,
+        uint paidAmount,
+        address royaltyAddress,
+        uint royaltyAmount,
+        address marketplaceAddress,
+        uint feeAmount
+    );
+
     constructor(uint _feePertenthousand) {
         marketplaceOwnerAccount = payable(msg.sender);
         marketplaceFeePercentage = _feePertenthousand;
     }
+
+    event ApproveLogger(address callerAddress, uint tokenId);
+    event TransferLogger(address callerAddress, address recipientAddress, uint tokenId);
 
     /**
     @notice Function used to allow voters to vote for a proposal
@@ -56,11 +69,14 @@ contract Marketplace is ReentrancyGuard {
     @param _nft The price of the NFT being put for sale
     @dev
     */
-    function putItemForSale(NftCollection _nft, uint _tokenId, uint _price) external nonReentrant {
+    function putNftForSale(NftCollection _nft, uint _tokenId, uint _price) external nonReentrant {
         require(_price > 0, "Price must be greater than zero");
 
-        // address seller = msg.sender;
+        //Marche pas
+        // emit ApproveLogger(address(this), _tokenId);
+        // _nft.approve(address(this), _tokenId);
         itemCount.increment();
+        emit TransferLogger(msg.sender, address(this), _tokenId);
         _nft.transferFrom(msg.sender, address(this), _tokenId);
 
         itemIdToItemData[itemCount.current()] = Item (
@@ -87,13 +103,10 @@ contract Marketplace is ReentrancyGuard {
         require(msg.value >= itemIdToItemData[_itemId].price, "not enough ether to cover item price and market fee");
         require(!item.sold, "item already sold");
 
-        // update item to sold
         item.sold = true;
-        // transfer nft to buyer
         item.nft.transferFrom(address(this), msg.sender, item.tokenId);
-        // pay seller and feeAccount
         splitPayment(_itemId);
-        // emit Bought event
+
         emit Bought(
             _itemId,
             address(item.nft),
@@ -108,14 +121,74 @@ contract Marketplace is ReentrancyGuard {
         uint price = itemIdToItemData[_itemId].price;
         (address receiver, uint royaltyAmount) = itemIdToItemData[_itemId].nft.royaltyInfo(_itemId, price);
         //Pay royalties
-        (bool royaltySent,) = payable (receiver).call{value: royaltyAmount}("");
+        // (bool royaltySent,) = payable (receiver).call{value: royaltyAmount}("");
+        bool royaltySent = payable (receiver).send(royaltyAmount);
         require(royaltySent, "Royaltiy payment failed");
         //Pay marketPlace fees
         uint marketplaceFee = (price * marketplaceFeePercentage) / 10000;
         (bool feeSent,) = marketplaceOwnerAccount.call{value: marketplaceFee}("");
         require(feeSent, "Fee payment failed");
         //Pay seller
-        (bool paymentSent,) = payable (itemIdToItemData[_itemId].seller).call{value: (price - (royaltyAmount + marketplaceFee))}("");
+        // (bool paymentSent,) = payable (itemIdToItemData[_itemId].seller).call{value: (price - (royaltyAmount + marketplaceFee))}("");
+        bool paymentSent = payable (itemIdToItemData[_itemId].seller).send(price - (royaltyAmount + marketplaceFee));
         require(paymentSent, "Payment failed");
+
+        emit SplitPayment(
+            itemIdToItemData[_itemId].seller,
+            (price - (royaltyAmount + marketplaceFee)),
+            receiver,
+            royaltyAmount,
+            marketplaceOwnerAccount,
+            marketplaceFee);
+
+//        emit Price(price);
+//        emit RoyaltiesLog(receiver, royaltyAmount);
+//        emit PaymentResult(feeSent);
+//        emit MarketplaceFee((price * marketplaceFeePercentage) / 10000);
+//        emit PaymentResult(feeSent);
+//        emit seller(itemIdToItemData[_itemId].seller);
+//        emit sellerPrice(price - (royaltyAmount + marketplaceFee));
+//        emit PaymentResult(paymentSent);
+//    }
+
+
+    // ****************************************TESTS****************************************
+    // DELETE BEFORE PROD
+
+    event RoyaltiesLog(address receiver, uint payment);
+    event Price(uint price);
+    event MarketplaceFee(uint price);
+    event PaymentResult(bool result);
+    event seller(address sdeller);
+    event sellerPrice(uint price);
+
+    function splitPaymentExternal(uint _itemId, NftCollection _nft) public {
+
+        itemIdToItemData[_itemId] = Item (
+            _itemId,
+            _nft,
+            1,
+            20000,
+            msg.sender,
+            false
+        );
+
+        uint price = itemIdToItemData[_itemId].price;
+        emit Price(price);
+        (address receiver, uint royaltyAmount) = itemIdToItemData[_itemId].nft.royaltyInfo(_itemId, price);
+        emit RoyaltiesLog(receiver, royaltyAmount);
+
+        bool royaltySent = payable (receiver).send(royaltyAmount);
+        emit PaymentResult(royaltySent);
+
+        emit MarketplaceFee((price * marketplaceFeePercentage) / 10000);
+        uint marketplaceFee = (price * marketplaceFeePercentage) / 10000;
+        bool feeSent = marketplaceOwnerAccount.send(marketplaceFee);
+        emit PaymentResult(feeSent);
+
+        emit seller(itemIdToItemData[_itemId].seller);
+        emit sellerPrice(price - (royaltyAmount + marketplaceFee));
+        bool paymentSent = payable (itemIdToItemData[_itemId].seller).send(price - (royaltyAmount + marketplaceFee));
+        emit PaymentResult(paymentSent);
     }
 }

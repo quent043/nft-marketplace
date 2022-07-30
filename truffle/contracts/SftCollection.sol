@@ -37,7 +37,7 @@ contract SftCollection is ERC1155, Royalties, Ownable, MetaVariables, Pausable, 
         for(uint i = 0; i < _amountOfSeries; i++) {
             _tokenIds.increment();
             tokenIdToSftData[_tokenIds.current()] = sftFactoryInputData[i];
-            _setTokenRoyalty(_tokenIds.current(), msg.sender, tokenIdToSftData[_tokenIds.current()]._royalties);
+            _setTokenRoyalty(_tokenIds.current(), _creator, tokenIdToSftData[_tokenIds.current()]._royalties);
         }
 
         _setURI(_uri);
@@ -64,6 +64,7 @@ contract SftCollection is ERC1155, Royalties, Ownable, MetaVariables, Pausable, 
         require(userToMintAmount[msg.sender] + _amount <= max_mint_allowed);
         require(tokenIdToSftData[tokenId]._minted + _amount <= tokenIdToSftData[tokenId]._supply, "Not enough Supply");
         require(msg.value >= tokenIdToSftData[tokenId]._price * _amount, "Insufficient funds");
+        require(_tokenIds.current() + 1 <= max_supply, "Max supply reached");
 
         tokenIdToSftData[tokenId]._minted += _amount;
         userToMintAmount[msg.sender] += _amount;
@@ -79,6 +80,7 @@ contract SftCollection is ERC1155, Royalties, Ownable, MetaVariables, Pausable, 
         require(tokenId <= _tokenIds.current(), "Token does not exist");
         require(userToMintAmount[msg.sender] + _amount <= max_mint_allowed);
         require(tokenIdToSftData[tokenId]._minted + _amount <= tokenIdToSftData[tokenId]._supply, "Not enough Supply");
+        require(_tokenIds.current() + 1 <= max_supply, "Max supply reached");
 
         tokenIdToSftData[tokenId]._minted += _amount;
         userToMintAmount[msg.sender] += _amount;
