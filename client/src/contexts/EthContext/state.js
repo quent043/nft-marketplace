@@ -1,13 +1,13 @@
 const actions = {
   init: "INIT",
 };
-
 const initialState = {
-  artifact: null,
+  artifacts: null,
   web3: null,
   accounts: null,
   networkID: null,
-  contract: null
+  marketplaceContract: null,
+  nftFactoryContract: null
 };
 
 const reducer = (state, action) => {

@@ -7,22 +7,28 @@ function EthProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const init = useCallback(
-    async artifact => {
-      if (artifact) {
+    async (artifacts) => {
+      if (artifacts.length !== 0) {
         const web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
         const accounts = await web3.eth.requestAccounts();
         const networkID = await web3.eth.net.getId();
-        const { abi } = artifact;
-        let address, contract;
+
+        console.log("id", networkID)
+        const marketplaceAbi = artifacts[0].abi;
+        const nftFactoryAbi = artifacts[1].abi;
+        let marketplaceAddress, marketplaceContract, nftFactoryAddress, nftFactoryContract;
         try {
-          address = artifact.networks[networkID].address;
-          contract = new web3.eth.Contract(abi, address);
+          marketplaceAddress = artifacts[0].networks[networkID].address;
+          marketplaceContract = new web3.eth.Contract(marketplaceAbi, marketplaceAddress);
+          nftFactoryAddress = artifacts[1].networks[networkID].address;
+          nftFactoryContract = new web3.eth.Contract(nftFactoryAbi, nftFactoryAddress);
         } catch (err) {
           console.error(err);
         }
+
         dispatch({
           type: actions.init,
-          data: { artifact, web3, accounts, networkID, contract }
+          data: { artifacts, web3, accounts, networkID, marketplaceContract, nftFactoryContract }
         });
       }
     }, []);
@@ -30,8 +36,10 @@ function EthProvider({ children }) {
   useEffect(() => {
     const tryInit = async () => {
       try {
-        const artifact = require("../../contracts/SimpleStorage.json");
-        init(artifact);
+        const marketplaceArtifact = require("../../contracts/Marketplace.json");
+        const nftFactoryArtifact = require("../../contracts/NftFactory.json");
+        const artifacts = [marketplaceArtifact, nftFactoryArtifact];
+        init(artifacts);
       } catch (err) {
         console.error(err);
       }
@@ -43,14 +51,14 @@ function EthProvider({ children }) {
   useEffect(() => {
     const events = ["chainChanged", "accountsChanged"];
     const handleChange = () => {
-      init(state.artifact);
+      init(state.artifacts);
     };
 
     events.forEach(e => window.ethereum.on(e, handleChange));
     return () => {
       events.forEach(e => window.ethereum.removeListener(e, handleChange));
     };
-  }, [init, state.artifact]);
+  }, [init, state.artifacts]);
 
   return (
     <EthContext.Provider value={{

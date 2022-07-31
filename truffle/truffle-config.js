@@ -1,6 +1,6 @@
 const path = require("path");
-const HDWalletProvider = require('../node_modules/@truffle/hdwallet-provider');
-require('../node_modules/dotenv').config();
+const HDWalletProvider = require('./node_modules/@truffle/hdwallet-provider');
+require('./node_modules/dotenv').config();
 
 module.exports = {
   /**
