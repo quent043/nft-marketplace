@@ -13,7 +13,6 @@ function EthProvider({ children }) {
         const accounts = await web3.eth.requestAccounts();
         const networkID = await web3.eth.net.getId();
 
-        console.log("id", networkID)
         const marketplaceAbi = artifacts[0].abi;
         const nftFactoryAbi = artifacts[1].abi;
         let marketplaceAddress, marketplaceContract, nftFactoryAddress, nftFactoryContract;

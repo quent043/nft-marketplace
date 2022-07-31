@@ -39,7 +39,7 @@ contract NftFactory is MetaVariables, Ownable {
     @param _amountOfNft The amount of tokens in the collection, got from the frontend to avoid using gas calculating it
     @dev Emits "CollectionDeployed" event
     */
-    function createNftCollection(string calldata _uri, uint64 _max_mint_allowed, uint64 _max_supply, nftCollectionData[] calldata _nftFactoryInputData, uint _amountOfNft) external {
+    function createNftCollection(string calldata _uri, uint64 _max_mint_allowed, uint64 _max_supply, nftCollectionData[] calldata _nftFactoryInputData, uint _amountOfNft) external returns(address) {
         bytes memory nftCollectionBytecode = type(NftCollection).creationCode;
         // Random salt based on the artist name + block timestamp
         bytes32 salt = keccak256(abi.encodePacked(msg.sender, block.timestamp));
@@ -48,5 +48,6 @@ contract NftFactory is MetaVariables, Ownable {
         emit CollectionDeployed(nftCollectionAddress);
 
         NftCollection(payable (nftCollectionAddress)).init(msg.sender, _uri, _max_mint_allowed, _max_supply, _nftFactoryInputData, _amountOfNft);
+        return(nftCollectionAddress);
     }
 }

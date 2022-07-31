@@ -59,7 +59,8 @@ contract SftCollection is ERC1155, Royalties, Ownable, MetaVariables, Pausable, 
     function init(address _creator, string calldata _uri, uint120 _max_mint_allowed, uint120 _max_supply, sftCollectionData[] memory _sftFactoryInputData, uint _amountOfSeries) external onlyOwner {
         require(!isInit, "Contract was already initiated");
 
-        for(uint i = 0; i < _amountOfSeries; _unsafeIncrement(i)) {
+//        for(uint i = 0; i < _amountOfSeries; _unsafeIncrement(i)) {
+        for(uint i = 0; i < _amountOfSeries; i++) {
             _tokenIds.increment();
             tokenIdToSftData[_tokenIds.current()] = _sftFactoryInputData[i];
             _setTokenRoyalty(_tokenIds.current(), _creator, tokenIdToSftData[_tokenIds.current()].royalties);

@@ -57,7 +57,8 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
     function init(address _creator, string calldata _uri, uint120 _max_mint_allowed, uint120 _max_supply, nftCollectionData[] calldata _nftFactoryInputData, uint _amountOfNft) external onlyOwner {
         require(!isInit, "Contract was already initiated");
         // require(_amountOfNft <= max_supply, "Max supply reached");
-        for(uint i = 0; i < _amountOfNft; _unsafeIncrement(i)) {
+//        for(uint i = 0; i < _amountOfNft; _unsafeIncrement(i)) {
+        for(uint i = 0; i < _amountOfNft; i++) {
             _tokenIds.increment();
             tokenIdToNftData[_tokenIds.current()] = _nftFactoryInputData[i];
             _setTokenRoyalty(_tokenIds.current(), _creator, tokenIdToNftData[_tokenIds.current()].royalties);
