@@ -16,9 +16,10 @@ contract SftCollection is ERC1155, Royalties, Ownable, MetaVariables, Pausable, 
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
-    uint64 public max_mint_allowed;
-    uint64 public max_supply;
+    uint120 public max_mint_allowed;
+    uint120 public max_supply;
     bool private isInit;
+
     mapping(uint => sftCollectionData) public tokenIdToSftData;
     mapping(address => uint) public userToMintAmount;
 
@@ -55,7 +56,7 @@ contract SftCollection is ERC1155, Royalties, Ownable, MetaVariables, Pausable, 
     @param _amountOfSeries The amount of tokens in the collection, got from the frontend to avoid using gas calculating it
     @dev Emits "CollectionInitiated" event
     */
-    function init(address _creator, string calldata _uri, uint64 _max_mint_allowed, uint64 _max_supply, sftCollectionData[] memory _sftFactoryInputData, uint _amountOfSeries) external onlyOwner {
+    function init(address _creator, string calldata _uri, uint120 _max_mint_allowed, uint120 _max_supply, sftCollectionData[] memory _sftFactoryInputData, uint _amountOfSeries) external onlyOwner {
         require(!isInit, "Contract was already initiated");
 
         for(uint i = 0; i < _amountOfSeries; _unsafeIncrement(i)) {
@@ -144,6 +145,6 @@ contract SftCollection is ERC1155, Royalties, Ownable, MetaVariables, Pausable, 
     }
 
     function _unsafeIncrement(uint x) private pure returns(uint) {
-        unchecked { return (x + 1);}
+    unchecked { return (x + 1);}
     }
 }

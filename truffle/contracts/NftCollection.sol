@@ -14,8 +14,8 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
-    uint64 public max_mint_allowed;
-    uint64 public max_supply;
+    uint120 public max_mint_allowed;
+    uint120 public max_supply;
     bool private isInit;
 
     mapping(uint => nftCollectionData) public tokenIdToNftData;
@@ -54,7 +54,7 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
     @param _amountOfNft The amount of tokens in the collection, got from the frontend to avoid using gas calculating it
     @dev Emits "CollectionInitiated" event
     */
-    function init(address _creator, string calldata _uri, uint64 _max_mint_allowed, uint64 _max_supply, nftCollectionData[] calldata _nftFactoryInputData, uint _amountOfNft) external onlyOwner {
+    function init(address _creator, string calldata _uri, uint120 _max_mint_allowed, uint120 _max_supply, nftCollectionData[] calldata _nftFactoryInputData, uint _amountOfNft) external onlyOwner {
         require(!isInit, "Contract was already initiated");
         // require(_amountOfNft <= max_supply, "Max supply reached");
         for(uint i = 0; i < _amountOfNft; _unsafeIncrement(i)) {
@@ -136,6 +136,6 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
     }
 
     function _unsafeIncrement(uint x) private pure returns(uint) {
-        unchecked { return (x + 1);}
+    unchecked { return (x + 1);}
     }
 }

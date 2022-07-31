@@ -14,7 +14,7 @@ interface IERC2981Royalties {
 contract Royalties is IERC2981Royalties, ERC165 {
     struct RoyaltyInfo {
         address recipient;
-        uint24 amount;
+        uint96 amount;
     }
 
     mapping(uint256 => RoyaltyInfo) internal _royalties;
@@ -34,7 +34,7 @@ contract Royalties is IERC2981Royalties, ERC165 {
     */
     function _setTokenRoyalty(uint256 _tokenId, address _recipient, uint256 _value) internal {
         require(_value <= 10000, 'ERC2981Royalties: Too high');
-        _royalties[_tokenId] = RoyaltyInfo(_recipient, uint24(_value));
+        _royalties[_tokenId] = RoyaltyInfo(_recipient, uint96(_value));
     }
 
     /**
