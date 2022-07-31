@@ -13,83 +13,93 @@ contract Marketplace is ReentrancyGuard, Ownable {
     Counters.Counter public itemCount;
 
     address payable public immutable marketplaceOwnerAccount;
-    uint public immutable marketplaceFeePercentage;
+    uint128 public immutable marketplaceFeePercentage;
 
-    struct Item {
-        uint itemId;
-        NftCollection nft;
-        uint tokenId;
-        uint price;
+    mapping(uint => MarketplaceItem) public itemIdToItemData;
+
+    struct MarketplaceItem {
+        uint marketplaceItemId;
+        uint64 tokenId;
+        uint64 price;
         address seller;
         bool sold;
+        NftCollection nft;
     }
 
-    mapping(uint => Item) public itemIdToItemData;
-
     event PutForSale(
-        uint itemId,
-        address indexed nft,
-        uint tokenId,
-        uint price,
-        address indexed seller
+        uint _itemId,
+        uint64 _tokenId,
+        uint64 _price,
+        address indexed _nft,
+        address indexed _seller
     );
 
     event Bought(
-        uint itemId,
-        address indexed nft,
-        uint tokenId,
-        uint price,
-        address indexed seller,
-        address indexed buyer
+        uint _itemId,
+        uint64 _tokenId,
+        uint64 _price,
+        address indexed _nft,
+        address indexed _seller,
+        address indexed _buyer
     );
 
     event SplitPayment(
-        address sellerAddress,
-        uint paidAmount,
-        address royaltyAddress,
-        uint royaltyAmount,
-        address marketplaceAddress,
-        uint feeAmount
+        uint64 _paidAmount,
+        uint64 _royaltyAmount,
+        uint64 _feeAmount,
+        address _sellerAddress,
+        address _royaltyAddress,
+        address _marketplaceAddress
     );
 
-    event LogDepositReceived(address from, uint amount);
+    event LogDepositReceived(address _from, uint _amount);
 
 
-    constructor(uint _feePertenthousand) {
+    constructor(uint128 _feePertenthousand) {
         marketplaceOwnerAccount = payable(msg.sender);
         marketplaceFeePercentage = _feePertenthousand;
     }
 
     /**
+    @notice Function used to receive ether
+    @dev  Emits "LogDepositReceived" event | Ether send to this contract for
+    no reason will be credited to the contract owner, and the deposit logged,
+    */
+    receive() external payable{
+        payable (owner()).transfer(msg.value);
+        emit LogDepositReceived(msg.sender, msg.value);
+    }
+
+    /**
     @notice Function used to put a NFT for sale on the marketplace
-    @param _nft The contract address of the NFT being put for sale
+    @param _nftCollection The contract address of the NFT being put for sale
     @param _tokenId The id of the NFT being put for sale
-    @param _nft The price of the NFT being put for sale
+    @param _price The price of the NFT being put for sale
     @dev Emits a "PutForSale" event
     */
-    function putNftForSale(NftCollection _nft, uint _tokenId, uint _price) external nonReentrant {
+    function putNftForSale(NftCollection _nftCollection, uint64 _tokenId, uint64 _price) external nonReentrant {
         require(_price > 0, "Price must be greater than zero");
 
         //Marche pas
         // emit ApproveLogger(address(this), _tokenId);
         // _nft.approve(address(this), _tokenId);
         itemCount.increment();
-        _nft.transferFrom(msg.sender, address(this), _tokenId);
+        _nftCollection.transferFrom(msg.sender, address(this), _tokenId);
 
-        itemIdToItemData[itemCount.current()] = Item (
+        itemIdToItemData[itemCount.current()] = MarketplaceItem(
             itemCount.current(),
-            _nft,
             _tokenId,
             _price,
             msg.sender,
-            false
+            false,
+            _nftCollection
         );
 
         emit PutForSale(
             itemCount.current(),
-            address(_nft),
             _tokenId,
             _price,
+            address(_nftCollection),
             msg.sender
         );
     }
@@ -97,24 +107,23 @@ contract Marketplace is ReentrancyGuard, Ownable {
     /**
     @notice Function used to purchase a NFT for sale on the marketplace
     @param _itemId The marketplace id of the NFT being bought
-    @param _nft The price of the NFT being put for sale
     @dev Emits a "Bought" event, protected against reentrancy
     */
     function purchaseItem(uint _itemId) external payable nonReentrant {
-        Item storage item = itemIdToItemData[_itemId];
+        MarketplaceItem storage item = itemIdToItemData[_itemId];
         require(_itemId > 0 && _itemId <= itemCount.current(), "item doesn't exist");
         require(msg.value >= itemIdToItemData[_itemId].price, "not enough ether to cover item price and market fee");
         require(!item.sold, "item already sold");
 
         item.sold = true;
         item.nft.transferFrom(address(this), msg.sender, item.tokenId);
-        splitPayment(_itemId);
+        _splitPayment(_itemId);
 
         emit Bought(
             _itemId,
-            address(item.nft),
             item.tokenId,
             item.price,
+            address(item.nft),
             item.seller,
             msg.sender
         );
@@ -125,7 +134,7 @@ contract Marketplace is ReentrancyGuard, Ownable {
     @param _itemId The marketplace id of the NFT being bought
     @dev Emits a "SplitPayment" event
     */
-    function splitPayment(uint _itemId) internal {
+    function _splitPayment(uint _itemId) internal {
         uint price = itemIdToItemData[_itemId].price;
         (address receiver, uint royaltyAmount) = itemIdToItemData[_itemId].nft.royaltyInfo(_itemId, price);
         //Pay royalties
@@ -143,31 +152,22 @@ contract Marketplace is ReentrancyGuard, Ownable {
         require(paymentSent, "Payment failed");
 
         emit SplitPayment(
+            uint64 (price - (royaltyAmount + marketplaceFee)),
+            uint64 (royaltyAmount),
+            uint64 (marketplaceFee),
             itemIdToItemData[_itemId].seller,
-            (price - (royaltyAmount + marketplaceFee)),
             receiver,
-            royaltyAmount,
-            marketplaceOwnerAccount,
-            marketplaceFee);
+            marketplaceOwnerAccount
+        );
 
-//        emit Price(price);
-//        emit RoyaltiesLog(receiver, royaltyAmount);
-//        emit PaymentResult(feeSent);
-//        emit MarketplaceFee((price * marketplaceFeePercentage) / 10000);
-//        emit PaymentResult(feeSent);
-//        emit seller(itemIdToItemData[_itemId].seller);
-//        emit sellerPrice(price - (royaltyAmount + marketplaceFee));
-//        emit PaymentResult(paymentSent);
-    }
-
-    /**
-    @notice Function used to receive ether
-    @dev  Emits "LogDepositReceived" event | Ether send to this contract for
-    no reason will be credited to the contract owner, and the deposit logged,
-    */
-    receive() external payable{
-        payable (owner()).transfer(msg.value);
-        emit LogDepositReceived(msg.sender, msg.value);
+        //        emit Price(price);
+        //        emit RoyaltiesLog(receiver, royaltyAmount);
+        //        emit PaymentResult(feeSent);
+        //        emit MarketplaceFee((price * marketplaceFeePercentage) / 10000);
+        //        emit PaymentResult(feeSent);
+        //        emit seller(itemIdToItemData[_itemId].seller);
+        //        emit sellerPrice(price - (royaltyAmount + marketplaceFee));
+        //        emit PaymentResult(paymentSent);
     }
 
     // ****************************************TESTS****************************************
@@ -182,13 +182,13 @@ contract Marketplace is ReentrancyGuard, Ownable {
 
     function splitPaymentExternal(uint _itemId, NftCollection _nft) public {
 
-        itemIdToItemData[_itemId] = Item (
+        itemIdToItemData[_itemId] = MarketplaceItem(
             _itemId,
-            _nft,
             1,
             20000,
             msg.sender,
-            false
+            false,
+            _nft
         );
 
         uint price = itemIdToItemData[_itemId].price;
