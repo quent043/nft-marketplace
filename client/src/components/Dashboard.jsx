@@ -1,16 +1,21 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
+import { useState, useEffect } from 'react';
 import useEth from "../contexts/EthContext/useEth";
-import {Button} from "react-bootstrap";
 
+import Button from 'react-bootstrap/Button';
 
 const Dashboard = () => {
+ 
+
     const {state: { accounts, marketplaceContract, nftFactoryContract }} = useEth();
     const [loaded, setLoaded] = useState(false);
+
+
 
     const collectionTuple =  [
         ["jbkbkb", "jbkbkb", "jbkbkb", 10, 50000],
         ["jbkbkb", "jbkbkb", "jbkbkb", 10, 50000]
-    ]
+    ] 
 
         const init = async () => {
         try {

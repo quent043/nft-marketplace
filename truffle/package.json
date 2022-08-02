@@ -7,7 +7,7 @@
     "@chainlink/contracts": "^0.4.2",
     "@openzeppelin/contracts": "^4.7.0",
     "@openzeppelin/test-helpers": "^0.5.15",
-    "@truffle/hdwallet-provider": "^2.0.10",
+    "@truffle/hdwallet-provider": "^2.0.13",
     "dotenv": "^16.0.1",
     "react-toastify": "4.1"
   },
