@@ -14,15 +14,15 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
-    uint120 public max_mint_allowed;
-    uint120 public max_supply;
+    uint80 public max_mint_allowed;
+    uint80 public max_supply;
     bool private isInit;
 
     mapping(uint => nftCollectionData) public tokenIdToNftData;
     mapping(address => uint) public userToMintAmount;
 
     event TokenMinted(address _tokenOwner, uint _tokenId);
-    event CollectionInitiated(address _contractOwner, uint _amountOfNft);
+    event CollectionInitiated(address _contractOwner, uint _max_supply);
     event LogDepositReceived(address _from, uint _amount);
 
     constructor() ERC721("", "") {}
@@ -49,16 +49,14 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
     @param _creator The owner of the collection
     @param _uri The URI of the IPFS storage location
     @param _max_mint_allowed The maximum amounts of mints allowed per user
-    @param _max_supply The maximum amount of NFTs in the collection
+    @param _max_supply The amount of NFTs in the collection, got from the frontend to avoid using gas calculating it
     @param _nftFactoryInputData The NFT collection metadata (
-    @param _amountOfNft The amount of tokens in the collection, got from the frontend to avoid using gas calculating it
     @dev Emits "CollectionInitiated" event
     */
-    function init(address _creator, string calldata _uri, uint120 _max_mint_allowed, uint120 _max_supply, nftCollectionData[] calldata _nftFactoryInputData, uint _amountOfNft) external onlyOwner {
+    function init(address _creator, string calldata _uri, uint80 _max_mint_allowed, uint80 _max_supply, nftCollectionData[] calldata _nftFactoryInputData) external onlyOwner {
         require(!isInit, "Contract was already initiated");
-        // require(_amountOfNft <= max_supply, "Max supply reached");
-//        for(uint i = 0; i < _amountOfNft; _unsafeIncrement(i)) {
-        for(uint i = 0; i < _amountOfNft; i++) {
+        //        for(uint i = 0; i < _max_supply; _unsafeIncrement(i)) {
+        for(uint i = 0; i < _max_supply; i++) {
             _tokenIds.increment();
             tokenIdToNftData[_tokenIds.current()] = _nftFactoryInputData[i];
             _setTokenRoyalty(_tokenIds.current(), _creator, tokenIdToNftData[_tokenIds.current()].royalties);
@@ -70,7 +68,7 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
         max_supply = _max_supply;
         _transferOwnership(_creator);
         isInit = true;
-        emit CollectionInitiated(owner(), _amountOfNft);
+        emit CollectionInitiated(owner(), _max_supply);
     }
 
     /**

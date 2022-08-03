@@ -15,6 +15,7 @@ function EthProvider({ children }) {
 
         const marketplaceAbi = artifacts[0].abi;
         const nftFactoryAbi = artifacts[1].abi;
+        const nftCollectionAbi = artifacts[2].abi;
         let marketplaceAddress, marketplaceContract, nftFactoryAddress, nftFactoryContract;
         try {
           marketplaceAddress = artifacts[0].networks[networkID].address;
@@ -27,7 +28,7 @@ function EthProvider({ children }) {
 
         dispatch({
           type: actions.init,
-          data: { artifacts, web3, accounts, networkID, marketplaceContract, nftFactoryContract }
+          data: { artifacts, web3, accounts, networkID, marketplaceContract, nftFactoryContract, nftCollectionAbi }
         });
       }
     }, []);
@@ -37,7 +38,8 @@ function EthProvider({ children }) {
       try {
         const marketplaceArtifact = require("../../contracts/Marketplace.json");
         const nftFactoryArtifact = require("../../contracts/NftFactory.json");
-        const artifacts = [marketplaceArtifact, nftFactoryArtifact];
+        const nftCollectionArtifact = require("../../contracts/NftCollection.json");
+        const artifacts = [marketplaceArtifact, nftFactoryArtifact, nftCollectionArtifact];
         init(artifacts);
       } catch (err) {
         console.error(err);

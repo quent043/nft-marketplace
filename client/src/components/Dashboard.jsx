@@ -1,27 +1,26 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import useEth from "../contexts/EthContext/useEth";
+import {Button} from "react-bootstrap";
+import NftCollectionTable from "./NftCollectionTable";
 
-import Button from 'react-bootstrap/Button';
 
 const Dashboard = () => {
- 
-
     const {state: { accounts, marketplaceContract, nftFactoryContract }} = useEth();
     const [loaded, setLoaded] = useState(false);
-
-
+    const [collectionsDeployed, setCollectionsDeployed] = useState([]);
 
     const collectionTuple =  [
-        ["jbkbkb", "jbkbkb", "jbkbkb", 10, 50000],
-        ["jbkbkb", "jbkbkb", "jbkbkb", 10, 50000]
-    ] 
+        ["Item1", "jbkbkb", "jbkbkb", 10, 50000],
+        ["Item2", "jbkbkb", "jbkbkb", 10, 50000]
+    ]
 
-        const init = async () => {
+    const init = async () => {
         try {
             setLoaded(false);
             if (nftFactoryContract) {
+                await getDeployedCollectionsFromEvents();
                 listenToCollectionDeployedEvent();
+                setLoaded(true);
             }
         } catch (err) {
             // toast.error("Error connecting to the blockchain")
@@ -31,48 +30,48 @@ const Dashboard = () => {
     const deployCollection = async () => {
         console.log("init collection deployment", nftFactoryContract.methods)
         try {
-            let response = await nftFactoryContract.methods.createNftCollection("uri", 20, 20, collectionTuple, 2).send({from: accounts[0]});
-            console.log("Quentin - response: ", response);
+            let response = await nftFactoryContract.methods.createNftCollection(owner(), 20, 2, collectionTuple).send({from: accounts[0]});
         } catch (err) {
+            //TODO: Gérer les erreurs
             console.log("Error: ", err);
         }
-        // console.log("Quentin - events: ", nftFactoryContract.events);
     }
 
     const owner = async () => {
-        let response = await nftFactoryContract.methods.owner().call({from: accounts[0]});
-        console.log("Quentin - owner: ", response);
+        return await nftFactoryContract.methods.owner().call({from: accounts[0]});
     }
 
     useEffect(() => {
+        console.log("init")
         init();
+        //TODO: Pas sur qu'on ait besoin de marketplaceContract en dépendance, à check
     }, [nftFactoryContract, marketplaceContract, accounts]);
 
     const listenToCollectionDeployedEvent = () => {
         nftFactoryContract.events.CollectionDeployed().on("data", async (event) => {
-            console.log("Collection event: ", event.returnValues._contractAddress);
-        })
-        nftFactoryContract.events.OwnershipTransferred().on("data", async (event) => {
-            console.log("Collection event: ", event.returnValues);
-        })
+            const collections = [...collectionsDeployed, event.returnValues._contractAddress];
+            setCollectionsDeployed(collections);
+        });
     };
 
-    const getCollectionEvents = async () => {
+    const getDeployedCollectionsFromEvents = async () => {
         let options = {
             fromBlock: 0,
             toBlock: "latest"
         }
+        let deployedCollections = [];
         const contractEvents = await nftFactoryContract.getPastEvents("CollectionDeployed", options);
-        console.log("PastEvents CollectionDeployed: ", contractEvents);
-        const contractEvents2 = await nftFactoryContract.getPastEvents("OwnershipTransferred", options);
-        console.log("PastEvents OwnershipTransferred: ", contractEvents2);
+
+        contractEvents.forEach(element => {
+            deployedCollections.push(element.returnValues._contractAddress);
+        });
+        setCollectionsDeployed(deployedCollections);
     }
 
-    return (
-        <div>
+    return ( loaded &&
+        <div className="container">
             <Button onClick={ ()=> { deployCollection() }}>Init Collection</Button>
-            <Button onClick={ ()=> { owner() }}>Owner</Button>
-            <Button onClick={ ()=> { getCollectionEvents() }}>Past Events</Button>
+            <NftCollectionTable title={"Deployed Collections"} items={collectionsDeployed} />
         </div>
     );
 };
