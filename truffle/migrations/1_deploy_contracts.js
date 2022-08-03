@@ -1,5 +1,5 @@
 const Marketplace = artifacts.require("Marketplace");
-const NFTFactory = artifacts.require("NFTFactory");
+const NFTFactory = artifacts.require("NftFactory");
 
 module.exports = async (deployer) => {
   await deployer.deploy(Marketplace, 500);
