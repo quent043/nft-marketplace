@@ -38,7 +38,7 @@ contract NftFactory is MetaVariables, Ownable {
     @param _nftFactoryInputData The NFT collection metadata
     @dev Emits "CollectionDeployed" event
     */
-    function createNftCollection(string calldata _uri, uint80 _max_mint_allowed, uint80 _max_supply, nftCollectionData[] calldata _nftFactoryInputData) external {
+    function createNftCollection(string calldata nameCollection, uint80 _max_mint_allowed, uint80 _max_supply, nftCollectionData[] calldata _nftFactoryInputData) external {
         bytes memory nftCollectionBytecode = type(NftCollection).creationCode;
         // Random salt based on the artist name + block timestamp
         bytes32 salt = keccak256(abi.encodePacked(msg.sender, block.timestamp));
@@ -46,6 +46,6 @@ contract NftFactory is MetaVariables, Ownable {
 
         emit CollectionDeployed(nftCollectionAddress);
 
-        NftCollection(payable (nftCollectionAddress)).init(msg.sender, _uri, _max_mint_allowed, _max_supply, _nftFactoryInputData);
+        NftCollection(payable (nftCollectionAddress)).init(nameCollection, msg.sender, _max_mint_allowed, _max_supply, _nftFactoryInputData);
     }
 }

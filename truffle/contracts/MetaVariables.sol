@@ -18,14 +18,15 @@ contract MetaVariables {
     }
 
     struct nftCollectionData {
+        string linktoImage;
         string name;
         string description;
-        string image;
-        uint royalties;
         uint price;
+        uint royalties;
     }
 }
 
+//[["https://ipfs.infura.io/ipfs/QmUjkxdHTm4xyzzzubUK2Z9fTtQfdNhEs4GKjcjFcdNFyc/1.png","NFT1","desc","4","1"]]
 
 
 // [
