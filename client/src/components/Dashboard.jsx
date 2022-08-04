@@ -30,7 +30,7 @@ const Dashboard = () => {
     const deployCollection = async () => {
         console.log("init collection deployment", nftFactoryContract.methods)
         try {
-            let response = await nftFactoryContract.methods.createNftCollection(owner(), 20, 2, collectionTuple).send({from: accounts[0]});
+            await nftFactoryContract.methods.createNftCollection(owner(), 20, 2, collectionTuple).send({from: accounts[0]});
         } catch (err) {
             //TODO: Gérer les erreurs
             console.log("Error: ", err);
@@ -42,15 +42,30 @@ const Dashboard = () => {
     }
 
     useEffect(() => {
-        console.log("init")
+        console.log("init Dashboard");
         init();
         //TODO: Pas sur qu'on ait besoin de marketplaceContract en dépendance, à check
     }, [nftFactoryContract, marketplaceContract, accounts]);
 
-    const listenToCollectionDeployedEvent = () => {
+    //TODO: Ne marche pas, il renvoie le state vide je ne sais pas pourquoi
+
+    // const listenToCollectionDeployedEvent = () => {
+    //     let collections = [...collectionsDeployed];
+    //     nftFactoryContract.events.CollectionDeployed().on("data", async (event) => {
+    //         console.log("Deployed ", collections);
+    //         const newCollection = event.returnValues._contractAddress;
+    //         // collectionsDeployed.push(newCollection);
+    //         collections = [...collectionsDeployed, newCollection];
+    //         // console.log("After add ", collections);
+    //         console.log("After add ", collections);
+    //         setCollectionsDeployed(collections);
+    //         // setCollectionsDeployed(collectionsDeployed);
+    //     });
+    // };
+
+    const listenToCollectionDeployedEvent = async () => {
         nftFactoryContract.events.CollectionDeployed().on("data", async (event) => {
-            const collections = [...collectionsDeployed, event.returnValues._contractAddress];
-            setCollectionsDeployed(collections);
+            await getDeployedCollectionsFromEvents();
         });
     };
 

@@ -11,17 +11,18 @@ import NavBar from "./components/ui/navbar";
 
 import Upload from "./components/uploadToIpfs";
 import UploadMultiple from "./components/uploadToIpfs_mul";
+import NftDetail from "./components/NftDetail";
 
 function App() {
 
     return (
         <EthProvider>
-            <Router>
-
+            <Router forceRefresh={true}>
                 <NavBar />
                 <Routes>
                     <Route path="/" element={<Dashboard/>}/>
                     <Route path="/collections/:contractAddress" element={<Collection/>}/>
+                    <Route path="/collections/:contractAddress/:tokenAddress" element={<NftDetail/>}/>
                     <Route path="/marketplace/:contractAddress" element={<Marketplace/>}/>
                     <Route path="/profil/:contractAddress" element={<Profil/>}/>
                     <Route path="/create/:contractAddress" element={<Upload/>}/>

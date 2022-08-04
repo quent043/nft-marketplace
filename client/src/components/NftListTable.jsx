@@ -1,13 +1,12 @@
 import React, {Fragment} from 'react';
 import {useNavigate} from "react-router-dom";
 
-function NftListTable({items, title, style}) {
+function NftListTable({items, title, style, path}) {
     const css = "table " + style;
     const navigate = useNavigate();
 
-    const handleClick = (address) => {
-        //TODO: Gérer le routing vers la page de détail du NFT
-        navigate("" + address);
+    const handleClick = (tokenId) => {
+        navigate(path + "/" + tokenId);
     };
 
     return (
@@ -22,7 +21,7 @@ function NftListTable({items, title, style}) {
                 {items.map((item, index) => (
                         <tr key={index}>
                             <td>
-                                {item.name}
+                                <p onClick={() => {handleClick(index + 1)}}>{item.name}</p>
                             </td>
                         </tr>
                     )
