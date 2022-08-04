@@ -41,7 +41,6 @@ const UploadMultiple = () => {
                 };
             },
             {
-                number: counter,
                 linkNFT: folderUrl + "/" + counter + files
             }
         );
@@ -95,6 +94,7 @@ const UploadMultiple = () => {
 
     return (
         <>
+        {JSON.stringify(smartContratInput)}
             <div className="container card-light">
                 <div className="main">
                     <FolderUpload setUrl={setFolderUrl} />
@@ -173,6 +173,7 @@ const UploadMultiple = () => {
                         : null}
                 </div>
             </div>
+          
                 <div className="d-flex">
                     {submitted.map((input, i) => (
                         <div className="card bg-light text-dark border-grey">
@@ -180,7 +181,7 @@ const UploadMultiple = () => {
                             <div className="card-body">
                                 <h5 className="card-title">{ColProps.collectionName}</h5>
                                     <ul key={`index${i}`} className="list-group">
-                                        <li className="list-group-item" >TokenId: {input.number}</li>
+                                        <li className="list-group-item" >TokenId: {counterRef.current}</li>
                                         <li className="list-group-item">Name: {input.name} </li>
                                         <li className="list-group-item">Description: {input.description}</li>
                                         <li className="list-group-item">Price: {input.price} </li>
@@ -190,7 +191,6 @@ const UploadMultiple = () => {
                         </div>
                     ))}
               </div>
-        
         </>
     )
 }
