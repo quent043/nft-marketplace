@@ -75,13 +75,12 @@ const UploadMultiple = () => {
         const _maxmint = ColProps.MaxMintAllowed;
         const _maxsupp = ColProps.maxsupply;
         const _namecoll = ColProps.collectionName;
-        //const _royalties = ColProps.ColRoyalties;
-
+  
         try {
             /**
              * @parameters string calldata _uri, uint80 _max_mint_allowed, uint80 _max_supply, nftCollectionData[] calldata _nftFactoryInputData
             */
-            let response = await nftFactoryContract.methods.createNftCollection(_namecoll, files, folderUrl, _maxmint, _maxsupp, smartContratInput).send({ from: accounts[0] });
+            let response = await nftFactoryContract.methods.createNftCollection(_namecoll, _maxmint, _maxsupp, smartContratInput).send({ from: accounts[0] });
             console.log("response : ");
             console.log(response);
         } catch (err) {
