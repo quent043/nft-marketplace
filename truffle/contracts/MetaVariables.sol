@@ -18,7 +18,7 @@ contract MetaVariables {
     }
 
     struct nftCollectionData {
-        string linktoImage;
+        string linkToImage;
         string name;
         string description;
         uint price;

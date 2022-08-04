@@ -32,7 +32,6 @@ contract NftFactory is MetaVariables, Ownable {
 
     /**
     @notice Factory function used to create a NFT collection
-    @param _uri The URI of the IPFS storage location
     @param _max_mint_allowed The maximum amounts of mints allowed per user
     @param _max_supply The amount of tokens in the collection, got from the frontend to avoid using gas calculating it
     @param _nftFactoryInputData The NFT collection metadata

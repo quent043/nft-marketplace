@@ -24,7 +24,7 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
     mapping(address => uint) public userToMintAmount;
 
     event TokenMinted(address _tokenOwner, uint _tokenId);
-    event CollectionInitiated(address _contractOwner, uint _max_supply, string namecollection, uint max_mint_allowed);
+    event CollectionInitiated(address _contractOwner, uint _max_supply, string namecollection);
     event LogDepositReceived(address _from, uint _amount);
 
     constructor() ERC721("", "") {}
@@ -49,29 +49,27 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
     /**
     @notice Init function used to populate the collection once it was created by the factory
     @param _creator The owner of the collection
-    @param _uri The URI of the IPFS storage location
     @param _max_mint_allowed The maximum amounts of mints allowed per user
     @param _max_supply The amount of NFTs in the collection, got from the frontend to avoid using gas calculating it
     @param _nftFactoryInputData The NFT collection metadata (
     @dev Emits "CollectionInitiated" event
     */
-    function init(string calldata _namecollection, string calldata _filetype,  address _creator, string calldata _uri, uint80 _max_mint_allowed, uint80 _max_supply, nftCollectionData[] calldata _nftFactoryInputData) external onlyOwner {
+    function init(string calldata _namecollection,  address _creator, uint80 _max_mint_allowed, uint80 _max_supply, nftCollectionData[] calldata _nftFactoryInputData) external onlyOwner {
         require(!isInit, "Contract was already initiated");
         //        for(uint i = 0; i < _max_supply; _unsafeIncrement(i)) {
         for(uint i = 0; i < _max_supply; i++) {
             _tokenIds.increment();
             tokenIdToNftData[_tokenIds.current()] = _nftFactoryInputData[i];
             _setTokenRoyalty(_tokenIds.current(), _creator, tokenIdToNftData[_tokenIds.current()].royalties);
-            //_setTokenURI(_tokenIds.current(), string(abi.encodePacked(_uri,i,_filetype)));
+            _setTokenURI(_tokenIds.current(), tokenIdToNftData[_tokenIds.current()].linkToImage);
         }
         
         namecollection = _namecollection;
-        filetype = _filetype;
         max_mint_allowed = _max_mint_allowed;
         max_supply = _max_supply;
         _transferOwnership(_creator);
         isInit = true;
-        emit CollectionInitiated(owner(), _max_supply, namecollection, max_mint_allowed);
+        emit CollectionInitiated(owner(), _max_supply, namecollection);
     }
 
     /**
