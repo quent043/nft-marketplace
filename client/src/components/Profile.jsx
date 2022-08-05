@@ -5,6 +5,7 @@ import NftCollectionTable from "./NftCollectionTable";
 
 import ProfilBox from './ui/ProfilBox';
 import CardNft from './ui/CardNft';
+import CardCollection from './ui/CardCollection';
 
 function Profile() {
     const {state: { web3, accounts, marketplaceContract, nftCollectionAbi, nftFactoryContract }} = useEth();
@@ -77,7 +78,8 @@ function Profile() {
             <CardNft/>
             <CardNft/>
             <CardNft/>
-            <CardNft/>
+            <CardNft goTo="0x172FBdF2Eda409Cbd2CA554F0A34d55308BCd8fd" nftId={1}/>
+            <CardCollection goTo="0x172FBdF2Eda409Cbd2CA554F0A34d55308BCd8fd"/>
         </div>
         </>
     );
