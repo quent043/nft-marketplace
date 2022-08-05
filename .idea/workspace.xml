@@ -2,8 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="87cfabeb-032c-453c-b37f-7c3c7cf837fd" name="Changes" comment="Added Marketplace contract&#10;Correcterd mistakes in Collections">
+      <change afterPath="$PROJECT_DIR$/client/src/components/Profile.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/contracts/Marketplace.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/Marketplace.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Collection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Collection.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Dashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dashboard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/NftDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/NftDetail.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Profil.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/uploadToIpfs_mul.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/uploadToIpfs_mul.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/truffle/contracts/NftCollection.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/NftCollection.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/truffle/contracts/NftFactory.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/NftFactory.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/truffle/migrations/1_deploy_contracts.js" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/migrations/1_deploy_contracts.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +76,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2021.1.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -85,6 +96,7 @@
       <workItem from="1658988012281" duration="17307000" />
       <workItem from="1659082354104" duration="9829000" />
       <workItem from="1659106923663" duration="4389000" />
+      <workItem from="1659645313028" duration="13483000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit: Dapp architecture using truffle react box&#10;- Smart Contracts&#10;- truffle-config.js&#10;- package.json&#10;- 1_deploy_simple_storage.js&#10;- .env">
       <created>1658923121505</created>

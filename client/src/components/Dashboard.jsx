@@ -9,12 +9,14 @@ const Dashboard = () => {
     const [loaded, setLoaded] = useState(false);
     const [collectionsDeployed, setCollectionsDeployed] = useState([]);
 
-    const collectionTuple =  [
-        ["Item1", "jbkbkb", "jbkbkb", 10, 50000],
-        ["Item2", "jbkbkb", "jbkbkb", 10, 50000]
+    const collectionTuple =
+    [
+        ["Item1", "jbkbkb", "jbkbkb", 50000, 1000],
+        ["Item2", "jbkbkb", "jbkbkb", 50000, 1000]
     ]
 
     const init = async () => {
+        console.log(marketplaceContract)
         try {
             setLoaded(false);
             if (nftFactoryContract) {
@@ -26,11 +28,12 @@ const Dashboard = () => {
             // toast.error("Error connecting to the blockchain")
         }
     }
+    // function createNftCollection(string calldata collectionName, uint80 _max_mint_allowed, uint80 _max_supply, nftCollectionData[] calldata _nftFactoryInputData) external {
 
-    const deployCollection = async () => {
+        const deployCollection = async () => {
         console.log("init collection deployment", nftFactoryContract.methods)
         try {
-            await nftFactoryContract.methods.createNftCollection(owner(), 20, 2, collectionTuple).send({from: accounts[0]});
+            await nftFactoryContract.methods.createNftCollection("CollectionName", 20, 2, collectionTuple).send({from: accounts[0]});
         } catch (err) {
             //TODO: Gérer les erreurs
             console.log("Error: ", err);
@@ -73,7 +76,7 @@ const Dashboard = () => {
         let options = {
             fromBlock: 0,
             toBlock: "latest"
-        }
+        };
         let deployedCollections = [];
         const contractEvents = await nftFactoryContract.getPastEvents("CollectionDeployed", options);
 

@@ -11,7 +11,7 @@ const Collection = () => {
     const [collectionItems, setCollectionItems] = useState();
 
 
-    const getCollectionContract = async () => {
+    const getCollectionContract = () => {
         if(web3 && nftCollectionAbi) {
             // console.log("Web3");a
             const NftContractInstance = new web3.eth.Contract(nftCollectionAbi, contractAddress);
@@ -34,18 +34,12 @@ const Collection = () => {
     }
 
     useEffect(() => {
-        // console.log("init Collection")
-        init();
+        getCollectionContract();
     }, [web3]);
 
-    const init = async () => {
-        await getCollectionContract();
-        await getCollectionItems();
-    };
-    // Ca trigger comme ça mais problème de boucle infinie car on setState dans init
-    // useEffect(() => {
-    //     init();
-    // });
+    useEffect(() => {
+        getCollectionItems();
+    }, [collectionContract]);
 
     return (
         <div className="container">{

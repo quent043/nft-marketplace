@@ -4,7 +4,7 @@ import Dashboard from "./components/Dashboard";
 import Collection from "./components/Collection";
 import Marketplace from "./components/Marketplace";
 import Error from "./components/Error404";
-import Profil from "./components/Profil";
+import Profile from "./components/Profile";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/ui/navbar";
@@ -24,7 +24,7 @@ function App() {
                     <Route path="/collections/:contractAddress" element={<Collection/>}/>
                     <Route path="/collections/:contractAddress/:tokenAddress" element={<NftDetail/>}/>
                     <Route path="/marketplace/:contractAddress" element={<Marketplace/>}/>
-                    <Route path="/profil/:contractAddress" element={<Profil/>}/>
+                    <Route path="/profile" element={<Profile/>}/>
                     <Route path="/create/:contractAddress" element={<Upload/>}/>
                     <Route path="/create2/:contractAddress" element={<UploadMultiple/>}/>
 

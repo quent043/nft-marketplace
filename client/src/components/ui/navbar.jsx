@@ -4,8 +4,6 @@ import useEth from "../../contexts/EthContext/useEth";
 
 function    NavBar() {
 
-    const { state: { accounts } } = useEth();
-
     return (
         <>
             <nav>
@@ -14,9 +12,9 @@ function    NavBar() {
                 {/*<Link to={"/" + accounts}> Dashboard </Link>*/}
                 {/*<Link to={"collection/" + accounts}> Collection </Link>*/}
                 {/*<Link to={"marketplace/" + accounts}> Marketplace </Link>*/}
-                {/*<Link to={"profile/" + accounts}> Profile </Link>*/}
+                <Link to={"profile"}> Profile </Link>
                 {/*<Link to={"create/" + accounts}> Create an NFT </Link>*/}
-                <Link to={"create2/" + accounts}> Create an NFT </Link>
+                {/*<Link to={"create2/" + accounts}> Create an NFT </Link>*/}
             </nav>
 
         </>

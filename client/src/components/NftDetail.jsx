@@ -30,14 +30,13 @@ function NftDetail() {
     }
 
     useEffect(() => {
-        console.log("init Detail")
-        init();
+        getCollectionContract();
     }, [web3]);
 
-    const init = async () => {
-        await getCollectionContract();
-        await getTokenInfo();
-    };
+    useEffect(() => {
+        getTokenInfo();
+    }, [collectionContract]);
+
 
     return (
         tokenData &&
