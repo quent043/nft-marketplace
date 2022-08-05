@@ -122,6 +122,12 @@ body{
   background: rgba(32, 48, 72, 1) !important;
 }
 
+footer {
+  text-align: center;
+  font-size: 17px;
+  padding: 20px;
+}
+
 tr {
   color: #fff;
 }
