@@ -3,6 +3,9 @@ import {useParams, useLocation, withRouter} from 'react-router-dom';
 import useEth from "../contexts/EthContext/useEth";
 import NftCollectionTable from "./NftCollectionTable";
 
+import ProfilBox from './ui/ProfilBox';
+import CardNft from './ui/CardNft';
+
 function Profile() {
     const {state: { web3, accounts, marketplaceContract, nftCollectionAbi, nftFactoryContract }} = useEth();
     const { contractAddress, tokenAddress: tokenId } = useParams();
@@ -59,12 +62,24 @@ function Profile() {
         getCreatedCollectionsFromEvents();
     };
 
+// Nombres fictif dans owned ( nombre de nft ) & collections 
+
     return (
+        <>
         collectionsCreated &&
         <div className="container">
             <NftCollectionTable title="Created collections" items={collectionsCreated} />
             <NftCollectionTable title="Owned tokens" items={collectionsCreated} />
         </div>
+        {web3 && <ProfilBox account={accounts[0]} owned={21} collections={9} imageUrl={"https://img.seadn.io/files/850f31ebd63659d457678f57b8dd6dea.png?fit=max&w=200"} />}
+        <div className='grid--card--nft'>
+            <CardNft nftImageUrl="https://img.seadn.io/files/850f31ebd63659d457678f57b8dd6dea.png?fit=max&w=300" nftId={12} price={1}/>
+            <CardNft/>
+            <CardNft/>
+            <CardNft/>
+            <CardNft/>
+        </div>
+        </>
     );
 }
 
