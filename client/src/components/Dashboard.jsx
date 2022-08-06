@@ -11,7 +11,7 @@ const Dashboard = () => {
 
     const collectionTuple =
     [
-        ["sdgt", "Item1", "jbkbkb", 50000, 1000],
+        ["https://img.seadn.io/files/e1599f007c586ff7565b4657906b57ea.png?fit=max&w=200", "Item1", "jbkbkb", 50000, 1000],
         ["zertg", "Item2", "jbkbkb", 50000, 1000],
         ["serg", "Item3", "jbkbkb", 50000, 1000]
     ]
