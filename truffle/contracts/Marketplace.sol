@@ -116,7 +116,7 @@ contract Marketplace is ReentrancyGuard, Ownable {
         require(!item.sold, "item already sold");
 
         item.sold = true;
-        item.nft.transferFrom(address(this), msg.sender, item.tokenId);
+        item.nft.transferNft(address(this), msg.sender, item.tokenId);
         _splitPayment(_itemId);
 
         emit Bought(
