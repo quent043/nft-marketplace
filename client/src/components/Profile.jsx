@@ -78,8 +78,11 @@ function Profile() {
             <CardNft/>
             <CardNft/>
             <CardNft/>
-            <CardNft goTo="0x172FBdF2Eda409Cbd2CA554F0A34d55308BCd8fd" nftId={1}/>
-            <CardCollection goTo="0x172FBdF2Eda409Cbd2CA554F0A34d55308BCd8fd"/>
+            <CardNft goTo="0x48FA7222f103F7D31fDe9E017569f10750C40c22" nftId={1}/>
+            <CardCollection goTo="0x48FA7222f103F7D31fDe9E017569f10750C40c22"/>
+        </div>
+        <div className='error--box'>
+            <p>error here</p>
         </div>
         </>
     );
