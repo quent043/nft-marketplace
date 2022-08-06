@@ -8,6 +8,7 @@ import Profile from "./components/Profile";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/ui/navbar";
+import SellNft from './components/SellNft';
 
 import Upload from "./components/uploadToIpfs";
 import UploadMultiple from "./components/uploadToIpfs_mul";
@@ -27,6 +28,7 @@ function App() {
                     <Route path="/profile" element={<Profile/>}/>
                     <Route path="/create" element={<Upload/>}/>
                     <Route path="/create2" element={<UploadMultiple/>}/>
+                    <Route path="/sellnft/:contractAddress/:tokenAddress" element={<SellNft/>}/>
 
                     <Route path="*" element={<Error/>}/>
                 </Routes>
