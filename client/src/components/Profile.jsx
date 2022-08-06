@@ -9,7 +9,8 @@ import CardCollection from './ui/CardCollection';
 
 function Profile() {
     const {state: { web3, accounts, marketplaceContract, nftCollectionAbi, nftFactoryContract, tokenOwnershipRegisterContract }} = useEth();
-    const [collectionsCreated, setCollectionsCreated] = useState([]);
+    const [createdCollections, setCreatedCollections] = useState([]);
+    const [allCollections, setAllCollections] = useState([]);
     const [tokenData, setTokenData] = useState();
     const [tokensPerCollection, setTokensPerCollection] = useState([]);
 
@@ -24,28 +25,33 @@ function Profile() {
             toBlock: "latest"
         };
         let createdCollections = [];
+        let allCollections = [];
         const contractEvents = await nftFactoryContract.getPastEvents("CollectionDeployed", options);
 
         contractEvents.forEach(element => {
             if(element.returnValues._creatorAddress === accounts[0]){
                 createdCollections.push(element.returnValues._contractAddress);
             }
+            allCollections.push(element.returnValues._contractAddress);
         });
-        setCollectionsCreated(createdCollections);
+        setCreatedCollections(createdCollections);
+        setAllCollections(allCollections);
+        console.log("created", createdCollections);
+        console.log("all", allCollections);
     }
 
     const getProfileData = async () => {
-        if(tokenOwnershipRegisterContract && collectionsCreated) {
+        if(tokenOwnershipRegisterContract && allCollections) {
             let collectionToTokens = [];
-            for(let collection of collectionsCreated) {
+            for(let collection of allCollections) {
                 const balance = await tokenOwnershipRegisterContract.methods.userToCollectionToBalance(accounts[0], collection).call();
                 if(balance){
                     const tokenIds = [];
                     for(let i = 0; i < balance; i++) {
                         tokenIds.push(await tokenOwnershipRegisterContract.methods.userToCollectionToTokens(accounts[0], collection, i).call());
+                        const collectionBalance = {[collection]: tokenIds};
+                        collectionToTokens.push(collectionBalance);
                     }
-                    const collectionBalance = {[collection]: tokenIds};
-                    collectionToTokens.push(collectionBalance);
                     console.log("Collection and their balances: ",collectionToTokens);
                 }
             }
@@ -65,7 +71,8 @@ function Profile() {
     useEffect(() => {
         console.log("Get Profile Data")
         getProfileData();
-    }, [tokenOwnershipRegisterContract, collectionsCreated]);
+    }, [tokenOwnershipRegisterContract, allCollections]);
+
 
 
 // Nombres fictif dans owned ( nombre de nft ) & collections 
@@ -74,8 +81,8 @@ function Profile() {
         <>
         collectionsCreated &&
         <div className="container">
-            <NftCollectionTable title="Created collections" items={collectionsCreated} />
-            <NftCollectionTable title="Owned tokens" items={collectionsCreated} />
+            <NftCollectionTable title="Created collections" items={createdCollections} />
+            <NftCollectionTable title="Owned tokens" items={createdCollections} />
         </div>
         {web3 && <ProfilBox account={accounts[0]} owned={21} collections={9} imageUrl={"https://img.seadn.io/files/850f31ebd63659d457678f57b8dd6dea.png?fit=max&w=200"} />}
         <div className='grid--card--nft'>
