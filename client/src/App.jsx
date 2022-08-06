@@ -23,6 +23,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Dashboard/>}/>
                     <Route path="/collections" element={<Collection/>}/>
+                    <Route path="/collections/:contractAddress" element={<Collection/>}/>
                     <Route path="/collections/:contractAddress/:tokenAddress" element={<NftDetail/>}/>
                     <Route path="/marketplace/:contractAddress" element={<Marketplace/>}/>
                     <Route path="/profile" element={<Profile/>}/>
