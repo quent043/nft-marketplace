@@ -8,32 +8,15 @@ import CardNft from './ui/CardNft';
 import CardCollection from './ui/CardCollection';
 
 function Profile() {
-    const {state: { web3, accounts, marketplaceContract, nftCollectionAbi, nftFactoryContract }} = useEth();
-    const { contractAddress, tokenAddress: tokenId } = useParams();
+    const {state: { web3, accounts, marketplaceContract, nftCollectionAbi, nftFactoryContract, tokenOwnershipRegisterContract }} = useEth();
     const [collectionsCreated, setCollectionsCreated] = useState([]);
     const [tokenData, setTokenData] = useState();
+    const [tokensPerCollection, setTokensPerCollection] = useState([]);
 
     //TODO: On log: Récupérer les collections qui lui appartiennent
     //TODO: On log: Récupérer les nft qu'il a minté
     //TODO: On log: Récupérer les nft qu'il a acheté
     //TODO: On log: Check si un des nft mintés a été acheté et n'es plus à lui
-
-    // tokenIdToNftData
-    // const getCollectionContract = async () => {
-    //     if(web3 && nftCollectionAbi) {
-    //         console.log("Web3");
-    //         const NftContractInstance = new web3.eth.Contract(nftCollectionAbi, contractAddress);
-    //         setCollectionContract(NftContractInstance);
-    //     }
-    // };
-    //
-    // const getTokenInfo = async () => {
-    //     if(collectionContract) {
-    //         const tokenDetail = await collectionContract.methods.tokenIdToNftData(tokenId).call();
-    //         setTokenData(tokenDetail);
-    //         console.log("Token, Info: ", tokenDetail);
-    //     }
-    // }
 
     const getCreatedCollectionsFromEvents = async () => {
         let options = {
@@ -51,17 +34,39 @@ function Profile() {
         setCollectionsCreated(createdCollections);
     }
 
+    const getProfileData = async () => {
+        if(tokenOwnershipRegisterContract && collectionsCreated) {
+            let collectionToTokens = [];
+            for(let collection of collectionsCreated) {
+                const balance = await tokenOwnershipRegisterContract.methods.userToCollectionToBalance(accounts[0], collection).call();
+                if(balance){
+                    const tokenIds = [];
+                    for(let i = 0; i < balance; i++) {
+                        tokenIds.push(await tokenOwnershipRegisterContract.methods.userToCollectionToTokens(accounts[0], collection, i).call());
+                    }
+                    const collectionBalance = {[collection]: tokenIds};
+                    collectionToTokens.push(collectionBalance);
+                    console.log("Collection and their balances: ",collectionToTokens);
+                }
+            }
+            setTokensPerCollection(collectionToTokens);
+        }
+    }
+
+    useEffect(() => {
+        console.log("Final : ", tokensPerCollection);
+    }, [tokensPerCollection]);
 
     useEffect(() => {
         console.log("init Detail")
-        init();
+        getCreatedCollectionsFromEvents();
     }, [web3]);
 
-    const init = async () => {
-        // await getCollectionContract();
-        // await getTokenInfo();
-        getCreatedCollectionsFromEvents();
-    };
+    useEffect(() => {
+        console.log("Get Profile Data")
+        getProfileData();
+    }, [tokenOwnershipRegisterContract, collectionsCreated]);
+
 
 // Nombres fictif dans owned ( nombre de nft ) & collections 
 

@@ -13,8 +13,8 @@ function    NavBar() {
                 {/*<Link to={"collection/" + accounts}> Collection </Link>*/}
                 {/*<Link to={"marketplace/" + accounts}> Marketplace </Link>*/}
                 <Link to={"profile"}> Profile </Link>
-                {/*<Link to={"create/" + accounts}> Create an NFT </Link>*/}
-                {/*<Link to={"create2/" + accounts}> Create an NFT </Link>*/}
+                <Link to={"create"}> Create an NFT </Link>
+                <Link to={"create2"}> Create an NFT </Link>
             </nav>
 
         </>

@@ -5,6 +5,7 @@ import "@openzeppelin/contracts/utils/Create2.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./NftCollection.sol";
 import "./MetaVariables.sol";
+import "./TokenOwnershipRegister.sol";
 
 // FOR ALL CONTRACTS
 //TODO: Security audit
@@ -16,9 +17,13 @@ import "./MetaVariables.sol";
     */
 
 contract NftFactory is MetaVariables, Ownable {
+    address tokenOwnershipRegisterAddress;
 
-    event CollectionDeployed(address _contractAddress);
-    event LogDepositReceived(address _from, uint _amount);
+    event CollectionDeployed(address _creatorAddress, address _contractAddress);
+
+    constructor(address _ownershipRegisterAddress) {
+        tokenOwnershipRegisterAddress = _ownershipRegisterAddress;
+    }
 
     /**
     @notice Function used to receive ether
@@ -27,7 +32,6 @@ contract NftFactory is MetaVariables, Ownable {
     */
     receive() external payable{
         payable (owner()).transfer(msg.value);
-        emit LogDepositReceived(msg.sender, msg.value);
     }
 
     /**
@@ -37,14 +41,23 @@ contract NftFactory is MetaVariables, Ownable {
     @param _nftFactoryInputData The NFT collection metadata
     @dev Emits "CollectionDeployed" event
     */
-    function createNftCollection(string calldata nameCollection, uint80 _max_mint_allowed, uint80 _max_supply, nftCollectionData[] calldata _nftFactoryInputData) external {
+    function createNftCollection(string calldata _collectionName, uint80 _max_mint_allowed, uint80 _max_supply, nftCollectionData[] calldata _nftFactoryInputData) external {
         bytes memory nftCollectionBytecode = type(NftCollection).creationCode;
         // Random salt based on the artist name + block timestamp
         bytes32 salt = keccak256(abi.encodePacked(msg.sender, block.timestamp));
         address nftCollectionAddress = Create2.deploy(0, salt, nftCollectionBytecode);
 
-        emit CollectionDeployed(nftCollectionAddress);
+        TokenOwnershipRegister(tokenOwnershipRegisterAddress).registerCollection(nftCollectionAddress);
+        emit CollectionDeployed(msg.sender, nftCollectionAddress);
 
-        NftCollection(payable (nftCollectionAddress)).init(nameCollection, msg.sender, _max_mint_allowed, _max_supply, _nftFactoryInputData);
+        NftCollection(payable (nftCollectionAddress)).init(_collectionName, msg.sender, _max_mint_allowed, _max_supply, _nftFactoryInputData);
+    }
+
+    function recordMint(address _collection, address _owner, uint _tokenId) external {
+        TokenOwnershipRegister(tokenOwnershipRegisterAddress).recordMint(_collection, _owner, _tokenId);
+    }
+
+    function recordTransfer(address _collection, address _from, address _to, uint _tokenId) external {
+        TokenOwnershipRegister(tokenOwnershipRegisterAddress).recordTransfer(_collection, _from, _to, _tokenId);
     }
 }

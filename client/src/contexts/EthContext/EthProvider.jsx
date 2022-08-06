@@ -16,19 +16,22 @@ function EthProvider({ children }) {
         const marketplaceAbi = artifacts[0].abi;
         const nftFactoryAbi = artifacts[1].abi;
         const nftCollectionAbi = artifacts[2].abi;
-        let marketplaceAddress, marketplaceContract, nftFactoryAddress, nftFactoryContract;
+        const tokenOwnershipRegisterAbi = artifacts[3].abi;
+        let marketplaceAddress, marketplaceContract, nftFactoryAddress, nftFactoryContract, tokenOwnershipRegisterAddress, tokenOwnershipRegisterContract;
         try {
           marketplaceAddress = artifacts[0].networks[networkID].address;
           marketplaceContract = new web3.eth.Contract(marketplaceAbi, marketplaceAddress);
           nftFactoryAddress = artifacts[1].networks[networkID].address;
           nftFactoryContract = new web3.eth.Contract(nftFactoryAbi, nftFactoryAddress);
+          tokenOwnershipRegisterAddress = artifacts[3].networks[networkID].address;
+          tokenOwnershipRegisterContract = new web3.eth.Contract(tokenOwnershipRegisterAbi, tokenOwnershipRegisterAddress);
         } catch (err) {
           console.error(err);
         }
 
         dispatch({
           type: actions.init,
-          data: { artifacts, web3, accounts, networkID, marketplaceContract, nftFactoryContract, nftCollectionAbi }
+          data: { artifacts, web3, accounts, networkID, marketplaceContract, nftFactoryContract, nftCollectionAbi, tokenOwnershipRegisterContract }
         });
       }
     }, []);
@@ -39,7 +42,8 @@ function EthProvider({ children }) {
         const marketplaceArtifact = require("../../contracts/Marketplace.json");
         const nftFactoryArtifact = require("../../contracts/NftFactory.json");
         const nftCollectionArtifact = require("../../contracts/NftCollection.json");
-        const artifacts = [marketplaceArtifact, nftFactoryArtifact, nftCollectionArtifact];
+        const tokenOwnershipRegisterArtifact = require("../../contracts/TokenOwnershipRegister.json");
+        const artifacts = [marketplaceArtifact, nftFactoryArtifact, nftCollectionArtifact, tokenOwnershipRegisterArtifact];
         init(artifacts);
       } catch (err) {
         console.error(err);

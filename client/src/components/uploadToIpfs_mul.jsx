@@ -88,7 +88,10 @@ const UploadMultiple = () => {
             console.log("Error: ", err);
         }
 
-        console.log(_namecoll, files, folderUrl, _maxmint, _maxsupp, smartContratInput)
+        console.log("Collection Name",_namecoll)
+        console.log("MaxMint",_maxmint)
+        console.log("MaxSupp",_maxsupp)
+        console.log("Imput",smartContratInput)
     }
 
     return (

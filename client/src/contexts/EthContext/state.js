@@ -8,6 +8,7 @@ const initialState = {
   networkID: null,
   marketplaceContract: null,
   nftFactoryContract: null,
+  tokenOwnershipRegisterContract: null,
   nftCollectionArtifact: null
 };
 

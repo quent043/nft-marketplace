@@ -11,8 +11,9 @@ const Dashboard = () => {
 
     const collectionTuple =
     [
-        ["Item1", "jbkbkb", "jbkbkb", 50000, 1000],
-        ["Item2", "jbkbkb", "jbkbkb", 50000, 1000]
+        ["sdgt", "Item1", "jbkbkb", 50000, 1000],
+        ["zertg", "Item2", "jbkbkb", 50000, 1000],
+        ["serg", "Item3", "jbkbkb", 50000, 1000]
     ]
 
     const init = async () => {
@@ -33,7 +34,7 @@ const Dashboard = () => {
         const deployCollection = async () => {
         console.log("init collection deployment", nftFactoryContract.methods)
         try {
-            await nftFactoryContract.methods.createNftCollection("CollectionName", 20, 2, collectionTuple).send({from: accounts[0]});
+            await nftFactoryContract.methods.createNftCollection("CollectionName", 20, 3, collectionTuple).send({from: accounts[0]});
         } catch (err) {
             //TODO: Gérer les erreurs
             console.log("Error: ", err);

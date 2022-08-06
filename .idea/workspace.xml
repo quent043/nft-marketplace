@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="87cfabeb-032c-453c-b37f-7c3c7cf837fd" name="Changes" comment="Added Marketplace contract&#10;Correcterd mistakes in Collections">
-      <change afterPath="$PROJECT_DIR$/client/src/components/Profile.jsx" afterDir="false" />
+    <list default="true" id="87cfabeb-032c-453c-b37f-7c3c7cf837fd" name="Changes" comment="Safe Commit&#10;Corrected the 2 bugs on Collection init &amp; NftDetail init&#10;Added material on the Profile&#10;Modified Navbar links">
+      <change afterPath="$PROJECT_DIR$/truffle/contracts/TokenOwnershipRegister.sol" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Collection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Collection.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Dashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dashboard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/NftDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/NftDetail.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Profil.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Profile.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/ui/navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/navbar.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/uploadToIpfs_mul.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/uploadToIpfs_mul.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/contexts/EthContext/EthProvider.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/contexts/EthContext/EthProvider.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/contexts/EthContext/state.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/contexts/EthContext/state.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/truffle/contracts/NftCollection.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/NftCollection.sol" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/truffle/contracts/NftFactory.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/NftFactory.sol" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/truffle/migrations/1_deploy_contracts.js" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/migrations/1_deploy_contracts.js" afterDir="false" />
@@ -82,6 +82,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\quent\Documents\Developpement Web\Web3\Alyra\NFTMarketplace" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\quent\Documents\Developpement Web\Web3\Alyra\NftMarketplace-keyMakers\ntf-marketplace\truffle\contracts" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -96,7 +99,7 @@
       <workItem from="1658988012281" duration="17307000" />
       <workItem from="1659082354104" duration="9829000" />
       <workItem from="1659106923663" duration="4389000" />
-      <workItem from="1659645313028" duration="13483000" />
+      <workItem from="1659645313028" duration="45442000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit: Dapp architecture using truffle react box&#10;- Smart Contracts&#10;- truffle-config.js&#10;- package.json&#10;- 1_deploy_simple_storage.js&#10;- .env">
       <created>1658923121505</created>
@@ -147,7 +150,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659112127285</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Safe Commit&#10;Corrected the 2 bugs on Collection init &amp; NftDetail init&#10;Added material on the Profile&#10;Modified Navbar links">
+      <created>1659692786516</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1659692786516</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -172,6 +182,7 @@
     <MESSAGE value="Added royalties" />
     <MESSAGE value="COrrected mistakes" />
     <MESSAGE value="Added Marketplace contract&#10;Correcterd mistakes in Collections" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Marketplace contract&#10;Correcterd mistakes in Collections" />
+    <MESSAGE value="Safe Commit&#10;Corrected the 2 bugs on Collection init &amp; NftDetail init&#10;Added material on the Profile&#10;Modified Navbar links" />
+    <option name="LAST_COMMIT_MESSAGE" value="Safe Commit&#10;Corrected the 2 bugs on Collection init &amp; NftDetail init&#10;Added material on the Profile&#10;Modified Navbar links" />
   </component>
 </project>

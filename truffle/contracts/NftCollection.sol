@@ -7,6 +7,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "./Royalties.sol";
 import "./MetaVariables.sol";
+import "./NftFactory.sol";
 
 //TODO: SetTokenUri URI+tokenId
 
@@ -17,8 +18,9 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
     uint80 public max_mint_allowed;
     uint80 public max_supply;
     bool private isInit;
-    string namecollection;
+    string collectionName;
     string private filetype;
+    address payable factoryAddress;
 
     mapping(uint => nftCollectionData) public tokenIdToNftData;
     mapping(address => uint) public userToMintAmount;
@@ -54,22 +56,23 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
     @param _nftFactoryInputData The NFT collection metadata (
     @dev Emits "CollectionInitiated" event
     */
-    function init(string calldata _namecollection,  address _creator, uint80 _max_mint_allowed, uint80 _max_supply, nftCollectionData[] calldata _nftFactoryInputData) external onlyOwner {
+    function init(string calldata _collectionName,  address _creator, uint80 _max_mint_allowed, uint80 _max_supply, nftCollectionData[] calldata _nftFactoryInputData) external onlyOwner {
         require(!isInit, "Contract was already initiated");
         //        for(uint i = 0; i < _max_supply; _unsafeIncrement(i)) {
         for(uint i = 0; i < _max_supply; i++) {
             _tokenIds.increment();
             tokenIdToNftData[_tokenIds.current()] = _nftFactoryInputData[i];
             _setTokenRoyalty(_tokenIds.current(), _creator, tokenIdToNftData[_tokenIds.current()].royalties);
-           // _setTokenURI(_tokenIds.current(), tokenIdToNftData[_tokenIds.current()].linkToImage);
+            // _setTokenURI(_tokenIds.current(), tokenIdToNftData[_tokenIds.current()].linkToImage);
         }
-        
-        namecollection = _namecollection;
+
+        collectionName = _collectionName;
         max_mint_allowed = _max_mint_allowed;
         max_supply = _max_supply;
+        factoryAddress = payable(msg.sender);
         _transferOwnership(_creator);
         isInit = true;
-        emit CollectionInitiated(owner(), _max_supply, namecollection);
+        emit CollectionInitiated(owner(), _max_supply, collectionName);
     }
 
     /**
@@ -84,13 +87,22 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
         require(_tokenId <= _tokenIds.current(), "Token does not exist");
         require(msg.value >= tokenIdToNftData[_tokenId].price, "Insufficient funds");
         require(userToMintAmount[msg.sender] + 1 <= max_mint_allowed, "Max mint amount reached");
-        require(_tokenIds.current() + 1 <= max_supply, "Max supply reached");
+        //TODO: A check Déjà couvert par la ligne 87
+        require(_tokenId <= max_supply, "Max supply reached");
 
         userToMintAmount[msg.sender] += 1;
+
+        NftFactory(factoryAddress).recordMint(address(this), msg.sender, _tokenId);
         _safeMint(msg.sender, _tokenId);
 
         emit TokenMinted(msg.sender, _tokenId);
         return(_tokenId);
+    }
+
+    //TODO: Considérer "safeTransferFrom" => Need to test
+    function transferNft(address _from, address _to, uint _tokenId) external whenNotPaused payable {
+        NftFactory(factoryAddress).recordTransfer(address(this), _from, _to, _tokenId);
+        transferFrom(_from, _to, _tokenId);
     }
 
     /**
@@ -111,31 +123,31 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
         require(_tokenId > 0, "Token does not exist");
         require(_tokenId <= _tokenIds.current(), "Token does not exist");
         require(userToMintAmount[msg.sender] + 1 <= max_mint_allowed, "Max mint amount reached");
-        require(_tokenIds.current() + 1 <= max_supply, "Max supply reached");
 
         userToMintAmount[msg.sender] += 1;
+        NftFactory(factoryAddress).recordMint(address(this), msg.sender, _tokenId);
         _safeMint(_luckyOne, _tokenId);
 
         emit TokenMinted(msg.sender, _tokenId);
     }
 
-    /**
-    @notice Function used by the owner to pause certain functions
-    @dev Used here only on mintNft() function
-    */
-    function pause() public onlyOwner {
-        _pause();
-    }
+     /**
+     @notice Function used by the owner to pause certain functions
+     @dev Used here only on mintNft() function
+     */
+     function pause() public onlyOwner {
+         _pause();
+     }
 
-    /**
-    @notice Function used by the owner to unpause certain functions
-    @dev Used here only on mintNft() function
-    */
-    function unPause() public onlyOwner {
-        _unpause();
-    }
-
-    function _unsafeIncrement(uint x) private pure returns(uint) {
-    unchecked { return (x + 1);}
-    }
+     /**
+     @notice Function used by the owner to unpause certain functions
+     @dev Used here only on mintNft() function
+     */
+     function unPause() public onlyOwner {
+         _unpause();
+     }
+    //
+    // function _unsafeIncrement(uint x) private pure returns(uint) {
+    // unchecked { return (x + 1);}
+    // }
 }
