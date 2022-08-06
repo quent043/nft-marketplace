@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="87cfabeb-032c-453c-b37f-7c3c7cf837fd" name="Changes" comment="Added a smart contract acting as a register for token ownership&#10;Modified the constructor of the factory&#10;Added functions in the profile to fetch data&#10;Refactored a bit the navbar &amp; routes">
+    <list default="true" id="87cfabeb-032c-453c-b37f-7c3c7cf837fd" name="Changes" comment="Corrected an error in purchaseItem marketplace function">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Collection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Collection.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Marketplace.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Marketplace.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Profile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/truffle/contracts/Marketplace.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/Marketplace.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/truffle/contracts/NftCollection.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/NftCollection.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/truffle/contracts/TokenOwnershipRegister.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/TokenOwnershipRegister.sol" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +95,8 @@
       <workItem from="1658988012281" duration="17307000" />
       <workItem from="1659082354104" duration="9829000" />
       <workItem from="1659106923663" duration="4389000" />
-      <workItem from="1659645313028" duration="50679000" />
+      <workItem from="1659645313028" duration="54564000" />
+      <workItem from="1659806621227" duration="9881000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit: Dapp architecture using truffle react box&#10;- Smart Contracts&#10;- truffle-config.js&#10;- package.json&#10;- 1_deploy_simple_storage.js&#10;- .env">
       <created>1658923121505</created>
@@ -154,7 +161,21 @@
       <option name="project" value="LOCAL" />
       <updated>1659785774016</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Added a &quot;allCollection&quot; state in Profile page.&#10;Corrected a data fetch bug">
+      <created>1659795921746</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1659795921746</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Corrected an error in purchaseItem marketplace function">
+      <created>1659807285956</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1659807285956</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,6 +202,8 @@
     <MESSAGE value="Added Marketplace contract&#10;Correcterd mistakes in Collections" />
     <MESSAGE value="Safe Commit&#10;Corrected the 2 bugs on Collection init &amp; NftDetail init&#10;Added material on the Profile&#10;Modified Navbar links" />
     <MESSAGE value="Added a smart contract acting as a register for token ownership&#10;Modified the constructor of the factory&#10;Added functions in the profile to fetch data&#10;Refactored a bit the navbar &amp; routes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added a smart contract acting as a register for token ownership&#10;Modified the constructor of the factory&#10;Added functions in the profile to fetch data&#10;Refactored a bit the navbar &amp; routes" />
+    <MESSAGE value="Added a &quot;allCollection&quot; state in Profile page.&#10;Corrected a data fetch bug" />
+    <MESSAGE value="Corrected an error in purchaseItem marketplace function" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrected an error in purchaseItem marketplace function" />
   </component>
 </project>

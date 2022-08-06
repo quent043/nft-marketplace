@@ -80,11 +80,8 @@ contract Marketplace is ReentrancyGuard, Ownable {
     function putNftForSale(NftCollection _nftCollection, uint128 _tokenId, uint88 _price) external nonReentrant {
         require(_price > 0, "Price must be greater than zero");
 
-        //Marche pas
-        // emit ApproveLogger(address(this), _tokenId);
-        // _nft.approve(address(this), _tokenId);
         itemCount.increment();
-        _nftCollection.transferFrom(msg.sender, address(this), _tokenId);
+        _nftCollection.transferNft(msg.sender, address(this), _tokenId);
 
         itemIdToItemData[itemCount.current()] = MarketplaceItem(
             uint128 (itemCount.current()),

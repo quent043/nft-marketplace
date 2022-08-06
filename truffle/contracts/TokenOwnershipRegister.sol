@@ -36,14 +36,15 @@ contract TokenOwnershipRegister is Ownable {
     }
 
     function recordTransfer(address _collection, address _from, address _to, uint _tokenId) external onlyRegisteredCollections(_collection) {
-        for(uint i = 0; i < userToCollectionToBalance[_from][_collection]; i++) {
-            if(userToCollectionToTokens[_from][_collection][i] == _tokenId) {
-                uint lastIndex = userToCollectionToBalance[_from][_collection] - 1;
-                uint lastIndexValue = userToCollectionToTokens[_from][_collection][lastIndex];
-                userToCollectionToTokens[_from][_collection][i] = lastIndexValue;
-                //TODO: Marche pas avec pop() ...
-                // userToCollectionToTokens[_from][_collection].pop();
-                delete userToCollectionToTokens[_from][_collection][lastIndex];
+        uint[] storage tokens = userToCollectionToTokens[_from][_collection];
+        uint balance = userToCollectionToBalance[_from][_collection];
+        for(uint i = 0; i < balance; i++) {
+            if(tokens[i] == _tokenId) {
+                uint lastIndex = balance - 1;
+                uint lastIndexValue = tokens[lastIndex];
+                tokens[i] = lastIndexValue;
+                // tokens.pop();
+                delete tokens[lastIndex];
             }
         }
         userToCollectionToTokens[_to][_collection].push(_tokenId);
