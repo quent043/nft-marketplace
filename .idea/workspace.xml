@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="87cfabeb-032c-453c-b37f-7c3c7cf837fd" name="Changes" comment="Refactoring">
+    <list default="true" id="87cfabeb-032c-453c-b37f-7c3c7cf837fd" name="Changes" comment="Added material to the readme&#10;Changed the Page Name">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Collection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Collection.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/NftCollectionTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/NftCollectionTable.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/CardCollection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/CardCollection.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/CardNft.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/CardNft.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/CardNftCreate.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/CardNftCreate.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/ProfileBox.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/ProfileBox.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/navbar.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +113,7 @@
       <workItem from="1659082354104" duration="9829000" />
       <workItem from="1659106923663" duration="4389000" />
       <workItem from="1659645313028" duration="54564000" />
-      <workItem from="1659806621227" duration="55342000" />
+      <workItem from="1659806621227" duration="58382000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit: Dapp architecture using truffle react box&#10;- Smart Contracts&#10;- truffle-config.js&#10;- package.json&#10;- 1_deploy_simple_storage.js&#10;- .env">
       <created>1658923121505</created>
@@ -285,7 +290,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659897382240</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Added material to the readme&#10;Changed the Page Name">
+      <created>1659903061530</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1659903061530</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -303,7 +315,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="First Commit: Dapp architecture using truffle react box&#10;- Smart Contracts&#10;- truffle-config.js&#10;- package.json&#10;- 1_deploy_simple_storage.js&#10;- .env" />
     <MESSAGE value="Worked on smart contracts, firts draft" />
     <MESSAGE value="Worked on smart contracts" />
     <MESSAGE value="Corrected mistakes on Gift functions&#10;Splitted Factory into 2 factories&#10;Initiated random number generation" />
@@ -328,6 +339,7 @@
     <MESSAGE value="Corrected a bug in token count in profile" />
     <MESSAGE value="Added Callbacks&#10;Refactoring" />
     <MESSAGE value="Refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactoring" />
+    <MESSAGE value="Added material to the readme&#10;Changed the Page Name" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added material to the readme&#10;Changed the Page Name" />
   </component>
 </project>

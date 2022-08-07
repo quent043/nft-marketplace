@@ -68,6 +68,8 @@ const Collection = () => {
 
     return (
         <>
+            {!contractAddress && <h2 className='sell--nft--title'> Check out our exclusive collections:</h2>}
+            {contractAddress && <h2 className='sell--nft--title'> Fancy anything ? Mint it here ! Or Check out our marketplace</h2>}
             <div className="grid--card--nft">{
                 (deployedCollections && !contractAddress) && deployedCollections.map((collection, i) => (
                     <CardCollection key={i} goTo={collection.contractAddress} nftImageUrl={collection.nftImageUrl} />

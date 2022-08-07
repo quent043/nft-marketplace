@@ -1,22 +1,21 @@
 import { useNavigate } from "react-router-dom";
 import useEth from "../../contexts/EthContext/useEth";
-
-const CardNft = (props) => {
+const CardNft = ({goTo, nftId, itemCountId, buyCallback, price, mintCallback, nftImageUrl, isProfilePage, notMint}) => {
     const navigate = useNavigate();
     const {state: { web3, accounts, marketplaceContract, nftCollectionAbi }} = useEth();
 
     const handleGoTo = () => {
-        navigate("/collections/" + props.goTo + "/" + props.nftId);
+        navigate("/collections/" + goTo + "/" + nftId);
     };
 
     const handleGoToSell = () => {
-        navigate("/sellnft/" + props.goTo + "/" + props.nftId);
+        navigate("/sellnft/" + goTo + "/" + nftId);
     };
 
     const handleBuy = async () => {
         try {
-            await marketplaceContract.methods.purchaseItem(props.itemCountId).send({from: accounts[0], value: props.price});
-            props.buyCallback();
+            await marketplaceContract.methods.purchaseItem(itemCountId).send({from: accounts[0], value: price});
+            buyCallback();
         } catch (error) {
             console.log(error);
         }
@@ -24,9 +23,9 @@ const CardNft = (props) => {
 
     const handleMint = async () => {
         try {
-            const NftContractInstance = new web3.eth.Contract(nftCollectionAbi, props.goTo);
-            await NftContractInstance.methods.mintNft(props.nftId).send({from: accounts[0], value: props.price});
-            props.mintCallback();
+            const NftContractInstance = new web3.eth.Contract(nftCollectionAbi, goTo);
+            await NftContractInstance.methods.mintNft(nftId).send({from: accounts[0], value: price});
+            mintCallback();
         } catch (error) {
             console.log(error);
         }
@@ -35,12 +34,12 @@ const CardNft = (props) => {
 
     return(
         <div className="card--nft--background">
-            <img src={props.nftImageUrl} className="card--nft--img"/>
-            <p className="card--nft--id">#{props.nftId} {props.price ? "- " + web3.utils.fromWei(props.price, 'ether') + " ETH": ""}</p>
+            <img src={nftImageUrl} className="card--nft--img"/>
+            <p className="card--nft--id">#{nftId} {price ? "- " + web3.utils.fromWei(price, 'ether') + " ETH": ""}</p>
             <button className="card--nft--btn" onClick={handleGoTo}>Info</button>
-            {props.isProfilePage && <button className="card--nft--btn--sell" onClick={handleGoToSell}>Sell</button>}
-            {props.itemCountId && <button className='card--nft--btn--sell' onClick={handleBuy}>Buy</button>}
-            {props.notMint && <button className='card--nft--btn--sell' onClick={handleMint}>Mint</button>}
+            {isProfilePage && <button className="card--nft--btn--sell" onClick={handleGoToSell}>Sell</button>}
+            {itemCountId && <button className='card--nft--btn--sell' onClick={handleBuy}>Buy</button>}
+            {notMint && <button className='card--nft--btn--sell' onClick={handleMint}>Mint</button>}
         </div>
     )
 }

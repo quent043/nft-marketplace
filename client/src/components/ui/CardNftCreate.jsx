@@ -1,12 +1,12 @@
-const CardNftCreate = (props) => {
+const CardNftCreate = ({name, nftImage, tokenId, description, price, royalties}) => {
     return(
         <div className="card--nft--background--create">
-            <img src={props.nftImage} className="card--nft--img"/>
-            <p> Token Id: {props.tokenId}</p>
-            <p> Name: {props.name}</p>
-            <p> Description: {props.description}</p>
-            <p> Price: {props.price}</p>
-            <p> Royalties: {props.royalties}</p>
+            <img src={nftImage} className="card--nft--img"/>
+            <p> Token Id: {tokenId}</p>
+            <p> Name: {name}</p>
+            <p> Description: {description}</p>
+            <p> Price: {price}</p>
+            <p> Royalties: {royalties}</p>
         </div>
     )
 }

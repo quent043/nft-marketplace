@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import { useNavigate } from "react-router-dom";
 
-function NftCollectionTable({items, title, style, history}) {
+function NftCollectionTable({items, title, style}) {
     const css = "table " + style;
     const navigate = useNavigate();
 
