@@ -35,7 +35,7 @@ const CardNft = (props) => {
     return(
         <div className="card--nft--background">
             <img src={props.nftImageUrl} className="card--nft--img"/>
-            <p className="card--nft--id">#{props.nftId} {props.price ? "- " + props.price + " ETH": ""}</p>
+            <p className="card--nft--id">#{props.nftId} {props.price ? "- " + web3.utils.fromWei(props.price, 'ether') + " ETH": ""}</p>
             <button className="card--nft--btn" onClick={handleGoTo}>Info</button>
             {props.isProfilePage && <button className="card--nft--btn--sell" onClick={handleGoToSell}>Sell</button>}
             {props.itemCountId && <button className='card--nft--btn--sell' onClick={handleBuy}>Buy</button>}
