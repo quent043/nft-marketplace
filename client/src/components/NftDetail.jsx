@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import {useParams, useLocation, withRouter} from 'react-router-dom';
 import useEth from "../contexts/EthContext/useEth";
+import { useNavigate } from "react-router-dom";
 
 function NftDetail() {
     const {state: { web3, accounts, marketplaceContract, nftCollectionAbi }} = useEth();
@@ -8,6 +9,7 @@ function NftDetail() {
     const { pathname } = useLocation();
     const [collectionContract, setCollectionContract] = useState();
     const [tokenData, setTokenData] = useState();
+    const navigate = useNavigate();
 
     console.log("contract", contractAddress);
     console.log("Nft", tokenId);
@@ -39,15 +41,23 @@ function NftDetail() {
 
 
     return (
-        tokenData &&
-    <div className="container">
-            <h2>Token {tokenId}</h2>
-            <p>Description {tokenData.description}</p>
-            <p>Image Url {tokenData.image}</p>
-            <p>Name {tokenData.name}</p>
-            <p>Price {tokenData.price}</p>
-            <p>Royalties {tokenData.royalties}</p>
-    </div>
+        tokenData && 
+        <>
+            <button className='nftdetail--goback' onClick={() => navigate("/collections/" + contractAddress)}>Back to Collection</button>
+            <div className="nftdetail--box">
+                <div>
+                    <h2>Token #{tokenId}</h2>
+                    <img src={tokenData.linkToImage}/>
+                </div>
+                <div className='nftdetail--box--infos'>
+                    <h3>Informations</h3>
+                    <p><b>Name</b> : {tokenData.name}</p>
+                    <p><b>Description</b> : {tokenData.description}</p>
+                    <p><b>Price</b> : {tokenData.price} wei</p>
+                    <p><b>Royalties</b> : {(tokenData.royalties / 100)}% for creator</p>
+                </div>
+            </div>
+        </>
     );
 }
 
