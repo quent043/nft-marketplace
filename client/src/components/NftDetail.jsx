@@ -1,23 +1,18 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import {useParams, useLocation, withRouter} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import {useParams} from 'react-router-dom';
 import useEth from "../contexts/EthContext/useEth";
 import { useNavigate } from "react-router-dom";
 
 function NftDetail() {
-    const {state: { web3, accounts, marketplaceContract, nftCollectionAbi }} = useEth();
+    const {state: { web3, nftCollectionAbi }} = useEth();
     const { contractAddress, tokenAddress: tokenId } = useParams();
-    const { pathname } = useLocation();
     const [collectionContract, setCollectionContract] = useState();
     const [tokenData, setTokenData] = useState();
     const navigate = useNavigate();
 
-    console.log("contract", contractAddress);
-    console.log("Nft", tokenId);
 
-    // tokenIdToNftData
     const getCollectionContract = async () => {
         if(web3 && nftCollectionAbi) {
-            console.log("Web3");
             const NftContractInstance = new web3.eth.Contract(nftCollectionAbi, contractAddress);
             setCollectionContract(NftContractInstance);
         }
@@ -27,7 +22,6 @@ function NftDetail() {
         if(collectionContract) {
             const tokenDetail = await collectionContract.methods.tokenIdToNftData(tokenId).call();
             setTokenData(tokenDetail);
-            console.log("Token, Info: ", tokenDetail);
         }
     }
 
@@ -41,7 +35,7 @@ function NftDetail() {
 
 
     return (
-        tokenData && 
+        tokenData &&
         <>
             <button className='nftdetail--goback' onClick={() => navigate("/collections/" + contractAddress)}>Back to Collection</button>
             <div className="nftdetail--box">

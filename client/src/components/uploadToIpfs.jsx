@@ -54,13 +54,9 @@ const Upload = () => {
       try {
         const created = await client.add(data);
         const url = `https://ipfs.infura.io/ipfs/${created.path}`;
-        console.log(url);
         setUrlArr((prev) => [...prev, url]);
-        console.log(urlArr);
-        console.log(data);
 
       } catch (error) {
-        console.log("erreur pendant l'upload");
         console.log(error.message);
       }
     };

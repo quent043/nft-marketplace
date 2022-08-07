@@ -7,12 +7,9 @@ import "./NftCollection.sol";
 import "./MetaVariables.sol";
 import "./TokenOwnershipRegister.sol";
 
-// FOR ALL CONTRACTS
-//TODO: Security audit
-//TODO: Besoin de fonction receive? Le pognon peut être reçu sans ça ?
 
-/**
-@author Quentin de Châteaubriant, Renaud Vidal, Nathan Combes contact: cryptokeymakers@gmail.com
+    /**
+    @author Quentin de Châteaubriant, Renaud Vidal, Nathan Combes contact: cryptokeymakers@gmail.com
     @notice This contract creates either a SFT or a NFT collection
     */
 

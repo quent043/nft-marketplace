@@ -12,7 +12,7 @@ contract SftFactory is MetaVariables , Ownable{
     event LogDepositReceived(address from, uint amount);
 
     /**
-@notice Function used to receive ether
+    @notice Function used to receive ether
     @dev  Emits "LogDepositReceived" event | Ether send to this contract for
     no reason will be credited to the contract owner, and the deposit logged,
     */

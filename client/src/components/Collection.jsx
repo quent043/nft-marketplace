@@ -15,13 +15,11 @@ const Collection = () => {
 
     const getCollectionItemsFromUrlParam = async () => {
         if(web3 && nftCollectionAbi) {
-            console.log("good")
             let options = {
                 fromBlock: 0,
                 toBlock: "latest"
             }
             const nftContractInstance = new web3.eth.Contract(nftCollectionAbi, contractAddress);
-            // setCollectionContract(nftContractInstance);
             const nftList = [];
             const nftAmount = await nftContractInstance.methods.max_supply().call();
             const mintedTokensEvent = await nftContractInstance.getPastEvents("TokenMinted", options);
@@ -65,7 +63,6 @@ const Collection = () => {
 
     useEffect(() => {
         //Update data for each URL change
-        console.log("location")
         contractAddress ? getCollectionItemsFromUrlParam() : getDeployedCollectionsFromEvents();
     }, [location]);
 

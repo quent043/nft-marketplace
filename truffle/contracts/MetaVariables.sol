@@ -25,20 +25,3 @@ contract MetaVariables {
         uint royalties;
     }
 }
-
-//[["https://ipfs.infura.io/ipfs/QmUjkxdHTm4xyzzzubUK2Z9fTtQfdNhEs4GKjcjFcdNFyc/1.png","NFT1","desc","4","1"]]
-
-
-// [
-//     ["jbkbkb", "jbkbkb", "jbkbkb", 0, 2, 10, 50],
-//     ["jbkbkb", "jbkbkb", "jbkbkb", 0, 2, 10, 50]
-// ]
-// [
-//     ["jbkbkb", "jbkbkb", "jbkbkb", 10, 50],
-//     ["jbkbkb", "jbkbkb", "jbkbkb", 10, 50]
-// ]
-// #setUsers
-// [
-//   ["1","name"],
-//   ["2",5678]
-// ]

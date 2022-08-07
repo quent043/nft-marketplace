@@ -5,7 +5,7 @@
  * npm install --save-dev @openzeppelin/test-helpers
  * npm install --save-dev chai
  */
-const { BN, ether, expectRevert, expectEvent } = require('@openzeppelin/test-helpers');
+const { expectRevert, expectEvent } = require('@openzeppelin/test-helpers');
 const { expect } = require('chai');
 const NFTFactory = artifacts.require("NftFactory");
 const Marketplace = artifacts.require("Marketplace");
@@ -15,7 +15,6 @@ contract('NFTFactory Contract Test Suite', accounts => {
 
     const owner = accounts[0];
     const seller = accounts[1];
-    const purchasers = accounts[2];
     const _uri = "QmcB83hiy2Q662MqHrYnJaTsAGr9VuNNemjJe9AAx1MALx"
     const _max_mint_allowed = 10;
     const _max_supply = 10;
@@ -146,8 +145,7 @@ contract('NFTFactory Contract Test Suite', accounts => {
 
         it('should attribute value 1 to the minter address', async () => {
                let returnAddrtoAmount= instance_NFTCollection.userToMintAmount(owner);
-                console.log(returnAddrtoAmount);
-                expect(returnAddrtoAmount.to.equal(1))  
+                expect(returnAddrtoAmount.to.equal(1))
             });
             
         });

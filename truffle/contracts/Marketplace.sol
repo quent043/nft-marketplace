@@ -18,12 +18,12 @@ contract Marketplace is ReentrancyGuard, Ownable {
     mapping(uint => MarketplaceItem) public itemIdToItemData;
 
     struct MarketplaceItem {
-        uint128 marketplaceItemId;  //bloc1 - 128bits
-        uint128 tokenId;            //bloc1 - 256bits FULL
-        uint88 price;               //bloc2 - 88bits
-        address seller;             //bloc2 - 248bits
-        bool sold;                  //bloc2 - 256bits FULL
-        NftCollection nft;          //Bloc3
+        uint128 marketplaceItemId;
+        uint128 tokenId;
+        uint88 price;
+        address seller;
+        bool sold;
+        NftCollection nft;
     }
 
     event PutForSale(
@@ -156,54 +156,5 @@ contract Marketplace is ReentrancyGuard, Ownable {
             receiver,
             marketplaceOwnerAccount
         );
-
-        //        emit Price(price);
-        //        emit RoyaltiesLog(receiver, royaltyAmount);
-        //        emit PaymentResult(feeSent);
-        //        emit MarketplaceFee((price * marketplaceFeePercentage) / 10000);
-        //        emit PaymentResult(feeSent);
-        //        emit seller(itemIdToItemData[_itemId].seller);
-        //        emit sellerPrice(price - (royaltyAmount + marketplaceFee));
-        //        emit PaymentResult(paymentSent);
-    }
-
-    // ****************************************TESTS****************************************
-    // DELETE BEFORE PROD
-
-    event RoyaltiesLog(address receiver, uint payment);
-    event Price(uint price);
-    event MarketplaceFee(uint price);
-    event PaymentResult(bool result);
-    event seller(address sdeller);
-    event sellerPrice(uint price);
-
-    function splitPaymentExternal(uint40 _itemId, NftCollection _nft) public {
-
-        itemIdToItemData[_itemId] = MarketplaceItem(
-            _itemId,
-            1,
-            20000,
-            msg.sender,
-            false,
-            _nft
-        );
-
-        uint price = itemIdToItemData[_itemId].price;
-        emit Price(price);
-        (address receiver, uint royaltyAmount) = itemIdToItemData[_itemId].nft.royaltyInfo(_itemId, price);
-        emit RoyaltiesLog(receiver, royaltyAmount);
-
-        bool royaltySent = payable (receiver).send(royaltyAmount);
-        emit PaymentResult(royaltySent);
-
-        emit MarketplaceFee((price * marketplaceFeePercentage) / 10000);
-        uint marketplaceFee = (price * marketplaceFeePercentage) / 10000;
-        bool feeSent = marketplaceOwnerAccount.send(marketplaceFee);
-        emit PaymentResult(feeSent);
-
-        emit seller(itemIdToItemData[_itemId].seller);
-        emit sellerPrice(price - (royaltyAmount + marketplaceFee));
-        bool paymentSent = payable (itemIdToItemData[_itemId].seller).send(price - (royaltyAmount + marketplaceFee));
-        emit PaymentResult(paymentSent);
     }
 }

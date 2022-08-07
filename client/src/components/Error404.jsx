@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 
 const Error = () => {
-   
+
     return (
         <div className='error--404'>
             <p>Error 404 : Page not found.</p>

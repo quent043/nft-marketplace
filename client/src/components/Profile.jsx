@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import useEth from "../contexts/EthContext/useEth";
-import ProfilBox from './ui/ProfilBox';
+import ProfileBox from './ui/ProfileBox';
 import CardNft from './ui/CardNft';
 
 
@@ -87,10 +87,10 @@ function Profile() {
     return (
         <>
             {(web3 && tokenData) &&
-                <ProfilBox account={accounts[0]}
-                           owned={Object.values(tokensPerCollection).length}
-                           collections={createdCollections.length}
-                           imageUrl={tokenData[0].linkToImage} />}
+                <ProfileBox account={accounts[0]}
+                            owned={Object.values(tokensPerCollection).length}
+                            collections={createdCollections.length}
+                            imageUrl={tokenData[0].linkToImage} />}
             {tokenData &&
                 <div className='grid--card--nft'>
                     {tokenData.map((tokenInfo) => (

@@ -4,8 +4,8 @@ pragma solidity 0.8.14;
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 
-/**
-@notice Royalty contract extension respecting the IERC2981Royalties standard
+    /**
+    @notice Royalty contract extension respecting the IERC2981Royalties standard
     */
 interface IERC2981Royalties {
     function royaltyInfo(uint256 _tokenId, uint256 _value) external view  returns (address _receiver, uint256 _royaltyAmount);

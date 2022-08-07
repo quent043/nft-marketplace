@@ -9,7 +9,6 @@ import "./Royalties.sol";
 import "./MetaVariables.sol";
 import "./NftFactory.sol";
 
-//TODO: SetTokenUri URI+tokenId
 
 contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, Pausable {
     using Counters for Counters.Counter;
@@ -58,12 +57,10 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
     */
     function init(string calldata _collectionName,  address _creator, uint80 _max_mint_allowed, uint80 _max_supply, nftCollectionData[] calldata _nftFactoryInputData) external onlyOwner {
         require(!isInit, "Contract was already initiated");
-        //        for(uint i = 0; i < _max_supply; _unsafeIncrement(i)) {
         for(uint i = 0; i < _max_supply; i++) {
             _tokenIds.increment();
             tokenIdToNftData[_tokenIds.current()] = _nftFactoryInputData[i];
             _setTokenRoyalty(_tokenIds.current(), _creator, tokenIdToNftData[_tokenIds.current()].royalties);
-            // _setTokenURI(_tokenIds.current(), tokenIdToNftData[_tokenIds.current()].linkToImage);
         }
 
         collectionName = _collectionName;
@@ -82,13 +79,10 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
     payment to be sufficient, and max supply and mint amounts not reached.
     */
     function mintNft(uint _tokenId) public whenNotPaused payable returns(uint) {
-        //TODO:         require(_tokenIds.current() + 1 <= max_supply, "Max supply reached"); useless. Le max est défini par la length de nftFactoryInputData.
         require(_tokenId > 0, "Token does not exist");
         require(_tokenId <= _tokenIds.current(), "Token does not exist");
         require(msg.value >= tokenIdToNftData[_tokenId].price, "Insufficient funds");
         require(userToMintAmount[msg.sender] + 1 <= max_mint_allowed, "Max mint amount reached");
-        //TODO: A check Déjà couvert par la ligne 87
-        require(_tokenId <= max_supply, "Max supply reached");
 
         userToMintAmount[msg.sender] += 1;
 
@@ -99,7 +93,6 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
         return(_tokenId);
     }
 
-    //TODO: Considérer "safeTransferFrom" => Need to test
     function transferNft(address _from, address _to, uint _tokenId) external whenNotPaused payable {
         NftFactory(factoryAddress).recordTransfer(address(this), ownerOf(_tokenId), _to, _tokenId);
         transferFrom(_from, _to, _tokenId);
@@ -146,8 +139,4 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
      function unPause() public onlyOwner {
          _unpause();
      }
-    //
-    // function _unsafeIncrement(uint x) private pure returns(uint) {
-    // unchecked { return (x + 1);}
-    // }
 }

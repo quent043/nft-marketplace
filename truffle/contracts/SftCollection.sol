@@ -9,8 +9,6 @@ import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 import "./Royalties.sol";
 import "./MetaVariables.sol";
 
-//TODO: SetTokenUri URI+tokenId
-//TODO: Initializable
 
 contract SftCollection is ERC1155, Royalties, Ownable, MetaVariables, Pausable, Initializable {
     using Counters for Counters.Counter;
@@ -59,7 +57,6 @@ contract SftCollection is ERC1155, Royalties, Ownable, MetaVariables, Pausable, 
     function init(address _creator, string calldata _uri, uint120 _max_mint_allowed, uint120 _max_supply, sftCollectionData[] memory _sftFactoryInputData, uint _amountOfSeries) external onlyOwner {
         require(!isInit, "Contract was already initiated");
 
-//        for(uint i = 0; i < _amountOfSeries; _unsafeIncrement(i)) {
         for(uint i = 0; i < _amountOfSeries; i++) {
             _tokenIds.increment();
             tokenIdToSftData[_tokenIds.current()] = _sftFactoryInputData[i];
@@ -82,7 +79,6 @@ contract SftCollection is ERC1155, Royalties, Ownable, MetaVariables, Pausable, 
         payable (owner()).transfer(address (this).balance);
     }
 
-    //TODO: Utiliser le hook _beforeTokenTransfer pour cette méthode ? Ou juste pour les events ? C'est appelé ppour les Batch aussi
     /**
     @notice Function used to mint tokens and regulate minting
     @param _tokenId The id of the token to be minted
@@ -102,7 +98,6 @@ contract SftCollection is ERC1155, Royalties, Ownable, MetaVariables, Pausable, 
         userToMintAmount[msg.sender] += _amount;
         _mint(msg.sender, _tokenId, _amount, "");
 
-        //TODO: On enlève ? Ou on renvoie autre chose ?
         emit TokenMinted(msg.sender, _tokenIds.current(), _amount);
         return _tokenId;
     }
