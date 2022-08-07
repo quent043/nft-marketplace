@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="87cfabeb-032c-453c-b37f-7c3c7cf837fd" name="Changes" comment="Added first collection image to Dashboard&#10;Added Footer everywhere">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Dashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dashboard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Collection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Collection.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Marketplace.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Marketplace.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/SellNft.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SellNft.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +46,9 @@
         </option>
       </RecentBranches>
     </option>
+  </component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="d00f2161-3788-4602-a7b8-6a0f2d5fcf7f" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -93,7 +94,7 @@
       <workItem from="1659082354104" duration="9829000" />
       <workItem from="1659106923663" duration="4389000" />
       <workItem from="1659645313028" duration="54564000" />
-      <workItem from="1659806621227" duration="32014000" />
+      <workItem from="1659806621227" duration="35177000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit: Dapp architecture using truffle react box&#10;- Smart Contracts&#10;- truffle-config.js&#10;- package.json&#10;- 1_deploy_simple_storage.js&#10;- .env">
       <created>1658923121505</created>
@@ -200,7 +201,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659875815299</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Added first collection image to Dashboard&#10;Added Footer everywhere">
+      <created>1659879158885</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1659879158885</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -2,51 +2,73 @@ import React, { useState, useEffect } from 'react';
 import {useParams} from 'react-router-dom';
 import useEth from "../contexts/EthContext/useEth";
 import CardNft from "./ui/CardNft";
+import CardCollection from "./ui/CardCollection";
+import { useLocation } from "react-router-dom";
 
 const Collection = () => {
-    const {state: { web3, nftCollectionAbi }} = useEth();
+    const {state: { web3, nftCollectionAbi, nftFactoryContract }} = useEth();
     const { contractAddress } = useParams();
-    const [collectionContract, setCollectionContract] = useState();
+    const [deployedCollections, setDeployedCollections] = useState([]);
     const [collectionItems, setCollectionItems] = useState();
+    const location = useLocation();
 
 
-    const getCollectionContract = () => {
+    const getCollectionItemsFromUrlParam = async () => {
         if(web3 && nftCollectionAbi) {
             const NftContractInstance = new web3.eth.Contract(nftCollectionAbi, contractAddress);
-            setCollectionContract(NftContractInstance);
-        }
-    };
-
-    const getCollectionItems = async () => {
-        if(collectionContract && contractAddress) {
             const nftList = [];
-            const nftAmount = await collectionContract.methods.max_supply().call();
+            const nftAmount = await NftContractInstance.methods.max_supply().call();
             for(let i = 1; i <= nftAmount; i++) {
-                const querriedItems = await collectionContract.methods.tokenIdToNftData(i).call();
+                const querriedItems = await NftContractInstance.methods.tokenIdToNftData(i).call();
                 //Add token id
                 nftList.push({tokenId: i, contractAddress, ...querriedItems});
             }
             console.log(nftList);
             setCollectionItems(nftList);
         }
+    };
+
+    const getDeployedCollectionsFromEvents = async () => {
+        let options = {
+            fromBlock: 0,
+            toBlock: "latest"
+        };
+        let collectionsAddressAndImage = [];
+        const contractEvents = await nftFactoryContract.getPastEvents("CollectionDeployed", options);
+
+        for (const element of contractEvents) {
+            const NftContractInstance = new web3.eth.Contract(nftCollectionAbi, element.returnValues._contractAddress);
+            //Get image of first token of the collection to display
+            const {linkToImage} = await NftContractInstance.methods.tokenIdToNftData(1).call();
+            collectionsAddressAndImage.push({contractAddress: element.returnValues._contractAddress, nftImageUrl: linkToImage });
+        }
+        setDeployedCollections(collectionsAddressAndImage);
     }
 
     useEffect(() => {
-        getCollectionContract();
+        contractAddress ? getCollectionItemsFromUrlParam() : getDeployedCollectionsFromEvents();
     }, [web3]);
 
     useEffect(() => {
-        getCollectionItems();
-        console.log("contract ", contractAddress)
-    }, [collectionContract]);
+        //Update data for each URL change
+        contractAddress ? getCollectionItemsFromUrlParam() : getDeployedCollectionsFromEvents();
+    }, [location]);
 
     return (
-        <div className="grid--card--nft">{
-            (collectionItems && contractAddress) && collectionItems.map((item) => (
-                <CardNft title="NFT List" nftImageUrl={item.linkToImage} nftId={item.tokenId} price={item.price} goTo={item.contractAddress} />
-            ))
-        }
-        </div>
+        <>
+            <div className="grid--card--nft">{
+                (deployedCollections && !contractAddress) && deployedCollections.map((collection, i) => (
+                    <CardCollection key={i} goTo={collection.contractAddress} nftImageUrl={collection.nftImageUrl} />
+                ))
+            }
+            </div>
+            <div className="grid--card--nft">{
+                (collectionItems && contractAddress) && collectionItems.map((item) => (
+                    <CardNft title="NFT List" nftImageUrl={item.linkToImage} nftId={item.tokenId} price={item.price} goTo={item.contractAddress} />
+                ))
+            }
+            </div>
+        </>
     );
 };
 
