@@ -1,7 +1,3 @@
-
-export default Marketplace;
- 
- 
 import React, { useEffect, useRef, useState } from 'react'
 import { FolderUpload } from 'react-ipfs-uploader'
 import { create } from "ipfs-http-client";

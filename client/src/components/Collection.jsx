@@ -21,6 +21,7 @@ const Collection = () => {
                 toBlock: "latest"
             }
             const nftContractInstance = new web3.eth.Contract(nftCollectionAbi, contractAddress);
+            // setCollectionContract(nftContractInstance);
             const nftList = [];
             const nftAmount = await nftContractInstance.methods.max_supply().call();
             const mintedTokensEvent = await nftContractInstance.getPastEvents("TokenMinted", options);
@@ -78,7 +79,7 @@ const Collection = () => {
             </div>
             <div className="grid--card--nft">{
                 (collectionItems && contractAddress) && collectionItems.map((item) => (
-                    <CardNft title="NFT List" nftImageUrl={item.linkToImage} nftId={item.tokenId} price={item.price} goTo={item.contractAddress} notMint={item.notMint} />
+                    <CardNft title="NFT List" nftImageUrl={item.linkToImage} nftId={item.tokenId} price={item.price} goTo={item.contractAddress} notMint={item.notMint} callback={getCollectionItemsFromUrlParam} />
                 ))
             }
             </div>

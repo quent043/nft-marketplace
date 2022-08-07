@@ -25,6 +25,7 @@ const CardNft = (props) => {
         try {
             const NftContractInstance = new web3.eth.Contract(nftCollectionAbi, props.goTo);
             await NftContractInstance.methods.mintNft(props.nftId).send({from: accounts[0], value: props.price});
+            props.callback();
         } catch (error) {
             console.log(error);
         }
