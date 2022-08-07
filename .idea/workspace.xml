@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="87cfabeb-032c-453c-b37f-7c3c7cf837fd" name="Changes" comment="Added Callbacks&#10;Refactoring">
+    <list default="true" id="87cfabeb-032c-453c-b37f-7c3c7cf837fd" name="Changes" comment="Refactoring">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Collection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Collection.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Dashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dashboard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Marketplace.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Marketplace.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Profile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/CardNft.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/CardNft.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/uploadToIpfs_mul.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/uploadToIpfs_mul.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/contracts/NftCollection.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/NftCollection.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/public/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,6 +87,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\quent\Documents\Developpement Web\Web3\Alyra\NftMarketplace-keyMakers\ntf-marketplace" />
       <recent name="C:\Users\quent\Documents\Developpement Web\Web3\Alyra\NFTMarketplace" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -112,7 +108,7 @@
       <workItem from="1659082354104" duration="9829000" />
       <workItem from="1659106923663" duration="4389000" />
       <workItem from="1659645313028" duration="54564000" />
-      <workItem from="1659806621227" duration="49945000" />
+      <workItem from="1659806621227" duration="55342000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit: Dapp architecture using truffle react box&#10;- Smart Contracts&#10;- truffle-config.js&#10;- package.json&#10;- 1_deploy_simple_storage.js&#10;- .env">
       <created>1658923121505</created>
@@ -282,7 +278,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659894953087</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Refactoring">
+      <created>1659897382240</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1659897382240</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -324,6 +327,7 @@
     <MESSAGE value="Refactored and cleaned code" />
     <MESSAGE value="Corrected a bug in token count in profile" />
     <MESSAGE value="Added Callbacks&#10;Refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Callbacks&#10;Refactoring" />
+    <MESSAGE value="Refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactoring" />
   </component>
 </project>

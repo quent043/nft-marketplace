@@ -4,6 +4,20 @@ NFT trade is a decentralized web platform allowing to easily mint, stored and tr
 
  [ℹ️ Website](https://NFTrate.com)
 
+---
+# Video Presentation
+Video presentation of the Dapp: https://www.loom.com/share/ef30ddfe3c1d46f5ba62a1f82ffee141
+
+Video presentation of the Solidity code: https://www.loom.com/share/d3ca27969941456da4579f635b88fb30
+
+Video presentation of the React code: https://www.loom.com/share/776b9f93a482452b9cd57332bf5c10f9
+
+------
+# Dapp Url
+You can find our Dapp hosted at this URL: https://beautiful-cajeta-5db8bb.netlify.app/
+
+---
+
 # Tour of the application
 
 ![image](https://user-images.githubusercontent.com/68705151/183306310-264e8d63-d122-4b28-b63e-280bac4910fd.png)
@@ -62,6 +76,7 @@ NFT trade is a decentralized web platform allowing to easily mint, stored and tr
 	-if you lost your way, just ask Cyril, our web3 dev and professor (big up to him !)  ;)
 	![image](https://user-images.githubusercontent.com/68705151/183306540-ad1ab417-c649-4294-815e-ee89695e821c.png)
 
+---
 	
  # Built Using
 
@@ -74,7 +89,8 @@ NFT trade is a decentralized web platform allowing to easily mint, stored and tr
 	      OpenZeppelin-Contracts
 
 	      Compiler Pragma solidity 0.8.14
-
+  
+---
 ## Installation
 
 First ensure you are in an empty directory.
@@ -102,25 +118,32 @@ First ensure you are in an empty directory.
          npm start
             Starting the development server...
 
+---
+
 ## Improvement
 
-	- Our NFT factory is approching 24576 bytes, the limit introduced in Spurious Dragon. We might need to down-size this file to increase gas deployment efficiency.
+	- Our NFT factory is approching 24576 bytes, the limit introduced in Spurious Dragon. We might need to down-size this file to increase gas deployment efficiency. We implemented the TokenOwnershipRegister.sol in this spirit
 	- We decided to handle fungible token using ERC 1155 implementation. However, we did not have the time to include those functionalities in our app. We are going to implement this feature in the near future.
 	- We also decided to optimise IPFS upload to make the procedure easy, efficient and error free.
-	- We currently do not handle events, pop up for user interaction , and some error management still missing, we will add those features soon.
+	- We currently do not handle events, pop up for user interaction, and some error management & logging still missing, we will add those features soon.
+	- We also would like to implement an admin dashboard for collection creators and for marketplace owners.
+	- We are also thinking of making the Marketplace Fee updatable; So far it is immutable but we would like to make a private setter accessible to the marketplace owner
 	
+
+---
 
 ## Contact our team
 
-  For any question, Feel free to contact our team at the address cryptokeymakers@gmail.com.
+  	For any question, Feel free to contact our team at the address cryptokeymakers@gmail.com.
+
+---
 
 ## FAQ
+	- __How do I use this with Ganache (or any other network)?__
 
-- __How do I use this with Ganache (or any other network)?__
+  	- The Truffle project is set to deploy to Ganache by default. If you'd like to change this, it's as easy as modifying the Truffle config file! Check out [our documentation on adding network configurations](https://trufflesuite.com/docs/truffle/reference/configuration/#networks). From there, you can run `truffle migrate` pointed to another network, restart the React dev server, and see the change take place.
 
-  The Truffle project is set to deploy to Ganache by default. If you'd like to change this, it's as easy as modifying the Truffle config file! Check out [our documentation on adding network configurations](https://trufflesuite.com/docs/truffle/reference/configuration/#networks). From there, you can run `truffle migrate` pointed to another network, restart the React dev server, and see the change take place.
+	- __Where can I get more information?__
 
-- __Where can I get more information?__
-
-  For any question, Feel free to contact our team at the address cryptokeymakers@gmail.com.
-    ``` 
+  	- For any question, Feel free to contact our team at the address cryptokeymakers@gmail.com.
+    
