@@ -73,7 +73,6 @@ const Marketplace = () => {
                         (ItemData.map((item, index) => (
                             <div key={index} className="justify-content-center inline-flex">
                                 <CardNft itemCountId={item.marketplaceItemId} marketplace nftId={item.tokenId}  price={item.price} nftImageUrl={imageURL[index]} />   
-                            
                                 </div>
                         )))
                         : null}
