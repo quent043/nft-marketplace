@@ -9,10 +9,10 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/ui/navbar";
 import SellNft from './components/SellNft';
-
 import Upload from "./components/uploadToIpfs";
 import UploadMultiple from "./components/uploadToIpfs_mul";
 import NftDetail from "./components/NftDetail";
+import Footer from "./components/Footer";
 
 function App() {
 
@@ -34,6 +34,7 @@ function App() {
                     <Route path="*" element={<Error/>}/>
                 </Routes>
             </Router>
+            <Footer/>
         </EthProvider>
     );
 }

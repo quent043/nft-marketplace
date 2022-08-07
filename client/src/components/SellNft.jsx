@@ -2,7 +2,6 @@ import {useParams} from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import useEth from "../contexts/EthContext/useEth";
 
-import Footer from './Footer';
 
 const SellNft = () => {
 
@@ -70,7 +69,6 @@ const SellNft = () => {
                     console.log(checkowner);}}>aaa</button>
             </div>
         </div>
-        <Footer/>
         </>
     )
 }

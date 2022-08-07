@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="87cfabeb-032c-453c-b37f-7c3c7cf837fd" name="Changes" comment="Corrected bug in Profile page">
+    <list default="true" id="87cfabeb-032c-453c-b37f-7c3c7cf837fd" name="Changes" comment="Added first collection image to Dashboard&#10;Added Footer everywhere">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Collection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Collection.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Dashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dashboard.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Marketplace.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Marketplace.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Profile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/SellNft.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/SellNft.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +93,7 @@
       <workItem from="1659082354104" duration="9829000" />
       <workItem from="1659106923663" duration="4389000" />
       <workItem from="1659645313028" duration="54564000" />
-      <workItem from="1659806621227" duration="28659000" />
+      <workItem from="1659806621227" duration="32014000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit: Dapp architecture using truffle react box&#10;- Smart Contracts&#10;- truffle-config.js&#10;- package.json&#10;- 1_deploy_simple_storage.js&#10;- .env">
       <created>1658923121505</created>
@@ -192,7 +193,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659866002315</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Worked on Collection.jsx with contract detail in url">
+      <created>1659875815299</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1659875815299</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -224,6 +232,8 @@
     <MESSAGE value="Corrected a bug in ownership register" />
     <MESSAGE value="CHanges safeTransferFrom to transferFrom in NftCOllection.sol&#10;&#10;Finalized Profile.jsx" />
     <MESSAGE value="Corrected bug in Profile page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrected bug in Profile page" />
+    <MESSAGE value="Worked on Collection.jsx with contract detail in url" />
+    <MESSAGE value="Added first collection image to Dashboard&#10;Added Footer everywhere" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added first collection image to Dashboard&#10;Added Footer everywhere" />
   </component>
 </project>
