@@ -1,4 +1,4 @@
-# NFTtrade . 🔥
+# NFTtrade . 🔥🛒🔥
 
 NFT trade is a decentralized web platform allowing to easily mint, stored and trade unique NFT Art Work. The app support royalties payment for the Artist whenever their work is exchanged on the platform. Once your collection created, it is the available to be minted by anyone. Any minted NFT car thereafter be transferred to the marketplace to be traded.
 
