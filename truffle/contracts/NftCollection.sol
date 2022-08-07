@@ -102,7 +102,7 @@ contract NftCollection is ERC721URIStorage, Royalties, Ownable, MetaVariables, P
     //TODO: Considérer "safeTransferFrom" => Need to test
     function transferNft(address _from, address _to, uint _tokenId) external whenNotPaused payable {
         NftFactory(factoryAddress).recordTransfer(address(this), ownerOf(_tokenId), _to, _tokenId);
-        safeTransferFrom(_from, _to, _tokenId);
+        transferFrom(_from, _to, _tokenId);
     }
 
     /**

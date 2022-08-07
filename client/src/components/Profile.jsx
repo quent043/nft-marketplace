@@ -1,23 +1,16 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import {useParams, useLocation, withRouter} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import useEth from "../contexts/EthContext/useEth";
-import NftCollectionTable from "./NftCollectionTable";
-
 import ProfilBox from './ui/ProfilBox';
 import CardNft from './ui/CardNft';
-import CardCollection from './ui/CardCollection';
+
 
 function Profile() {
-    const {state: { web3, accounts, marketplaceContract, nftCollectionAbi, nftFactoryContract, tokenOwnershipRegisterContract }} = useEth();
+    const {state: { web3, accounts, marketplaceContract, nftFactoryContract, nftCollectionAbi, tokenOwnershipRegisterContract }} = useEth();
     const [createdCollections, setCreatedCollections] = useState([]);
     const [allCollections, setAllCollections] = useState([]);
-    const [tokenData, setTokenData] = useState();
     const [tokensPerCollection, setTokensPerCollection] = useState([]);
+    const [tokenData, setTokenData] = useState();
 
-    //TODO: On log: Récupérer les collections qui lui appartiennent
-    //TODO: On log: Récupérer les nft qu'il a minté
-    //TODO: On log: Récupérer les nft qu'il a acheté
-    //TODO: On log: Check si un des nft mintés a été acheté et n'es plus à lui
 
     const getCreatedCollectionsFromEvents = async () => {
         let options = {
@@ -36,8 +29,6 @@ function Profile() {
         });
         setCreatedCollections(createdCollections);
         setAllCollections(allCollections);
-        console.log("created", createdCollections);
-        console.log("all", allCollections);
     }
 
     const getProfileData = async () => {
@@ -52,50 +43,66 @@ function Profile() {
                         const collectionBalance = {[collection]: tokenIds};
                         collectionToTokens.push(collectionBalance);
                     }
-                    console.log("Collection and their balances: ",collectionToTokens);
                 }
             }
             setTokensPerCollection(collectionToTokens);
         }
     }
 
-    useEffect(() => {
-        console.log("Final : ", tokensPerCollection);
-    }, [tokensPerCollection]);
+    const getTokenInfo = async () => {
+        if(web3 && nftCollectionAbi && tokensPerCollection) {
+            for(let collectionData of tokensPerCollection) {
+                //Get contract instance
+                const collectionAddress = Object.keys(collectionData)[0];
+                const NftContractInstance = new web3.eth.Contract(nftCollectionAbi, collectionAddress);
+                const tokenIds = Object.values(collectionData)[0];
+                console.log(tokenIds)
+                let tokenDetails = [];
+                //Get contract owned tokens details
+                for( let tokenId of tokenIds ) {
+                    console.log(tokenId)
+                    const tokenDetail = await NftContractInstance.methods.tokenIdToNftData(tokenId).call();
+                    const tokenDetailFormatted = {tokenId : tokenId, collectionAddress : collectionAddress, ...tokenDetail};
+                    tokenDetails.push(tokenDetailFormatted);
+                }
+                setTokenData(tokenDetails);
+            }
+        }
+    }
 
     useEffect(() => {
-        console.log("init Detail")
         getCreatedCollectionsFromEvents();
     }, [web3]);
 
     useEffect(() => {
-        console.log("Get Profile Data")
         getProfileData();
     }, [tokenOwnershipRegisterContract, allCollections]);
 
+    useEffect(() => {
+        getTokenInfo();
+    }, [tokensPerCollection]);
 
-
-// Nombres fictif dans owned ( nombre de nft ) & collections 
 
     return (
         <>
-        collectionsCreated &&
-        <div className="container">
-            <NftCollectionTable title="Created collections" items={createdCollections} />
-            <NftCollectionTable title="Owned tokens" items={createdCollections} />
-        </div>
-        {web3 && <ProfilBox account={accounts[0]} owned={21} collections={9} imageUrl={"https://img.seadn.io/files/850f31ebd63659d457678f57b8dd6dea.png?fit=max&w=200"} />}
-        <div className='grid--card--nft'>
-            <CardNft nftImageUrl="https://img.seadn.io/files/850f31ebd63659d457678f57b8dd6dea.png?fit=max&w=300" nftId={12} price={1}/>
-            <CardNft/>
-            <CardNft/>
-            <CardNft/>
-            <CardNft goTo="0x48FA7222f103F7D31fDe9E017569f10750C40c22" nftId={1}/>
-            <CardCollection goTo="0x48FA7222f103F7D31fDe9E017569f10750C40c22"/>
-        </div>
-        <div className='error--box'>
-            <p>error here</p>
-        </div>
+            {(web3 && tokenData) &&
+                <ProfilBox account={accounts[0]}
+                           owned={Object.values(tokensPerCollection).length}
+                           collections={createdCollections.length}
+                           imageUrl={tokenData[0].linkToImage} />}
+            {tokenData &&
+                <div className='grid--card--nft'>
+                    {tokenData.map((tokenInfo) => (
+                            <CardNft nftImageUrl={tokenInfo.linkToImage}
+                                     nftId={tokenInfo.tokenId}
+                                     price={tokenInfo.price}
+                                     goTo={tokenInfo.collectionAddress}/>
+                        )
+                    )}
+                </div>}
+            {/*<div className='error--box'>*/}
+            {/*    <p>error here</p>*/}
+            {/*</div>*/}
         </>
     );
 }

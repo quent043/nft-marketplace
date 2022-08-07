@@ -5,9 +5,9 @@ const ProfilBox = (props) => {
           <img className='box--nft--profil--image' src={props.imageUrl}/>
         </div>
         <div className='box--nft--profil--info'>
-          <p>{props.account}</p>
-          <p>Owned: {props.owned}</p>
-          <p>Collections: {props.collections}</p>
+          <p>User: {props.account}</p>
+          <p>Owned tokens: {props.owned}</p>
+          <p>Collections created: {props.collections}</p>
         </div>
         <div></div>
       </div>
