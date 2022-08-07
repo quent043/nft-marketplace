@@ -1,34 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import {useParams, useLocation, withRouter} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import useEth from "../contexts/EthContext/useEth";
-import NftListTable from "./NftListTable";
+import CardNft from "./ui/CardNft";
 
 const Collection = () => {
-    const {state: { web3, accounts, marketplaceContract, nftCollectionAbi }} = useEth();
+    const {state: { web3, nftCollectionAbi }} = useEth();
     const { contractAddress } = useParams();
-    const { pathname } = useLocation();
     const [collectionContract, setCollectionContract] = useState();
     const [collectionItems, setCollectionItems] = useState();
 
 
     const getCollectionContract = () => {
         if(web3 && nftCollectionAbi) {
-            // console.log("Web3");a
             const NftContractInstance = new web3.eth.Contract(nftCollectionAbi, contractAddress);
             setCollectionContract(NftContractInstance);
         }
     };
 
     const getCollectionItems = async () => {
-        if(collectionContract) {
-            // console.log("collectionContract");
+        if(collectionContract && contractAddress) {
             const nftList = [];
             const nftAmount = await collectionContract.methods.max_supply().call();
             for(let i = 1; i <= nftAmount; i++) {
                 const querriedItems = await collectionContract.methods.tokenIdToNftData(i).call();
                 //Add token id
-                nftList.push(querriedItems);
+                nftList.push({tokenId: i, contractAddress, ...querriedItems});
             }
+            console.log(nftList);
             setCollectionItems(nftList);
         }
     }
@@ -39,11 +37,14 @@ const Collection = () => {
 
     useEffect(() => {
         getCollectionItems();
+        console.log("contract ", contractAddress)
     }, [collectionContract]);
 
     return (
-        <div className="container">{
-            collectionItems && <NftListTable title="NFT List" items={collectionItems} path={pathname} />
+        <div className="grid--card--nft">{
+            (collectionItems && contractAddress) && collectionItems.map((item) => (
+                <CardNft title="NFT List" nftImageUrl={item.linkToImage} nftId={item.tokenId} price={item.price} goTo={item.contractAddress} />
+            ))
         }
         </div>
     );
