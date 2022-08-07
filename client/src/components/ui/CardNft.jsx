@@ -16,6 +16,7 @@ const CardNft = (props) => {
     const handleBuy = async () => {
         try {
             await marketplaceContract.methods.purchaseItem(props.itemCountId).send({from: accounts[0], value: props.price});
+            props.buyCallback();
         } catch (error) {
             console.log(error);
         }
@@ -25,7 +26,7 @@ const CardNft = (props) => {
         try {
             const NftContractInstance = new web3.eth.Contract(nftCollectionAbi, props.goTo);
             await NftContractInstance.methods.mintNft(props.nftId).send({from: accounts[0], value: props.price});
-            props.callback();
+            props.mintCallback();
         } catch (error) {
             console.log(error);
         }

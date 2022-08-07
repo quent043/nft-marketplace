@@ -64,10 +64,12 @@ function Profile() {
                 //Get contract owned tokens details
                 for( let tokenId of tokenIds ) {
                     const tokenDetail = await NftContractInstance.methods.tokenIdToNftData(tokenId).call();
+                    console.log("Token Data: ", tokenDetails);
                     const tokenDetailFormatted = {tokenId, collectionAddress, ...tokenDetail};
                     tokenDetails.push(tokenDetailFormatted);
                 }
             }
+            // console.log("Token Data: ", tokenDetails);
             setTokenData(tokenDetails);
         }
     }

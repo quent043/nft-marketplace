@@ -1,26 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="87cfabeb-032c-453c-b37f-7c3c7cf837fd" name="Changes" comment="Updated Routes">
-      <change afterPath="$PROJECT_DIR$/client/src/components/ui/ProfileBox.jsx" afterDir="false" />
+    <list default="true" id="87cfabeb-032c-453c-b37f-7c3c7cf837fd" name="Changes" comment="Added Callbacks&#10;Refactoring">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Collection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Collection.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Error404.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Error404.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Dashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dashboard.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Marketplace.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Marketplace.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/NftDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/NftDetail.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Profile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/ProfilBox.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/uploadToIpfs.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/uploadToIpfs.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/CardNft.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/CardNft.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/uploadToIpfs_mul.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/uploadToIpfs_mul.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/contracts/Marketplace.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/Marketplace.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/contracts/MetaVariables.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/MetaVariables.sol" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/truffle/contracts/NftCollection.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/NftCollection.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/contracts/NftFactory.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/NftFactory.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/contracts/Royalties.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/Royalties.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/contracts/SftCollection.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/SftCollection.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/contracts/SftFactory.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/SftFactory.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/test/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/test/test.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +112,7 @@
       <workItem from="1659082354104" duration="9829000" />
       <workItem from="1659106923663" duration="4389000" />
       <workItem from="1659645313028" duration="54564000" />
-      <workItem from="1659806621227" duration="46149000" />
+      <workItem from="1659806621227" duration="49945000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit: Dapp architecture using truffle react box&#10;- Smart Contracts&#10;- truffle-config.js&#10;- package.json&#10;- 1_deploy_simple_storage.js&#10;- .env">
       <created>1658923121505</created>
@@ -279,7 +268,21 @@
       <option name="project" value="LOCAL" />
       <updated>1659889995703</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Refactored and cleaned code">
+      <created>1659893722649</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1659893722649</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Corrected a bug in token count in profile">
+      <created>1659894953087</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1659894953087</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -318,6 +321,9 @@
     <MESSAGE value="COrrected bug on Collection.jsx" />
     <MESSAGE value="Corrected a bug in IPFS&#10;Added a callback to update Mint function" />
     <MESSAGE value="Updated Routes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated Routes" />
+    <MESSAGE value="Refactored and cleaned code" />
+    <MESSAGE value="Corrected a bug in token count in profile" />
+    <MESSAGE value="Added Callbacks&#10;Refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Callbacks&#10;Refactoring" />
   </component>
 </project>

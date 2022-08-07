@@ -76,7 +76,7 @@ const Collection = () => {
             </div>
             <div className="grid--card--nft">{
                 (collectionItems && contractAddress) && collectionItems.map((item) => (
-                    <CardNft title="NFT List" nftImageUrl={item.linkToImage} nftId={item.tokenId} price={item.price} goTo={item.contractAddress} notMint={item.notMint} callback={getCollectionItemsFromUrlParam} />
+                    <CardNft title="NFT List" nftImageUrl={item.linkToImage} nftId={item.tokenId} price={item.price} goTo={item.contractAddress} notMint={item.notMint} mintCallback={getCollectionItemsFromUrlParam} />
                 ))
             }
             </div>
