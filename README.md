@@ -37,8 +37,11 @@ NFT trade is a decentralized web platform allowing to easily mint, stored and tr
   
 	Once NFT are minted, they can be sell on the platform
   
-	Navigate to your profile to see your NFT
+	Navigate to your profile to see your NFTs
 	
+	![image](https://user-images.githubusercontent.com/68705151/183307553-0a0e8621-cc68-4b0e-8432-be823f24812d.png)
+
+		
 	-Have a look into  your collection 
 	![image](https://user-images.githubusercontent.com/68705151/183306334-44f107a5-23ae-4394-9277-d95d2a863e9e.png)
 	
