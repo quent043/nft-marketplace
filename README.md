@@ -25,17 +25,19 @@ NFT trade is a decentralized web platform allowing to easily mint, stored and tr
 	Fill the form with the same information that you put into your metadata. Those informations are kept on chains
 	![image](https://user-images.githubusercontent.com/68705151/183306391-34165878-1886-477e-8d77-ab14753d4e9e.png)
 
-	Create an NFT should pop up a metamask confirmation. ![image](https://user-images.githubusercontent.com/68705151/183306866-90fa676c-4303-4047-83ef-03e9f0e6a064.png)
-
-	- Once transaction done, navigate to profile to see your collection. 
-  
-	- Use Minted button to mint an NFT
-  
-	- Once NFT are minted, they can be sell on the platform
-  
-	- Navigate to your profile
+	Create an NFT should pop up a metamask confirmation. 
 	
-	-Have a look into our collection 
+	![image](https://user-images.githubusercontent.com/68705151/183306866-90fa676c-4303-4047-83ef-03e9f0e6a064.png)
+
+	Once transaction done, navigate to profile to see your collection. 
+  
+	Use Minted button to mint an NFT
+  
+	Once NFT are minted, they can be sell on the platform
+  
+	Navigate to your profile to see your NFT
+	
+	-Have a look into  your collection 
 	![image](https://user-images.githubusercontent.com/68705151/183306334-44f107a5-23ae-4394-9277-d95d2a863e9e.png)
 	
 	- If you like other people to buy it, use "Sell this NFT" button, with your price in ETH, to list your NFT on the exchange
