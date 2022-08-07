@@ -11,13 +11,10 @@ NFT trade is a decentralized web platform allowing to easily mint, stored and tr
   * To buy an NFT
   Connect your wallet and naviguate to marketplace or profile
   
-  ![image](https://user-images.githubusercontent.com/68705151/183306723-47a7a105-63c7-4dc7-8b9a-f6ca2ea152a0.png)
-
   * To mint an NFT
    Connect your wallet and naviguate to the collection and click mint. If button does not appear, the nft if not to be minted
    
    ![image](https://user-images.githubusercontent.com/68705151/183306486-4c39335b-66d4-409e-8864-e87e8d711f8c.png)
-
 
   * To create your NFT collection
 	
@@ -28,9 +25,8 @@ NFT trade is a decentralized web platform allowing to easily mint, stored and tr
 	- Fill the form with the same information that you put into your metadata. Those informations are kept on chains
 	![image](https://user-images.githubusercontent.com/68705151/183306391-34165878-1886-477e-8d77-ab14753d4e9e.png)
 
-  
-	- Create an NFT should pop up a metamask confirmation. 
-  
+	- Create an NFT should pop up a metamask confirmation. ![image](https://user-images.githubusercontent.com/68705151/183306866-90fa676c-4303-4047-83ef-03e9f0e6a064.png)
+
 	- Once transaction done, navigate  to profile to see your collection. 
   
 	- Use Minted button to mint an NFT
@@ -42,14 +38,19 @@ NFT trade is a decentralized web platform allowing to easily mint, stored and tr
 	-Have a look into our collection 
 	![image](https://user-images.githubusercontent.com/68705151/183306334-44f107a5-23ae-4394-9277-d95d2a863e9e.png)
 	
-	- If you like other people to buy it, use Put to sell button to list your NFT on the exchange
+	- If you like other people to buy it, use "Sell this NFT" button, with your price in ETH, to list your NFT on the exchange
+		-approve the market place to handle your NFT
+		![image](https://user-images.githubusercontent.com/68705151/183306962-da89d4d5-5064-4639-99af-5e888d71a6c7.png)
+		-grant the transaction to transfer your NFT
+		![image](https://user-images.githubusercontent.com/68705151/183307016-e3f8957c-0d6c-4092-8dd2-f1fba5269e70.png)
+
+		![image](https://user-images.githubusercontent.com/68705151/183306723-47a7a105-63c7-4dc7-8b9a-f6ca2ea152a0.png)
 	
 	-To sell your NFT
 	
 	-if you lost your way, just ask Cyril, our web3 dev and professor (big up to him !)  ;)
 	![image](https://user-images.githubusercontent.com/68705151/183306540-ad1ab417-c649-4294-815e-ee89695e821c.png)
 
-	
 	
  # Built Using
 
