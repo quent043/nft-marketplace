@@ -10,6 +10,7 @@ function Profile() {
     const [allCollections, setAllCollections] = useState([]);
     const [tokensPerCollection, setTokensPerCollection] = useState([]);
     const [tokenData, setTokenData] = useState();
+    const [tokenBalance, setTokenBalance] = useState();
 
 
     const getCreatedCollectionsFromEvents = async () => {
@@ -66,9 +67,17 @@ function Profile() {
                     const tokenDetailFormatted = {tokenId, collectionAddress, ...tokenDetail};
                     tokenDetails.push(tokenDetailFormatted);
                 }
-                setTokenData(tokenDetails);
             }
+            setTokenData(tokenDetails);
         }
+    }
+
+    const getOwnedTokenNumber = () => {
+        let tokenBalance = 0;
+        tokensPerCollection.forEach(collection => {
+            tokenBalance += Object.values(collection)[0].length;
+        });
+        setTokenBalance(tokenBalance);
     }
 
     useEffect(() => {
@@ -83,12 +92,16 @@ function Profile() {
         getTokenInfo();
     }, [tokensPerCollection]);
 
+    useEffect(() => {
+        getOwnedTokenNumber();
+    }, [tokenData]);
+
 
     return (
         <>
-            {(web3 && tokenData) &&
+            {(web3 && tokenBalance) &&
                 <ProfileBox account={accounts[0]}
-                            owned={Object.values(tokensPerCollection).length}
+                            owned={tokenBalance}
                             collections={createdCollections.length}
                             imageUrl={tokenData[0].linkToImage} />}
             {tokenData &&
