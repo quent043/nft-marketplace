@@ -16,7 +16,7 @@ NFT trade is a decentralized web platform allowing to easily mint, stored and tr
 	
   - Create your art work: you can uses HashLips [ℹ️ Website] (https://hashlips.online/HashLips)
 	
-  - Upload your files: ensure that one folder contains your metadata file and art. Each file and related metadata should be named Starting using incremented   number from 1.[png] to last image. [png]
+  - Upload your files: ensure that one folder contains your metadata file and art. Each file and related metadata should be named using incrementing numbers from 1.[png] to last image. [png]
   
 	- Fill the form with the same information that you put into your metadata. Those informations are kept on chains
   
@@ -31,19 +31,25 @@ NFT trade is a decentralized web platform allowing to easily mint, stored and tr
 	- Navigate to your profile
   
 	- If you like other people to buy it, use Put to sell button to list your NFT on the exchange
+	
+	-To sell your NFT
+	
+	///ADD PICTURE  OF THE PROCESS /////////////////
 
 
  # Built Using
 
   * This project was built using multiple frameworks, the most notable ones being below.
   
-      Truffle suite 
+  ////ADD licence////
+  
+	      Truffle suite 
 
-      ReactJS 
+	      ReactJS 
 
-      OpenZeppelin-Contracts
+	      OpenZeppelin-Contracts
 
-      Compiler Pragma solidity 0.8.14
+	      Compiler Pragma solidity 0.8.14
 
 ## Installation
 
