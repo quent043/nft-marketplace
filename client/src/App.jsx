@@ -25,10 +25,9 @@ function App() {
                     <Route path="/collections" element={<Collection/>}/>
                     <Route path="/collections/:contractAddress" element={<Collection/>}/>
                     <Route path="/collections/:contractAddress/:tokenAddress" element={<NftDetail/>}/>
-                    <Route path="/marketplace/:contractAddress" element={<Marketplace/>}/>
+                    <Route path="/marketplace" element={<Marketplace/>}/>
                     <Route path="/profile" element={<Profile/>}/>
-                    <Route path="/create" element={<Upload/>}/>
-                    <Route path="/create2" element={<UploadMultiple/>}/>
+                    <Route path="/createNft" element={<UploadMultiple/>}/>
                     <Route path="/sellnft/:contractAddress/:tokenAddress" element={<SellNft/>}/>
 
                     <Route path="*" element={<Error/>}/>
