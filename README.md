@@ -18,16 +18,16 @@ NFT trade is a decentralized web platform allowing to easily mint, stored and tr
 
   * To create your NFT collection
 	
-  - Create your art work: you can uses HashLips [ℹ️ Website] (https://hashlips.online/HashLips)
+ 	Create your art work: you can uses HashLips [ℹ️ Website] (https://hashlips.online/HashLips)
 	
-  - Upload your files: ensure that one folder contains your metadata file and art. Each file and related metadata should be named using incrementing numbers from 1.[png] to last image. [png]
+  	Upload your files: ensure that one folder contains your metadata file and art. Each file and related metadata should be named using incrementing numbers from 1.[png] to last image. [png]
   
-	- Fill the form with the same information that you put into your metadata. Those informations are kept on chains
+	Fill the form with the same information that you put into your metadata. Those informations are kept on chains
 	![image](https://user-images.githubusercontent.com/68705151/183306391-34165878-1886-477e-8d77-ab14753d4e9e.png)
 
-	- Create an NFT should pop up a metamask confirmation. ![image](https://user-images.githubusercontent.com/68705151/183306866-90fa676c-4303-4047-83ef-03e9f0e6a064.png)
+	Create an NFT should pop up a metamask confirmation. ![image](https://user-images.githubusercontent.com/68705151/183306866-90fa676c-4303-4047-83ef-03e9f0e6a064.png)
 
-	- Once transaction done, navigate  to profile to see your collection. 
+	- Once transaction done, navigate to profile to see your collection. 
   
 	- Use Minted button to mint an NFT
   
@@ -55,8 +55,6 @@ NFT trade is a decentralized web platform allowing to easily mint, stored and tr
  # Built Using
 
   * This project was built using multiple frameworks, the most notable ones being below.
-  
-  ////ADD licence////
   
 	      Truffle suite 
 
