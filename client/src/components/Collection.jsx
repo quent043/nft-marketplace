@@ -10,23 +10,47 @@ const Collection = () => {
     const { contractAddress } = useParams();
     const [deployedCollections, setDeployedCollections] = useState([]);
     const [collectionItems, setCollectionItems] = useState();
+    const [collectionContract, setCollectionContract] = useState();
     const location = useLocation();
 
 
     const getCollectionItemsFromUrlParam = async () => {
         if(web3 && nftCollectionAbi) {
-            const NftContractInstance = new web3.eth.Contract(nftCollectionAbi, contractAddress);
-            const nftList = [];
-            const nftAmount = await NftContractInstance.methods.max_supply().call();
-            for(let i = 1; i <= nftAmount; i++) {
-                const querriedItems = await NftContractInstance.methods.tokenIdToNftData(i).call();
-                //Add token id
-                nftList.push({tokenId: i, contractAddress, ...querriedItems});
+            let options = {
+                fromBlock: 0,
+                toBlock: "latest"
             }
-            console.log(nftList);
+            const nftContractInstance = new web3.eth.Contract(nftCollectionAbi, contractAddress);
+            setCollectionContract(nftContractInstance);
+            const nftList = [];
+            const nftAmount = await collectionContract.methods.max_supply().call();
+            const mintedTokensEvent = await collectionContract.getPastEvents("TokenMinted", options);
+            let mintedTokenIds = [];
+            mintedTokensEvent.forEach(element => {
+                mintedTokenIds.push(parseInt(element.returnValues._tokenId));
+            });
+
+            for(let i = 1; i <= nftAmount; i++) {
+                let notMint = true;
+                const querriedItems = await collectionContract.methods.tokenIdToNftData(i).call();
+                // console.log("BoolTest: ", mintedTokenIds.includes(i))
+                if(mintedTokenIds.includes(i)){
+                    notMint = false;
+                }
+                // console.log("index: ", i)
+                // console.log("notMint: ", notMint)
+                nftList.push({tokenId: i, contractAddress, notMint, ...querriedItems});
+            }
             setCollectionItems(nftList);
         }
     };
+
+    // const listenToTokenMintedEvent = async () => {
+    //     collectionContract.events.TokenMinted().on("data", async () => {
+    //         await getDeployedCollectionsFromEvents();
+    //     });
+    // }
+
 
     const getDeployedCollectionsFromEvents = async () => {
         let options = {
@@ -54,6 +78,10 @@ const Collection = () => {
         contractAddress ? getCollectionItemsFromUrlParam() : getDeployedCollectionsFromEvents();
     }, [location]);
 
+    // useEffect(() => {
+    //     listenToTokenMintedEvent()
+    // }, [collectionContract]);
+
     return (
         <>
             <div className="grid--card--nft">{
@@ -64,7 +92,7 @@ const Collection = () => {
             </div>
             <div className="grid--card--nft">{
                 (collectionItems && contractAddress) && collectionItems.map((item) => (
-                    <CardNft title="NFT List" nftImageUrl={item.linkToImage} nftId={item.tokenId} price={item.price} goTo={item.contractAddress} />
+                    <CardNft title="NFT List" nftImageUrl={item.linkToImage} nftId={item.tokenId} price={item.price} goTo={item.contractAddress} notMint={item.notMint} />
                 ))
             }
             </div>
