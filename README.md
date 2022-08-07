@@ -43,9 +43,13 @@ NFT trade is a decentralized web platform allowing to easily mint, stored and tr
 	![image](https://user-images.githubusercontent.com/68705151/183306334-44f107a5-23ae-4394-9277-d95d2a863e9e.png)
 	
 	- If you like other people to buy it, use "Sell this NFT" button, with your price in ETH, to list your NFT on the exchange
+		
 		-approve the market place to handle your NFT
+		
 		![image](https://user-images.githubusercontent.com/68705151/183306962-da89d4d5-5064-4639-99af-5e888d71a6c7.png)
+		
 		-grant the transaction to transfer your NFT
+		
 		![image](https://user-images.githubusercontent.com/68705151/183307016-e3f8957c-0d6c-4092-8dd2-f1fba5269e70.png)
 
 		![image](https://user-images.githubusercontent.com/68705151/183306723-47a7a105-63c7-4dc7-8b9a-f6ca2ea152a0.png)
