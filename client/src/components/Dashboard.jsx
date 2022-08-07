@@ -3,6 +3,8 @@ import useEth from "../contexts/EthContext/useEth";
 import {Button} from "react-bootstrap";
 import NftCollectionTable from "./NftCollectionTable";
 
+import DashboardBoxWelcome from './ui/DashboardBoxWelcome';
+import CardCollection from './ui/CardCollection';
 
 const Dashboard = () => {
     const {state: { accounts, marketplaceContract, nftFactoryContract }} = useEth();
@@ -87,11 +89,19 @@ const Dashboard = () => {
         setCollectionsDeployed(deployedCollections);
     }
 
-    return ( loaded &&
-        <div className="container">
-            <Button onClick={ ()=> { deployCollection() }}>Init Collection</Button>
-            <NftCollectionTable title={"Deployed Collections"} items={collectionsDeployed} />
-        </div>
+    return ( loaded && 
+        <>
+            <DashboardBoxWelcome/>
+            <div className='grid--card--nft'>
+                {collectionsDeployed && collectionsDeployed.map((collection,i) => {
+                    return(<CardCollection key={i} goTo={collection} />)
+                })};
+            </div>
+            <div className="container">
+                <Button onClick={ ()=> { deployCollection() }}>Init Collection</Button>
+                <NftCollectionTable title={"Deployed Collections"} items={collectionsDeployed} />
+            </div>
+        </>
     );
 };
 

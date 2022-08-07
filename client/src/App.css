@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
 /* CARDNFT CSS */
 .card--nft--background{
   background: linear-gradient(45deg, rgba(27,35,45,1) 20%,      rgba(31,54,83,1) 96%);
@@ -248,9 +250,48 @@
 
 /* END SELL NFT PAGE */
 
+/* WELCOME PAGE */
+
+.box--dashboard--welcome{
+  background: radial-gradient(93.13% 50% at 93.13% 50%, #3B67AA 38.02%, rgba(54, 93, 152, 0.67) 100%);
+  box-shadow: 0px 10px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 80px;
+  padding: 50px;
+  max-width: 1000px;
+  margin: 70px auto;
+  
+}
+
+.box--dashboard--welcome h1 {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 34px;
+}
+
+.box--dashboard--welcome p {
+  font-size: 23px;
+}
+
+.box--dashboard--welcome--btn {
+  background: radial-gradient(50% 50% at 50% 50%, #3A6FBF 14.58%, rgba(30, 56, 94, 0.62) 95.31%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: none;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 17px;
+  margin-top: 20px;
+  margin-right: 20px;
+  font-weight: 600;
+}
+
+/* END WELCOME PAGE */
+
 body{
   font-size: 13px !important;
   background: rgba(32, 48, 72, 1) !important;
+  font-family: 'Roboto', sans-serif !important;
 }
 
 nav {
