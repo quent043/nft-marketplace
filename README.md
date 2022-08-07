@@ -6,11 +6,18 @@ NFT trade is a decentralized web platform allowing to easily mint, stored and tr
 
 # Tour of the application
 
-  * To buy an NFT sell you
+![image](https://user-images.githubusercontent.com/68705151/183306310-264e8d63-d122-4b28-b63e-280bac4910fd.png)
+
+  * To buy an NFT
   Connect your wallet and naviguate to marketplace or profile
+  
+  ![image](https://user-images.githubusercontent.com/68705151/183306723-47a7a105-63c7-4dc7-8b9a-f6ca2ea152a0.png)
 
   * To mint an NFT
    Connect your wallet and naviguate to the collection and click mint. If button does not appear, the nft if not to be minted
+   
+   ![image](https://user-images.githubusercontent.com/68705151/183306486-4c39335b-66d4-409e-8864-e87e8d711f8c.png)
+
 
   * To create your NFT collection
 	
@@ -19,6 +26,8 @@ NFT trade is a decentralized web platform allowing to easily mint, stored and tr
   - Upload your files: ensure that one folder contains your metadata file and art. Each file and related metadata should be named using incrementing numbers from 1.[png] to last image. [png]
   
 	- Fill the form with the same information that you put into your metadata. Those informations are kept on chains
+	![image](https://user-images.githubusercontent.com/68705151/183306391-34165878-1886-477e-8d77-ab14753d4e9e.png)
+
   
 	- Create an NFT should pop up a metamask confirmation. 
   
@@ -29,14 +38,19 @@ NFT trade is a decentralized web platform allowing to easily mint, stored and tr
 	- Once NFT are minted, they can be sell on the platform
   
 	- Navigate to your profile
-  
+	
+	-Have a look into our collection 
+	![image](https://user-images.githubusercontent.com/68705151/183306334-44f107a5-23ae-4394-9277-d95d2a863e9e.png)
+	
 	- If you like other people to buy it, use Put to sell button to list your NFT on the exchange
 	
 	-To sell your NFT
 	
-	///ADD PICTURE  OF THE PROCESS /////////////////
+	-if you lost your way, just ask Cyril, our web3 dev and professor (big up to him !)  ;)
+	![image](https://user-images.githubusercontent.com/68705151/183306540-ad1ab417-c649-4294-815e-ee89695e821c.png)
 
-
+	
+	
  # Built Using
 
   * This project was built using multiple frameworks, the most notable ones being below.
