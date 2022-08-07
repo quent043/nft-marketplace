@@ -78,6 +78,13 @@ First ensure you are in an empty directory.
          npm start
             Starting the development server...
 
+## Improvement
+
+	- Our NFT factory is approching 24576 bytes, the limit introduced in Spurious Dragon. We might need to down-size this file to increase gas deployment efficiency.
+	- We decided to handle fungible token using ERC 1155 implementation. However, we did not have the time to include those functionalities in our app. We are going to implement this feature in the near future.
+	- We also decided to optimise IPFS upload to make the procedure easy, efficient and error free.
+	- We currently do not handle events, pop up for user interaction , and some error management still missing, we will add those features soon.
+	
 
 ## Contact our team
 
