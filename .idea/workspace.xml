@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="87cfabeb-032c-453c-b37f-7c3c7cf837fd" name="Changes" comment="Corrected a bug in ownership register">
+    <list default="true" id="87cfabeb-032c-453c-b37f-7c3c7cf837fd" name="Changes" comment="Corrected bug in Profile page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Collection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Collection.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Marketplace.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Marketplace.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Profile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/ProfilBox.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/ProfilBox.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/truffle/contracts/NftCollection.sol" beforeDir="false" afterPath="$PROJECT_DIR$/truffle/contracts/NftCollection.sol" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +92,7 @@
       <workItem from="1659082354104" duration="9829000" />
       <workItem from="1659106923663" duration="4389000" />
       <workItem from="1659645313028" duration="54564000" />
-      <workItem from="1659806621227" duration="18379000" />
+      <workItem from="1659806621227" duration="23062000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit: Dapp architecture using truffle react box&#10;- Smart Contracts&#10;- truffle-config.js&#10;- package.json&#10;- 1_deploy_simple_storage.js&#10;- .env">
       <created>1658923121505</created>
@@ -180,7 +178,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659819060101</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="CHanges safeTransferFrom to transferFrom in NftCOllection.sol&#10;&#10;Finalized Profile.jsx">
+      <created>1659861408080</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1659861408080</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,6 +215,8 @@
     <MESSAGE value="Added a &quot;allCollection&quot; state in Profile page.&#10;Corrected a data fetch bug" />
     <MESSAGE value="Corrected an error in purchaseItem marketplace function" />
     <MESSAGE value="Corrected a bug in ownership register" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrected a bug in ownership register" />
+    <MESSAGE value="CHanges safeTransferFrom to transferFrom in NftCOllection.sol&#10;&#10;Finalized Profile.jsx" />
+    <MESSAGE value="Corrected bug in Profile page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrected bug in Profile page" />
   </component>
 </project>

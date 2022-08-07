@@ -5,7 +5,7 @@ import CardNft from './ui/CardNft';
 
 
 function Profile() {
-    const {state: { web3, accounts, marketplaceContract, nftFactoryContract, nftCollectionAbi, tokenOwnershipRegisterContract }} = useEth();
+    const {state: { web3, accounts, nftFactoryContract, nftCollectionAbi, tokenOwnershipRegisterContract }} = useEth();
     const [createdCollections, setCreatedCollections] = useState([]);
     const [allCollections, setAllCollections] = useState([]);
     const [tokensPerCollection, setTokensPerCollection] = useState([]);
@@ -13,22 +13,24 @@ function Profile() {
 
 
     const getCreatedCollectionsFromEvents = async () => {
-        let options = {
-            fromBlock: 0,
-            toBlock: "latest"
-        };
-        let createdCollections = [];
-        let allCollections = [];
-        const contractEvents = await nftFactoryContract.getPastEvents("CollectionDeployed", options);
+        if(web3){
+            let options = {
+                fromBlock: 0,
+                toBlock: "latest"
+            };
+            let createdCollections = [];
+            let allCollections = [];
+            const contractEvents = await nftFactoryContract.getPastEvents("CollectionDeployed", options);
 
-        contractEvents.forEach(element => {
-            if(element.returnValues._creatorAddress === accounts[0]){
-                createdCollections.push(element.returnValues._contractAddress);
-            }
-            allCollections.push(element.returnValues._contractAddress);
-        });
-        setCreatedCollections(createdCollections);
-        setAllCollections(allCollections);
+            contractEvents.forEach(element => {
+                if(element.returnValues._creatorAddress === accounts[0]){
+                    createdCollections.push(element.returnValues._contractAddress);
+                }
+                allCollections.push(element.returnValues._contractAddress);
+            });
+            setCreatedCollections(createdCollections);
+            setAllCollections(allCollections);
+        }
     }
 
     const getProfileData = async () => {
@@ -36,13 +38,14 @@ function Profile() {
             let collectionToTokens = [];
             for(let collection of allCollections) {
                 const balance = await tokenOwnershipRegisterContract.methods.userToCollectionToBalance(accounts[0], collection).call();
-                if(balance){
+                if(parseInt(balance)){
                     const tokenIds = [];
+                    let collectionBalance = [];
                     for(let i = 0; i < balance; i++) {
                         tokenIds.push(await tokenOwnershipRegisterContract.methods.userToCollectionToTokens(accounts[0], collection, i).call());
-                        const collectionBalance = {[collection]: tokenIds};
-                        collectionToTokens.push(collectionBalance);
+                        collectionBalance = {[collection]: tokenIds};
                     }
+                    collectionToTokens.push(collectionBalance);
                 }
             }
             setTokensPerCollection(collectionToTokens);
@@ -51,16 +54,14 @@ function Profile() {
 
     const getTokenInfo = async () => {
         if(web3 && nftCollectionAbi && tokensPerCollection) {
+            let tokenDetails = [];
             for(let collectionData of tokensPerCollection) {
                 //Get contract instance
                 const collectionAddress = Object.keys(collectionData)[0];
                 const NftContractInstance = new web3.eth.Contract(nftCollectionAbi, collectionAddress);
                 const tokenIds = Object.values(collectionData)[0];
-                console.log(tokenIds)
-                let tokenDetails = [];
                 //Get contract owned tokens details
                 for( let tokenId of tokenIds ) {
-                    console.log(tokenId)
                     const tokenDetail = await NftContractInstance.methods.tokenIdToNftData(tokenId).call();
                     const tokenDetailFormatted = {tokenId : tokenId, collectionAddress : collectionAddress, ...tokenDetail};
                     tokenDetails.push(tokenDetailFormatted);
@@ -76,7 +77,7 @@ function Profile() {
 
     useEffect(() => {
         getProfileData();
-    }, [tokenOwnershipRegisterContract, allCollections]);
+    }, [allCollections]);
 
     useEffect(() => {
         getTokenInfo();
@@ -96,7 +97,8 @@ function Profile() {
                             <CardNft nftImageUrl={tokenInfo.linkToImage}
                                      nftId={tokenInfo.tokenId}
                                      price={tokenInfo.price}
-                                     goTo={tokenInfo.collectionAddress}/>
+                                     goTo={tokenInfo.collectionAddress}
+                                     isProfilePage={true}/>
                         )
                     )}
                 </div>}
