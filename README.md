@@ -11,6 +11,8 @@ NFT trade is a decentralized web platform allowing to easily mint, stored and tr
   * To buy an NFT
   Connect your wallet and naviguate to marketplace or profile
   
+  ![image](https://user-images.githubusercontent.com/68705151/183307402-6cf8f675-93d7-46a6-823d-869fc516b907.png)
+  
   * To mint an NFT
    Connect your wallet and naviguate to the collection and click mint. If button does not appear, the nft if not to be minted
    
