@@ -15,15 +15,28 @@ const Collection = () => {
 
     const getCollectionItemsFromUrlParam = async () => {
         if(web3 && nftCollectionAbi) {
-            const NftContractInstance = new web3.eth.Contract(nftCollectionAbi, contractAddress);
-            const nftList = [];
-            const nftAmount = await NftContractInstance.methods.max_supply().call();
-            for(let i = 1; i <= nftAmount; i++) {
-                const querriedItems = await NftContractInstance.methods.tokenIdToNftData(i).call();
-                //Add token id
-                nftList.push({tokenId: i, contractAddress, ...querriedItems});
+            console.log("good")
+            let options = {
+                fromBlock: 0,
+                toBlock: "latest"
             }
-            console.log(nftList);
+            const nftContractInstance = new web3.eth.Contract(nftCollectionAbi, contractAddress);
+            const nftList = [];
+            const nftAmount = await nftContractInstance.methods.max_supply().call();
+            const mintedTokensEvent = await nftContractInstance.getPastEvents("TokenMinted", options);
+            let mintedTokenIds = [];
+            mintedTokensEvent.forEach(element => {
+                mintedTokenIds.push(parseInt(element.returnValues._tokenId));
+            });
+
+            for(let i = 1; i <= nftAmount; i++) {
+                let notMint = true;
+                const querriedItems = await nftContractInstance.methods.tokenIdToNftData(i).call();
+                if(mintedTokenIds.includes(i)){
+                    notMint = false;
+                }
+                nftList.push({tokenId: i, contractAddress, notMint, ...querriedItems});
+            }
             setCollectionItems(nftList);
         }
     };
@@ -51,6 +64,7 @@ const Collection = () => {
 
     useEffect(() => {
         //Update data for each URL change
+        console.log("location")
         contractAddress ? getCollectionItemsFromUrlParam() : getDeployedCollectionsFromEvents();
     }, [location]);
 
@@ -64,7 +78,7 @@ const Collection = () => {
             </div>
             <div className="grid--card--nft">{
                 (collectionItems && contractAddress) && collectionItems.map((item) => (
-                    <CardNft title="NFT List" nftImageUrl={item.linkToImage} nftId={item.tokenId} price={item.price} goTo={item.contractAddress} />
+                    <CardNft title="NFT List" nftImageUrl={item.linkToImage} nftId={item.tokenId} price={item.price} goTo={item.contractAddress} notMint={item.notMint} />
                 ))
             }
             </div>
